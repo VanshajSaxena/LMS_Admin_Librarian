@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F4D06402C36E0A0009416A2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4D063F2C36E0A0009416A2 /* LoginView.swift */; };
+		5F4D06422C36E0B3009416A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F4D06412C36E0B3009416A2 /* Assets.xcassets */; };
 		8016A7DD2C353E8B0037D386 /* LMS_Admin_LibrarianApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8016A7DC2C353E8B0037D386 /* LMS_Admin_LibrarianApp.swift */; };
 		8016A7DF2C353E8B0037D386 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8016A7DE2C353E8B0037D386 /* ContentView.swift */; };
-		8016A7E12C353E8D0037D386 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8016A7E02C353E8D0037D386 /* Assets.xcassets */; };
 		8016A7E42C353E8D0037D386 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8016A7E32C353E8D0037D386 /* Preview Assets.xcassets */; };
 		8016A7EE2C3544B30037D386 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8016A7ED2C3544B30037D386 /* FirebaseAnalytics */; };
 		8016A7F02C3544B30037D386 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 8016A7EF2C3544B30037D386 /* FirebaseAnalyticsWithoutAdIdSupport */; };
@@ -20,10 +21,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5F4D063F2C36E0A0009416A2 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		5F4D06412C36E0B3009416A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../login/login/Assets.xcassets; sourceTree = "<group>"; };
 		8016A7D92C353E8B0037D386 /* LMS_Admin_Librarian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LMS_Admin_Librarian.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8016A7DC2C353E8B0037D386 /* LMS_Admin_LibrarianApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LMS_Admin_LibrarianApp.swift; sourceTree = "<group>"; };
 		8016A7DE2C353E8B0037D386 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		8016A7E02C353E8D0037D386 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8016A7E32C353E8D0037D386 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8016A8132C3546D60037D386 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -66,7 +68,8 @@
 			children = (
 				8016A7DC2C353E8B0037D386 /* LMS_Admin_LibrarianApp.swift */,
 				8016A7DE2C353E8B0037D386 /* ContentView.swift */,
-				8016A7E02C353E8D0037D386 /* Assets.xcassets */,
+				5F4D063F2C36E0A0009416A2 /* LoginView.swift */,
+				5F4D06412C36E0B3009416A2 /* Assets.xcassets */,
 				8016A7E22C353E8D0037D386 /* Preview Content */,
 			);
 			path = LMS_Admin_Librarian;
@@ -149,7 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8016A7E42C353E8D0037D386 /* Preview Assets.xcassets in Resources */,
-				8016A7E12C353E8D0037D386 /* Assets.xcassets in Resources */,
+				5F4D06422C36E0B3009416A2 /* Assets.xcassets in Resources */,
 				8016A8142C3546D60037D386 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -161,6 +164,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F4D06402C36E0A0009416A2 /* LoginView.swift in Sources */,
 				8016A7DF2C353E8B0037D386 /* ContentView.swift in Sources */,
 				8016A7DD2C353E8B0037D386 /* LMS_Admin_LibrarianApp.swift in Sources */,
 			);
