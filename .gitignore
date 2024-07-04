@@ -90,4 +90,5 @@ fastlane/test_output
 iOSInjectionProject/
 
 
+LMS_Admin_Librarian.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
 .DS_Store
