@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A1214532C36EDAB009E1BD1 /* ExcelToFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1214522C36EDAB009E1BD1 /* ExcelToFirebase.swift */; };
+		1A1214562C36EF99009E1BD1 /* CoreXLSX in Frameworks */ = {isa = PBXBuildFile; productRef = 1A1214552C36EF99009E1BD1 /* CoreXLSX */; };
+		1A1214592C370869009E1BD1 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 1A1214582C370869009E1BD1 /* FirebaseFirestore */; };
+		1A12145B2C370869009E1BD1 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 1A12145A2C370869009E1BD1 /* FirebaseFirestoreCombine-Community */; };
+		1A12145D2C370869009E1BD1 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1A12145C2C370869009E1BD1 /* FirebaseFirestoreSwift */; };
 		8016A7DD2C353E8B0037D386 /* LMS_Admin_LibrarianApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8016A7DC2C353E8B0037D386 /* LMS_Admin_LibrarianApp.swift */; };
 		8016A7DF2C353E8B0037D386 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8016A7DE2C353E8B0037D386 /* ContentView.swift */; };
 		8016A7E12C353E8D0037D386 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8016A7E02C353E8D0037D386 /* Assets.xcassets */; };
@@ -20,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A1214522C36EDAB009E1BD1 /* ExcelToFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcelToFirebase.swift; sourceTree = "<group>"; };
 		8016A7D92C353E8B0037D386 /* LMS_Admin_Librarian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LMS_Admin_Librarian.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8016A7DC2C353E8B0037D386 /* LMS_Admin_LibrarianApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LMS_Admin_LibrarianApp.swift; sourceTree = "<group>"; };
 		8016A7DE2C353E8B0037D386 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -33,23 +39,35 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A1214562C36EF99009E1BD1 /* CoreXLSX in Frameworks */,
+				1A12145B2C370869009E1BD1 /* FirebaseFirestoreCombine-Community in Frameworks */,
 				8016A7EE2C3544B30037D386 /* FirebaseAnalytics in Frameworks */,
 				8016A7F22C3544B30037D386 /* FirebaseAuth in Frameworks */,
 				8016A7F42C3544B30037D386 /* FirebaseDatabase in Frameworks */,
 				8016A7F62C3544B30037D386 /* FirebaseStorage in Frameworks */,
 				8016A7F02C3544B30037D386 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				1A1214592C370869009E1BD1 /* FirebaseFirestore in Frameworks */,
+				1A12145D2C370869009E1BD1 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A1214572C370869009E1BD1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8016A7D02C353E8B0037D386 = {
 			isa = PBXGroup;
 			children = (
 				8016A8132C3546D60037D386 /* GoogleService-Info.plist */,
 				8016A7DB2C353E8B0037D386 /* LMS_Admin_Librarian */,
 				8016A7DA2C353E8B0037D386 /* Products */,
+				1A1214572C370869009E1BD1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -66,6 +84,7 @@
 			children = (
 				8016A7DC2C353E8B0037D386 /* LMS_Admin_LibrarianApp.swift */,
 				8016A7DE2C353E8B0037D386 /* ContentView.swift */,
+				1A1214522C36EDAB009E1BD1 /* ExcelToFirebase.swift */,
 				8016A7E02C353E8D0037D386 /* Assets.xcassets */,
 				8016A7E22C353E8D0037D386 /* Preview Content */,
 			);
@@ -102,6 +121,10 @@
 				8016A7F12C3544B30037D386 /* FirebaseAuth */,
 				8016A7F32C3544B30037D386 /* FirebaseDatabase */,
 				8016A7F52C3544B30037D386 /* FirebaseStorage */,
+				1A1214552C36EF99009E1BD1 /* CoreXLSX */,
+				1A1214582C370869009E1BD1 /* FirebaseFirestore */,
+				1A12145A2C370869009E1BD1 /* FirebaseFirestoreCombine-Community */,
+				1A12145C2C370869009E1BD1 /* FirebaseFirestoreSwift */,
 			);
 			productName = LMS_Admin_Librarian;
 			productReference = 8016A7D92C353E8B0037D386 /* LMS_Admin_Librarian.app */;
@@ -133,6 +156,7 @@
 			mainGroup = 8016A7D02C353E8B0037D386;
 			packageReferences = (
 				8016A7EC2C3544B30037D386 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				1A1214542C36EF99009E1BD1 /* XCRemoteSwiftPackageReference "CoreXLSX" */,
 			);
 			productRefGroup = 8016A7DA2C353E8B0037D386 /* Products */;
 			projectDirPath = "";
@@ -161,6 +185,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A1214532C36EDAB009E1BD1 /* ExcelToFirebase.swift in Sources */,
 				8016A7DF2C353E8B0037D386 /* ContentView.swift in Sources */,
 				8016A7DD2C353E8B0037D386 /* LMS_Admin_LibrarianApp.swift in Sources */,
 			);
@@ -311,7 +336,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.infosys.LMS-Admin";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.infosys.LMS-Admin-Librarian";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -342,7 +367,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.infosys.LMS-Admin";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.infosys.LMS-Admin-Librarian";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -374,6 +399,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1A1214542C36EF99009E1BD1 /* XCRemoteSwiftPackageReference "CoreXLSX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CoreOffice/CoreXLSX.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.14.2;
+			};
+		};
 		8016A7EC2C3544B30037D386 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -385,6 +418,26 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1A1214552C36EF99009E1BD1 /* CoreXLSX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1A1214542C36EF99009E1BD1 /* XCRemoteSwiftPackageReference "CoreXLSX" */;
+			productName = CoreXLSX;
+		};
+		1A1214582C370869009E1BD1 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8016A7EC2C3544B30037D386 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		1A12145A2C370869009E1BD1 /* FirebaseFirestoreCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8016A7EC2C3544B30037D386 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseFirestoreCombine-Community";
+		};
+		1A12145C2C370869009E1BD1 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8016A7EC2C3544B30037D386 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
 		8016A7ED2C3544B30037D386 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8016A7EC2C3544B30037D386 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
