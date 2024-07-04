@@ -10,16 +10,16 @@ import FirebaseFirestore
 import CoreXLSX
 
 struct Book {
-    let title: String
-    let author: String
-    let isbn: String
+    let totalNumberOfCopies: Int
+    let numberOfIssuedCopies: Int
+    let isbnOfTheBook: String
     // Other properties...
-        
+    
     var dictionary: [String: Any] {
         return [
-            "title": title,
-            "author": author,
-            "isbn": isbn,
+            "totalNumberOfCopies": totalNumberOfCopies,
+            "numberOfIssuedCopies": numberOfIssuedCopies,
+            "isbnOfTheBook": isbnOfTheBook,
             // Other properties...
         ]
     }
@@ -47,9 +47,9 @@ func parseExcelFile(at url: URL, completion: @escaping ([Book]) -> Void) {
                     if row.reference == 0 {}
                     else {
                         let book = Book(
-                            title: row.cells[0].stringValue(sharedStrings) ?? "",
-                            author: row.cells[1].stringValue(sharedStrings) ?? "",
-                            isbn: row.cells[2].stringValue(sharedStrings) ?? ""
+                            totalNumberOfCopies: Int(row.cells[0].stringValue(sharedStrings) ?? "") ?? 0,
+                            numberOfIssuedCopies: Int(row.cells[1].stringValue(sharedStrings) ?? "") ?? 0,
+                            isbnOfTheBook: row.cells[2].stringValue(sharedStrings) ?? ""
                             // Other properties...
                         )
                         books.append(book)
@@ -64,19 +64,19 @@ func parseExcelFile(at url: URL, completion: @escaping ([Book]) -> Void) {
 }
 
 func updateFirestore(with books: [Book]) {
-        let db = Firestore.firestore()
-        let batch = db.batch()
-        
-        for book in books {
-            let docRef = db.collection("books").document(book.isbn)
-            batch.setData(book.dictionary, forDocument: docRef)
-        }
-        
-        batch.commit { error in
-            if let error = error {
-                print("Error writing batch \(error)")
-            } else {
-                print("Batch write succeeded.")
-            }
+    let db = Firestore.firestore()
+    let batch = db.batch()
+    
+    for book in books {
+        let docRef = db.collection("books").document(book.isbnOfTheBook)
+        batch.setData(book.dictionary, forDocument: docRef)
+    }
+    
+    batch.commit { error in
+        if let error = error {
+            print("Error writing batch \(error)")
+        } else {
+            print("Batch write succeeded.")
         }
     }
+}
