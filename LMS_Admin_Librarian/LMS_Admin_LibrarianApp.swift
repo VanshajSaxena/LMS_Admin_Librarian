@@ -23,9 +23,9 @@ struct LMS_Admin_LibrarianApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
-            NavigationView {
+            
                 ContentView()
-            }
+            
         }
     }
 }
