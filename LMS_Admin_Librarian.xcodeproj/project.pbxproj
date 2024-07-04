@@ -12,6 +12,8 @@
 		1A1214592C370869009E1BD1 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 1A1214582C370869009E1BD1 /* FirebaseFirestore */; };
 		1A12145B2C370869009E1BD1 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 1A12145A2C370869009E1BD1 /* FirebaseFirestoreCombine-Community */; };
 		1A12145D2C370869009E1BD1 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1A12145C2C370869009E1BD1 /* FirebaseFirestoreSwift */; };
+		5FDAB7952C371F1000FEC1C2 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDAB7932C371F1000FEC1C2 /* SidebarView.swift */; };
+		5FDAB7962C371F1000FEC1C2 /* AddBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDAB7942C371F1000FEC1C2 /* AddBookView.swift */; };
 		8016A7DD2C353E8B0037D386 /* LMS_Admin_LibrarianApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8016A7DC2C353E8B0037D386 /* LMS_Admin_LibrarianApp.swift */; };
 		8016A7DF2C353E8B0037D386 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8016A7DE2C353E8B0037D386 /* ContentView.swift */; };
 		8016A7E12C353E8D0037D386 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8016A7E02C353E8D0037D386 /* Assets.xcassets */; };
@@ -26,6 +28,8 @@
 
 /* Begin PBXFileReference section */
 		1A1214522C36EDAB009E1BD1 /* ExcelToFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcelToFirebase.swift; sourceTree = "<group>"; };
+		5FDAB7932C371F1000FEC1C2 /* SidebarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
+		5FDAB7942C371F1000FEC1C2 /* AddBookView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBookView.swift; sourceTree = "<group>"; };
 		8016A7D92C353E8B0037D386 /* LMS_Admin_Librarian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LMS_Admin_Librarian.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8016A7DC2C353E8B0037D386 /* LMS_Admin_LibrarianApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LMS_Admin_LibrarianApp.swift; sourceTree = "<group>"; };
 		8016A7DE2C353E8B0037D386 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -82,6 +86,8 @@
 		8016A7DB2C353E8B0037D386 /* LMS_Admin_Librarian */ = {
 			isa = PBXGroup;
 			children = (
+				5FDAB7942C371F1000FEC1C2 /* AddBookView.swift */,
+				5FDAB7932C371F1000FEC1C2 /* SidebarView.swift */,
 				8016A7DC2C353E8B0037D386 /* LMS_Admin_LibrarianApp.swift */,
 				8016A7DE2C353E8B0037D386 /* ContentView.swift */,
 				1A1214522C36EDAB009E1BD1 /* ExcelToFirebase.swift */,
@@ -186,8 +192,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A1214532C36EDAB009E1BD1 /* ExcelToFirebase.swift in Sources */,
+				5FDAB7952C371F1000FEC1C2 /* SidebarView.swift in Sources */,
 				8016A7DF2C353E8B0037D386 /* ContentView.swift in Sources */,
 				8016A7DD2C353E8B0037D386 /* LMS_Admin_LibrarianApp.swift in Sources */,
+				5FDAB7962C371F1000FEC1C2 /* AddBookView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
