@@ -1,6 +1,7 @@
 import SwiftUI
 import Firebase
 import FirebaseFirestore
+import FirebaseAuth
 
 struct LoginView: View {
     @State private var email: String = ""
@@ -98,6 +99,9 @@ struct LoginView: View {
                         LibrarianView()
                     }
                 }
+                .sheet(isPresented: $isShowingForgotPassword) {
+                    ForgetPasswordView()
+                }
             }
         }
     }
@@ -143,6 +147,8 @@ struct LoginView: View {
         navigationPath.append(view)
     }
 }
+
+
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
