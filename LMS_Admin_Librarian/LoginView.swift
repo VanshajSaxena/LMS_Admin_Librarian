@@ -123,19 +123,15 @@ struct LoginView: View {
                 }
             }
 
-            let librarianRef = db.collection("librarians").whereField("email", isEqualTo: email).whereField("password", isEqualTo: password)
-            librarianRef.getDocuments { querySnapshot, error in
+            // Check librarian credentials using Firebase Authentication
+            Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
                 if let error = error {
-                    print("Error fetching librarian documents: \(error.localizedDescription)")
-                    loginError = "Error fetching data"
-                    return
-                }
-
-                guard let documents = querySnapshot?.documents, !documents.isEmpty else {
+                    print("Error signing in: \(error.localizedDescription)")
                     loginError = "Invalid credentials"
                     return
                 }
-
+                
+                // Successfully signed in
                 DispatchQueue.main.async {
                     navigateToView(view: "LibrarianView")
                 }
@@ -147,8 +143,6 @@ struct LoginView: View {
         navigationPath.append(view)
     }
 }
-
-
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
