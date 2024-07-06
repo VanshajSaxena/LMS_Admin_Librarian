@@ -11,6 +11,7 @@
 		1A1214562C36EF99009E1BD1 /* CoreXLSX in Frameworks */ = {isa = PBXBuildFile; productRef = 1A1214552C36EF99009E1BD1 /* CoreXLSX */; };
 		1A12145B2C370869009E1BD1 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 1A12145A2C370869009E1BD1 /* FirebaseFirestoreCombine-Community */; };
 		1A12145D2C370869009E1BD1 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1A12145C2C370869009E1BD1 /* FirebaseFirestoreSwift */; };
+		328757102C39AA1100B96FE8 /* AddLibrarianView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3287570F2C39AA1100B96FE8 /* AddLibrarianView.swift */; };
 		329E0A592C3823EC00E8925A /* ForgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329E0A582C3823EC00E8925A /* ForgetPasswordView.swift */; };
 		32D84C142C3708C500E489F7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D84C132C3708C500E489F7 /* LoginView.swift */; };
 		32D84C162C370E0A00E489F7 /* AdminView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D84C152C370E0A00E489F7 /* AdminView.swift */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		1A1214522C36EDAB009E1BD1 /* ExcelToFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcelToFirebase.swift; sourceTree = "<group>"; };
+		3287570F2C39AA1100B96FE8 /* AddLibrarianView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLibrarianView.swift; sourceTree = "<group>"; };
 		329E0A582C3823EC00E8925A /* ForgetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordView.swift; sourceTree = "<group>"; };
 		32D84C132C3708C500E489F7 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		32D84C152C370E0A00E489F7 /* AdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminView.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				1A1214522C36EDAB009E1BD1 /* ExcelToFirebase.swift */,
 				32D84C132C3708C500E489F7 /* LoginView.swift */,
 				32D84C152C370E0A00E489F7 /* AdminView.swift */,
+				3287570F2C39AA1100B96FE8 /* AddLibrarianView.swift */,
 				32D84C1C2C37213E00E489F7 /* LibrarianView.swift */,
 				8016A7E02C353E8D0037D386 /* Assets.xcassets */,
 				8016A7E22C353E8D0037D386 /* Preview Content */,
@@ -207,6 +210,7 @@
 				32D84C142C3708C500E489F7 /* LoginView.swift in Sources */,
 				8016A7DF2C353E8B0037D386 /* ContentView.swift in Sources */,
 				329E0A592C3823EC00E8925A /* ForgetPasswordView.swift in Sources */,
+				328757102C39AA1100B96FE8 /* AddLibrarianView.swift in Sources */,
 				32D84C1D2C37213E00E489F7 /* LibrarianView.swift in Sources */,
 				32D84C162C370E0A00E489F7 /* AdminView.swift in Sources */,
 				8016A7DD2C353E8B0037D386 /* LMS_Admin_LibrarianApp.swift in Sources */,

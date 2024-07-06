@@ -1,146 +1,156 @@
 import SwiftUI
 import Firebase
 import FirebaseFirestore
-import FirebaseAuth
+
+struct Librarian: Identifiable, Codable {
+    @DocumentID var id: String?
+    var name: String
+    var email: String
+    var age: String
+    var yearsOfExperience: String
+    var userID : String
+    
+}
 
 struct AdminView: View {
-    @State private var userID: String = ""
-    @State private var librarianEmail: String = ""
-    @State private var librarianPassword: String = ""
-    @State private var creationError: String?
-    @State private var successMessage: String?
-
+    @State private var librarians: [Librarian] = []
+    @State private var isShowingAddLibrarian = false
+    
     var body: some View {
         VStack {
-            TextField("User ID", text: $userID)
+            Text("Librarians")
+                .font(.largeTitle)
+                .fontWeight(.bold)
                 .padding()
-                .background(Color(.secondarySystemBackground))
-                .cornerRadius(8)
-                .autocapitalization(.none)
-
-            TextField("Librarian Gmail", text: $librarianEmail)
-                .padding()
-                .background(Color(.secondarySystemBackground))
-                .cornerRadius(8)
-                .keyboardType(.emailAddress)
-                .autocapitalization(.none)
-
-            SecureField("Librarian Password", text: $librarianPassword)
-                .padding()
-                .background(Color(.secondarySystemBackground))
-                .cornerRadius(8)
             
-            if let creationError = creationError {
-                Text(creationError)
-                    .foregroundColor(.red)
-                    .padding()
-            }
+            List {
+                           ForEach(librarians) { librarian in
+                               LibrarianRow(librarian: librarian) {
+                                   deleteLibrarian(librarian)
+                               }
+                           }
+                       }
+                       
             
-            if let successMessage = successMessage {
-                Text(successMessage)
-                    .foregroundColor(.green)
-                    .padding()
-            }
-
-            Button(action: createLibrarian) {
-                Text("Create Librarian")
+            Button(action: {
+                isShowingAddLibrarian.toggle()
+            }) {
+                Text("Add Librarian")
                     .foregroundColor(.white)
                     .padding()
-                    .background(Color.blue)
-                    .cornerRadius(8)
+                    .background(Color.orange)
+                    .cornerRadius(12)
             }
             .padding()
-        }
-        .padding()
-        .navigationTitle("Admin Home")
-    }
-
-    func createLibrarian() {
-        guard !userID.isEmpty else {
-            creationError = "Please enter a user ID"
-            return
-        }
-
-        guard !librarianEmail.isEmpty else {
-            creationError = "Please enter an email"
-            return
-        }
-        
-        guard !librarianPassword.isEmpty else {
-            creationError = "Please enter a password"
-            return
-        }
-        
-        guard isValidGmail(email: librarianEmail) else {
-            creationError = "Please enter a valid Gmail address"
-            return
-        }
-        
-        print("Starting librarian creation process...")
-        
-        // Authenticate the admin with Firebase Authentication
-        Auth.auth().signInAnonymously { (result, error) in
-            if let error = error {
-                print("Error authenticating admin anonymously: \(error.localizedDescription)")
-                creationError = "Error creating librarian: Auth failed"
-                return
-            }
-            
-            print("Admin authenticated successfully.")
-            
-            // Admin authenticated successfully
-            guard let user = result?.user else {
-                creationError = "Error creating librarian: No user"
-                return
-            }
-            
-            // Create librarian user account with email and password
-            Auth.auth().createUser(withEmail: librarianEmail, password: librarianPassword) { (authResult, error) in
-                if let error = error {
-                    print("Error creating librarian user: \(error.localizedDescription)")
-                    creationError = "Error creating librarian: \(error.localizedDescription)"
-                    return
-                }
-                
-                guard let librarianUID = authResult?.user.uid else {
-                    creationError = "Error creating librarian: No UID"
-                    return
-                }
-                
-                print("Librarian user created successfully. UID: \(librarianUID)")
-                
-                // Add librarian credentials to Firestore
-                let db = Firestore.firestore()
-                let librarianRef = db.collection("librarians").document(librarianUID)
-                
-                librarianRef.setData([
-                    "userID": userID,
-                    "email": librarianEmail
-                ]) { error in
-                    if let error = error {
-                        print("Error adding librarian to Firestore: \(error.localizedDescription)")
-                        creationError = "Error creating librarian: \(error.localizedDescription)"
-                    } else {
-                        print("Librarian added to Firestore successfully.")
-                        successMessage = "Librarian created successfully"
-                        userID = ""
-                        librarianEmail = ""
-                        librarianPassword = ""
+            .sheet(isPresented: $isShowingAddLibrarian) {
+                AddLibrarianView(onAdd: { name, age, yearsOfExperience, userID, librarianEmail in
+                    // Add new librarian to Firestore
+                    let db = Firestore.firestore()
+                    db.collection("librarians").addDocument(data: [
+                        "name": name,
+                        "email": librarianEmail,
+                        "age": age,
+                        "yearsOfExperience": yearsOfExperience,
+                        "userID": userID
+                    ]) { error in
+                        if let error = error {
+                            print("Error adding librarian: \(error.localizedDescription)")
+                        } else {
+                            print("Librarian added successfully.")
+                            fetchLibrarians()
+                        }
                     }
+                })
+            }
+        }
+        .onAppear(perform: fetchLibrarians)
+        .navigationTitle("Librarians")
+    }
+    
+    func fetchLibrarians() {
+        let db = Firestore.firestore()
+        db.collection("librarians").getDocuments { snapshot, error in
+            if let error = error {
+                print("Error fetching librarians: \(error.localizedDescription)")
+                return
+            }
+            
+            if let snapshot = snapshot {
+                librarians = snapshot.documents.compactMap { document in
+                    try? document.data(as: Librarian.self)
                 }
             }
         }
     }
     
-    func isValidGmail(email: String) -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@gmail.com"
-        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailPred.evaluate(with: email)
-    }
+    func deleteLibrarian(at offsets: IndexSet) {
+            let db = Firestore.firestore()
+            offsets.forEach { index in
+                let librarian = librarians[index]
+                if let librarianID = librarian.id {
+                    db.collection("librarians").document(librarianID).delete { error in
+                        if let error = error {
+                            print("Error deleting librarian: \(error.localizedDescription)")
+                        } else {
+                            print("Librarian deleted successfully.")
+                            librarians.remove(at: index)
+                        }
+                    }
+                }
+            }
+        }
+        
+        func deleteLibrarian(_ librarian: Librarian) {
+            let db = Firestore.firestore()
+            if let librarianID = librarian.id {
+                db.collection("librarians").document(librarianID).delete { error in
+                    if let error = error {
+                        print("Error deleting librarian: \(error.localizedDescription)")
+                    } else {
+                        print("Librarian deleted successfully.")
+                        librarians.removeAll(where: { $0.id == librarianID })
+                    }
+                }
+            }
+        }
 }
 
-struct AdminView_Previews: PreviewProvider {
-    static var previews: some View {
-        AdminView()
+struct LibrarianRow: View {
+    var librarian: Librarian
+    var onDelete: () -> Void
+    
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text("Name:")
+                Text("Email:")
+                Text("Age:")
+                Text("Years of Experience:")
+            }
+            .foregroundColor(.gray)
+            
+            VStack(alignment: .leading) {
+                Text(librarian.name)
+                Text(librarian.email)
+                Text(librarian.age)
+                Text(librarian.yearsOfExperience)
+            }
+            .padding(.leading, 8)
+            
+            Spacer()
+            
+            Button(action: {
+                onDelete()
+            }) {
+                Image(systemName: "trash")
+                    .foregroundColor(.red)
+            }
+        }
+        .padding()
+        .background(Color.white)
+        .cornerRadius(8)
+        .shadow(radius: 5)
+        .padding(.horizontal)
+        .padding(.vertical, 4)
     }
 }
