@@ -9,7 +9,17 @@ import Foundation
 import FirebaseFirestore
 import CoreXLSX
 
-struct Book {
+struct BookMetaData {
+    let title: String
+    let authors: String
+    let publishedDate: String
+    let pageCount: String
+    let language: String
+    let imageLinks: String
+    let isbn: String
+}
+
+struct BookRecord {
     let isbnOfTheBook: String
     let totalNumberOfCopies: Int
     let numberOfIssuedCopies: Int
@@ -27,7 +37,7 @@ struct Book {
 
 let filepath = "/Users/vanshaj/Documents/Book (4).xlsx"
 
-func parseExcelFile(at url: URL, completion: @escaping ([Book]) -> Void) {
+func parseExcelFile(at url: URL, completion: @escaping ([BookRecord]) -> Void) {
     do {
         guard let file = XLSXFile(filepath: url.path) else {
             print("Failed to open file.")
@@ -37,7 +47,7 @@ func parseExcelFile(at url: URL, completion: @escaping ([Book]) -> Void) {
         // Load shared strings
         let sharedStrings = try file.parseSharedStrings()
         
-        var books: [Book] = []
+        var books: [BookRecord] = []
         let workbooks = try file.parseWorkbooks()
         
         for workbook in workbooks {
@@ -72,7 +82,7 @@ func parseExcelFile(at url: URL, completion: @escaping ([Book]) -> Void) {
                 // Iterate over rows starting from the second row
                 for row in worksheet.data?.rows.dropFirst() ?? [] {
                     if row.cells.count > max(Int(ISBNIdx)!, TNOCIdx, NOICIdx) { // Ensure there are enough cells in the row
-                        let book = Book(
+                        let book = BookRecord (
                             isbnOfTheBook: row.cells[Int(ISBNIdx)!].stringValue(sharedStrings!) ?? "NOContent",
                             totalNumberOfCopies: Int(row.cells[TNOCIdx].stringValue(sharedStrings!) ?? "NOContent") ?? 0,
                             numberOfIssuedCopies: Int(row.cells[NOICIdx].stringValue(sharedStrings!) ?? "NOContent") ?? 0
@@ -89,20 +99,20 @@ func parseExcelFile(at url: URL, completion: @escaping ([Book]) -> Void) {
     }
 }
 
-func updateFirestore(with books: [Book]) {
-        let db = Firestore.firestore()
-        let batch = db.batch()
-        
-        for book in books {
-            let docRef = db.collection("books").document(book.isbnOfTheBook)
-            batch.setData(book.dictionary, forDocument: docRef)
-        }
-        
-        batch.commit { error in
-            if let error = error {
-                print("Error writing batch \(error)")
-            } else {
-                print("Batch write succeeded.")
-            }
+func updateFirestore(with books: [BookRecord]) {
+    let db = Firestore.firestore()
+    let batch = db.batch()
+    
+    for book in books {
+        let docRef = db.collection("books").document(book.isbnOfTheBook)
+        batch.setData(book.dictionary, forDocument: docRef)
+    }
+    
+    batch.commit { error in
+        if let error = error {
+            print("Error writing batch \(error)")
+        } else {
+            print("Batch write succeeded.")
         }
     }
+}
