@@ -17,7 +17,20 @@ struct LoginView: View {
                 ZStack {
                     Color("BackgroundColor")
                         .edgesIgnoringSafeArea(.all)
-                    HStack {
+                    HStack(spacing: 20) {
+                        Spacer()
+                        
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color("ThemeOrange"))
+                            .frame(width: geometry.size.width * 0.4, height: geometry.size.height * 0.9)
+                            .overlay(
+                                Image(systemName: "photo")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: geometry.size.width * 0.4, height: geometry.size.height * 0.9)
+                            )
+                            .cornerRadius(20)
+                        
                         VStack(alignment: .center, spacing: 30) {
                             Text("Welcome Back 👋")
                                 .font(.largeTitle)
@@ -76,25 +89,12 @@ struct LoginView: View {
                         .frame(width: geometry.size.width * 0.4)
                         
                         Spacer()
-                        
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(Color("ThemeOrange"))
-                            .frame(width: geometry.size.width * 0.5, height: geometry.size.height * 0.9)
-                            .overlay(
-                                Image(systemName: "photo")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: geometry.size.width * 0.5, height: geometry.size.height * 0.9)
-                            )
-                            .cornerRadius(20)
-                        
-                        Spacer()
                     }
                     .padding()
                 }
                 .navigationDestination(for: String.self) { destination in
                     if destination == "AdminView" {
-                        AdminView()
+                        AddLibrarianView()
                     } else if destination == "LibrarianView" {
                         LibrarianView()
                     }

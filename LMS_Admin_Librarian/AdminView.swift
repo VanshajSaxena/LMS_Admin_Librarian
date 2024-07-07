@@ -5,7 +5,7 @@ import FirebaseAuth
 
 struct AdminView: View {
    
-   
+    @Environment(\.presentationMode) var presentationMode
     @State private var name: String = ""
     @State private var age: String = ""
     @State private var yearsOfExperience: String = ""
@@ -14,6 +14,7 @@ struct AdminView: View {
     @State private var librarianPassword: String = ""
     @State private var creationError: String?
     @State private var successMessage: String?
+    var onAdd: (String, String, String, String, String) -> Void
         
         var body: some View {
             GeometryReader { geometry in
@@ -26,6 +27,7 @@ struct AdminView: View {
                                 .font(.title)
                                 .fontWeight(.bold)
                                 .padding(.horizontal, geometry.size.width * 0.15)
+                                .foregroundColor(.black)
                            
                             VStack(alignment: .leading, spacing: 15) {
                                 Text("Name")
@@ -38,6 +40,7 @@ struct AdminView: View {
                                             RoundedRectangle(cornerRadius: 8)
                                             .stroke(Color.gray, lineWidth: 1)
                                         )
+                                    .multilineTextAlignment(.leading)
                                 
                                 Text("Age")
                                     .foregroundColor(.orange)
@@ -49,6 +52,7 @@ struct AdminView: View {
                                             RoundedRectangle(cornerRadius: 8)
                                             .stroke(Color.gray, lineWidth: 1)
                                         )
+                                    .multilineTextAlignment(.leading)
                                 
                                 Text("Email")
                                     .foregroundColor(.orange)
@@ -62,6 +66,7 @@ struct AdminView: View {
                                             RoundedRectangle(cornerRadius: 8)
                                             .stroke(Color.gray, lineWidth: 1)
                                         )
+                                    .multilineTextAlignment(.leading)
                                 
                                 Text("Years of Experience")
                                     .foregroundColor(.orange)
@@ -73,6 +78,7 @@ struct AdminView: View {
                                             RoundedRectangle(cornerRadius: 8)
                                             .stroke(Color.gray, lineWidth: 1)
                                         )
+                                    .multilineTextAlignment(.leading)
                             }
                             .frame(width: geometry.size.width * 0.68)
                             .padding(.horizontal, geometry.size.width * 0.15)// Reduce the width of the text fields
@@ -83,6 +89,8 @@ struct AdminView: View {
                                 Text("Generate Credentials")
                                     .font(.title)
                                     .fontWeight(.bold)
+                                    .foregroundColor(.black)
+                                    
                                    
                                 
                                 Text("User ID")
@@ -97,7 +105,7 @@ struct AdminView: View {
                                             RoundedRectangle(cornerRadius: 8)
                                             .stroke(Color.gray, lineWidth: 1)
                                         )
-                                
+                                    .multilineTextAlignment(.leading)
                                 Text("Password")
                                     .foregroundColor(.orange)
                                 SecureField("Enter the Password", text: $librarianPassword)
@@ -108,7 +116,7 @@ struct AdminView: View {
                                             RoundedRectangle(cornerRadius: 8)
                                             .stroke(Color.gray, lineWidth: 1)
                                         )
-                                
+                                    .multilineTextAlignment(.leading)
                                 if let creationError = creationError {
                                     Text(creationError)
                                         .foregroundColor(.red)
@@ -222,9 +230,13 @@ struct AdminView: View {
                     } else {
                         print("Librarian added to Firestore successfully.")
                         successMessage = "Librarian created successfully"
-                        userID = ""
-                        librarianEmail = ""
-                        librarianPassword = ""
+                        userID = userID
+                        librarianEmail = librarianEmail
+                        librarianPassword = librarianPassword
+                        DispatchQueue.main.async {
+                            onAdd(name, age, yearsOfExperience, userID, librarianEmail)
+                                                presentationMode.wrappedValue.dismiss()
+                                            }
                     }
                 }
             }
@@ -238,11 +250,6 @@ struct AdminView: View {
     }
 }
 
-struct AdminView_Previews: PreviewProvider {
-    static var previews: some View {
-        AdminView()
-    }
-}
 
     
                           
