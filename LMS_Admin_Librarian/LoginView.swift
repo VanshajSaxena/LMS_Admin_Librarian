@@ -89,10 +89,10 @@ struct LoginView: View {
                     .padding()
                 }
                 .navigationDestination(for: String.self) { destination in
-                    if destination == "AdminView" {
+                    if destination == "AddLibrarianView" {
                         AddLibrarianView()
-                    } else if destination == "LibrarianView" {
-                        LibrarianView()
+                    } else if destination == "InventoryView" {
+                        InventoryView()
                     }
                 }
                 .sheet(isPresented: $isShowingForgotPassword) {
@@ -129,11 +129,12 @@ struct LoginView: View {
                 
                 // Successfully signed in
                 DispatchQueue.main.async {
-                    // here
+                    navigateToView(view: "InventoryView")
                 }
             }
         }
     }
+
     
     func navigateToView(view: String) {
         navigationPath.append(view)
