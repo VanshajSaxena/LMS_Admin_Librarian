@@ -1,15 +1,15 @@
 import SwiftUI
 
 struct AddBookView: View {
-    @State private var isbnNumber: String = ""
     @State private var numberOfCopies: String = ""
     @State private var column: String = ""
     @State private var shelf: String = ""
     @State private var selectedButton: String? = nil
     
+    // to get data from barcode scanning
     @State private var isPresented = false
-    @State private var isbn: String?
-    @State private var foundBooks: Books?
+    @State private var isbn: String = ""
+    @State private var foundBooks: BooksAPI?
     
     var body: some View {
         VStack(spacing: 30) {
@@ -125,7 +125,7 @@ struct AddBookView: View {
     
     private var formSection: some View {
         VStack(alignment: .leading, spacing: 20) {
-            formField(title: "ISBN Number", text: $isbnNumber, placeholder: "Enter the ISBN number")
+            formField(title: "ISBN Number", text: $isbn, placeholder: "Enter the ISBN number")
             formField(title: "No of Copies", text: $numberOfCopies, placeholder: "Enter the number of copies")
             formField(title: "Column", text: $column, placeholder: "Enter the column")
             formField(title: "Shelf", text: $shelf, placeholder: "Enter the shelf")
@@ -140,6 +140,7 @@ struct AddBookView: View {
                 .font(.headline)
                 .foregroundColor(Color("ThemeOrange"))
             TextField(placeholder, text: text)
+                .foregroundStyle(.black)
                 .padding()
                 .background(Color.white)
                 .cornerRadius(8)
