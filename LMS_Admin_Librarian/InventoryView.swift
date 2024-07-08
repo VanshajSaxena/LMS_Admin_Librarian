@@ -16,10 +16,7 @@ struct InventoryView: View {
     @State private var showAddBookView: Bool = false
 
     // Sample data
-    @State private var books: [BookInventoryView] = [
-        BookInventoryView(name: "For Whom The Bell Tolls", author: "Earnest Hemingway", genre: "War, Thriller, Action", pages: 300, copies: 5, column: "Col 2", shelf: "Shelf 4"),
-        BookInventoryView(name: "The Three Musketeers", author: "Alexandre Dumas", genre: "Adventure, Fiction", pages: 230, copies: 3, column: "Col 2", shelf: "Shelf 3")
-    ]
+    @State private var books: [BookInventoryView] = []
 
     var body: some View {
         GeometryReader { geometry in
