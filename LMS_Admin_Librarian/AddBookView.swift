@@ -6,33 +6,37 @@ struct AddBookView: View {
     @State private var column: String = ""
     @State private var shelf: String = ""
     @State private var selectedButton: String? = nil
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
-        VStack(spacing: 30) {
-            buttonSection
-            
-            VStack {
-                Text("Add Book")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .padding(.horizontal, 100)
+        ScrollView {
+            VStack(spacing: 30) {
+                
+                buttonSection
+                
+                VStack {
+                    Text("Add Book")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .padding(.horizontal, 100)
+                }
+                
+                formSection
+                
+                doneButton
+                    .padding(.horizontal, 250)
+                    .padding(.top, 30)
             }
-            
-            formSection
-            
-            doneButton
-                .padding(.horizontal, 250)
-                .padding(.top, 30)
+            .background(Color(.white))
         }
-        .background(Color("BackgroundColor"))
         .ignoresSafeArea()
     }
     
     private var buttonSection: some View {
         HStack(spacing: 30) {
             selectableButton(title: "Scan ISBN").frame(width: 165)
-            Rectangle().frame(width: 1, height: 70).foregroundColor(Color("ThemeOrange")).padding(.top, 20)
+            Rectangle().frame(width: 1, height: 70).foregroundColor(Color("ThemeOrange")).padding(.top, 80)
             selectableButton(title: "Import CSV").frame(width: 165)
         }
         .padding(.horizontal, 200)
@@ -53,7 +57,7 @@ struct AddBookView: View {
                         .stroke(Color("ThemeOrange"), lineWidth: 1)
                 )
         }
-        .padding(.top)
+        .padding(.top, 70)
         .buttonStyle(PlainButtonStyle())
     }
     
@@ -86,6 +90,7 @@ struct AddBookView: View {
     
     private var doneButton: some View {
         Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
             // Add book action
         }) {
             Text("Done")
@@ -95,7 +100,7 @@ struct AddBookView: View {
                 .frame(width: 300)
                 .background(Color("ThemeOrange"))
                 .cornerRadius(8)
-                .padding(.bottom, 50)
+                .padding(.bottom, 70)
         }
     }
 }
