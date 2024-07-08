@@ -11,6 +11,8 @@ struct AddBookView: View {
     @State private var isPresented = false
     @State private var isbn: String = ""
     @State private var foundBooks: BooksAPI?
+    @State private var showAlert = false
+    @State private var alertMessage = ""
     
     @State private var isShowingFilePicker = false
     @State private var selectedFileURL: URL?
@@ -89,7 +91,12 @@ struct AddBookView: View {
             .sheet(isPresented: $isShowingFilePicker) {
                 FilePicker( documentTypes: ["public.item"], onPick: {url in self.selectedFileURL = url
                     self.isShowingFilePicker = false
-                })
+                    parseExcelFile(at: selectedFileURL!, completion: { books in updateFirestore(with: books)})
+                   showAlert = true
+                }, showAlert: $showAlert)
+            }
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text("Success!"), message: Text("File selected and processed."), dismissButton: .default(Text("OK")))
             }
 
         }
@@ -160,7 +167,6 @@ struct AddBookView: View {
         Button(action: {
             self.presentationMode.wrappedValue.dismiss()
             // Add book action
-            parseExcelFile(at: selectedFileURL!, completion: { books in updateFirestore(with: books)})
         }) {
             Text("Done")
                 .font(.headline)

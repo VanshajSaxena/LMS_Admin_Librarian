@@ -11,9 +11,10 @@ import UIKit
 struct FilePicker: UIViewControllerRepresentable {
     var documentTypes: [String]
     var onPick: (URL) -> Void
+    @Binding var showAlert: Bool
 
     func makeCoordinator() -> Coordinator {
-        Coordinator(onPick: onPick)
+        Coordinator(onPick: onPick, showAlert: $showAlert)
     }
 
     func makeUIViewController(context: Context) -> UIDocumentPickerViewController {
@@ -26,18 +27,35 @@ struct FilePicker: UIViewControllerRepresentable {
 
     class Coordinator: NSObject, UIDocumentPickerDelegate {
         var onPick: (URL) -> Void
+        @Binding var showAlert: Bool
 
-        init(onPick: @escaping (URL) -> Void) {
+        init(onPick: @escaping (URL) -> Void, showAlert: Binding<Bool>) {
             self.onPick = onPick
+            self._showAlert = showAlert
         }
 
         func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
             guard let url = urls.first else { return }
-            onPick(url)
+
+            // Validate the file extension
+            if url.pathExtension.lowercased() == "xlsx" {
+                onPick(url)
+                showAlert = true
+            } else {
+                presentInvalidFileTypeAlert(controller: controller)
+            }
         }
 
         func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-            // Handle cancelation if needed
+            // Handle cancellation if needed
+        }
+
+        private func presentInvalidFileTypeAlert(controller: UIDocumentPickerViewController) {
+            let alert = UIAlertController(title: "Invalid File Type",
+                                          message: "Please select a .xlsx file.",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            controller.present(alert, animated: true, completion: nil)
         }
     }
 }
