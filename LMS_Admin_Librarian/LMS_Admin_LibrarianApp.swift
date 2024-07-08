@@ -25,6 +25,9 @@ struct LMS_Admin_LibrarianApp: App {
         WindowGroup {
             
                 InventoryView()
+                .onAppear{
+                    fetchBookDetails()
+                }
             
         }
     }

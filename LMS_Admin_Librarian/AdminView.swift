@@ -196,7 +196,7 @@ struct AdminView: View {
             print("Admin authenticated successfully.")
             
             // Admin authenticated successfully
-            guard let user = result?.user else {
+            guard let _ = result?.user else {
                 creationError = "Error creating librarian: No user"
                 return
             }
