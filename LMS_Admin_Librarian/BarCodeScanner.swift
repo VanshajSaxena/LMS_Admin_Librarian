@@ -12,8 +12,8 @@ import AVFoundation
 
 struct BarCodeScanner : UIViewControllerRepresentable {
     
-    @Binding var isbn: String?
-    @Binding var foundBooks: Books?
+    @Binding var isbn: String
+    @Binding var foundBooks: BooksAPI?
     
     @Environment(\.presentationMode) private var presentationMode
     

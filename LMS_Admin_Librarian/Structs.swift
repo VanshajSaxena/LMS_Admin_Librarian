@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Books: Decodable {
+struct BooksAPI: Decodable {
     let items: [BookItem]
 }
 
