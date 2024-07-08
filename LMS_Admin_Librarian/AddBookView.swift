@@ -11,6 +11,9 @@ struct AddBookView: View {
     @State private var isbn: String?
     @State private var foundBooks: Books?
     
+    @State private var isShowingFilePicker = false
+    @State private var selectedFileURL: URL?
+
     var body: some View {
         VStack(spacing: 30) {
             buttonSection
@@ -68,7 +71,22 @@ struct AddBookView: View {
                 .padding(.top,20)
                 .background(Color.themeOrange)
             
-            
+            Button(action: {
+                isShowingFilePicker  = true
+            }, label: {
+                Text("Import XLSX")
+                    .foregroundStyle(.themeOrange)
+                    .padding()
+                    .overlay(){
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color.themeOrange, lineWidth: 1)
+                    }
+            })
+            .sheet(isPresented: $isShowingFilePicker) {
+                FilePicker( documentTypes: ["public.item"], onPick: {url in self.selectedFileURL = url
+                    self.isShowingFilePicker = false
+                })
+            }
 
         }
         .padding(.top,30)
@@ -153,6 +171,7 @@ struct AddBookView: View {
     private var doneButton: some View {
         Button(action: {
             // Add book action
+            parseExcelFile(at: selectedFileURL!, completion: { books in updateFirestore(with: books)})
         }) {
             Text("Done")
                 .font(.headline)
