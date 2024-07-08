@@ -8,7 +8,7 @@
 import Foundation
 
 class BookSearchManager {
-    func getBookInfo(isbn: String, completion: @escaping (Books) -> Void) {
+    func getBookInfo(isbn: String, completion: @escaping (BooksAPI) -> Void) {
         /* Configure session, choose between:
            * defaultSessionConfiguration
            * ephemeralSessionConfiguration
@@ -42,7 +42,7 @@ class BookSearchManager {
                 guard let jsonData = data else { return }
                 
                 do {
-                    let bookData = try JSONDecoder().decode(Books.self, from: jsonData)
+                    let bookData = try JSONDecoder().decode(BooksAPI.self, from: jsonData)
                     completion(bookData)
                 } catch {
                     print(error)
