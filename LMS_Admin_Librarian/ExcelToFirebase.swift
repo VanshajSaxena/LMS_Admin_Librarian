@@ -23,19 +23,22 @@ struct BookRecord {
     let isbnOfTheBook: String
     let totalNumberOfCopies: Int
     let numberOfIssuedCopies: Int
+    let bookColumn: String
+    let bookShelf: String
     // Other properties...
     
     var dictionary: [String: Any] {
         return [
+            "isbnOfTheBook": isbnOfTheBook,
             "totalNumberOfCopies": totalNumberOfCopies,
             "numberOfIssuedCopies": numberOfIssuedCopies,
-            "isbnOfTheBook": isbnOfTheBook,
-            // Other properties...
+            "bookColumn": bookColumn,
+            "bookShelf": bookShelf,
         ]
     }
 }
 
-let filepath = "/Users/vanshaj/Documents/Book (4).xlsx"
+let filepath = "/Users/vanshaj/Documents/Book (5).xlsx"
 
 func parseExcelFile(at url: URL, completion: @escaping ([BookRecord]) -> Void) {
     do {
@@ -55,37 +58,46 @@ func parseExcelFile(at url: URL, completion: @escaping ([BookRecord]) -> Void) {
             
             for (_, path) in worksheetPathsAndNames {
                 let worksheet = try file.parseWorksheet(at: path)
-                var totalNumberOfCopies: Int?
-                var numberOfIssuedCopies: Int?
-                var isbnOfTheBook: String?
+                var totalNumberOfCopiesIdx: Int?
+                var numberOfIssuedCopiesIdx: Int?
+                var isbnOfTheBookIdx: Int?
+                var bookColumnIdx: Int?
+                var bookShelfIdx: Int?
 
                 // Find the indices of the required columns
                 if let headerRow = worksheet.data?.rows.first {
                     for (index, cell) in headerRow.cells.enumerated() {
                         let value = cell.stringValue(sharedStrings!)?.lowercased()
                         if value == "isbn" {
-                            isbnOfTheBook = String(index)
+                            isbnOfTheBookIdx = index
                         } else if value == "total number of copies" {
-                            totalNumberOfCopies = index
+                            totalNumberOfCopiesIdx = index
                         } else if value == "number of issued copies" {
-                            numberOfIssuedCopies = index
+                            numberOfIssuedCopiesIdx = index
+                        } else if value == "book column" {
+                            bookColumnIdx = index
+                        } else if value == "book shelf" {
+                            bookShelfIdx = index
                         }
                     }
                 }
 
                 // Ensure all required columns are found
-                guard let ISBNIdx = isbnOfTheBook, let TNOCIdx = totalNumberOfCopies, let NOICIdx = numberOfIssuedCopies else {
+                guard let isbnIdx = isbnOfTheBookIdx, let tnocIdx = totalNumberOfCopiesIdx, let noicIdx = numberOfIssuedCopiesIdx, let bcIdx = bookColumnIdx, let bsIdx = bookShelfIdx else {
                     print("Required columns not found")
+                    completion([])
                     return
                 }
 
                 // Iterate over rows starting from the second row
                 for row in worksheet.data?.rows.dropFirst() ?? [] {
-                    if row.cells.count > max(Int(ISBNIdx)!, TNOCIdx, NOICIdx) { // Ensure there are enough cells in the row
-                        let book = BookRecord (
-                            isbnOfTheBook: row.cells[Int(ISBNIdx)!].stringValue(sharedStrings!) ?? "NOContent",
-                            totalNumberOfCopies: Int(row.cells[TNOCIdx].stringValue(sharedStrings!) ?? "NOContent") ?? 0,
-                            numberOfIssuedCopies: Int(row.cells[NOICIdx].stringValue(sharedStrings!) ?? "NOContent") ?? 0
+                    if row.cells.count > max(isbnIdx, tnocIdx, noicIdx, bcIdx, bsIdx) { // Ensure there are enough cells in the row
+                        let book = BookRecord(
+                            isbnOfTheBook: row.cells[isbnIdx].stringValue(sharedStrings!) ?? "NOContent",
+                            totalNumberOfCopies: Int(row.cells[tnocIdx].stringValue(sharedStrings!) ?? "0") ?? 0,
+                            numberOfIssuedCopies: Int(row.cells[noicIdx].stringValue(sharedStrings!) ?? "0") ?? 0,
+                            bookColumn: row.cells[bcIdx].stringValue(sharedStrings!) ?? "NOContent",
+                            bookShelf: row.cells[bsIdx].stringValue(sharedStrings!) ?? "NOContent"
                             // Other properties...
                         )
                         books.append(book)
@@ -96,6 +108,7 @@ func parseExcelFile(at url: URL, completion: @escaping ([BookRecord]) -> Void) {
         completion(books)
     } catch {
         print("Error parsing Excel file: \(error)")
+        completion([])
     }
 }
 
@@ -113,6 +126,30 @@ func updateFirestore(with books: [BookRecord]) {
             print("Error writing batch \(error)")
         } else {
             print("Batch write succeeded.")
+        }
+    }
+}
+
+func fetchBooks(completion: @escaping ([BookRecord]?, Error?) -> Void) {
+    let db = Firestore.firestore()
+    db.collection("books").getDocuments { snapshot, error in
+        if let error = error {
+            print("Error getting documents: \(error)")
+            completion(nil, error)
+        } else {
+            var books: [BookRecord] = []
+            for document in snapshot!.documents {
+                let data = document.data()
+                if let isbnOfTheBook = data["isbnOfTheBook"] as? String,
+                   let numberOfIssuedCopies = data["numberOfIssuedCopies"] as? Int,
+                   let totalNumberOfCopies = data["totalNumberOfCopies"] as? Int,
+                   let bookColumn = data["bookColumn"] as? String,
+                   let bookShelf = data["bookShelf"] as? String {
+                    let book = BookRecord(isbnOfTheBook: isbnOfTheBook, totalNumberOfCopies: totalNumberOfCopies, numberOfIssuedCopies: numberOfIssuedCopies, bookColumn: bookColumn, bookShelf: bookShelf)
+                    books.append(book)
+                }
+            }
+            completion(books, nil)
         }
     }
 }

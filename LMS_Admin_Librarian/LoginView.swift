@@ -18,6 +18,15 @@ struct LoginView: View {
                     Color("BackgroundColor")
                         .edgesIgnoringSafeArea(.all)
                     HStack {
+//                        Spacer()
+                        
+                        Image("LoginAdminlibrarian")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: geometry.size.width * 0.4)
+                        
+                        Spacer()
+                        
                         VStack(alignment: .center, spacing: 30) {
                             Text("Welcome Back 👋")
                                 .font(.largeTitle)
@@ -76,25 +85,12 @@ struct LoginView: View {
                         .frame(width: geometry.size.width * 0.4)
                         
                         Spacer()
-                        
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(Color("ThemeOrange"))
-                            .frame(width: geometry.size.width * 0.5, height: geometry.size.height * 0.9)
-                            .overlay(
-                                Image(systemName: "photo")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: geometry.size.width * 0.5, height: geometry.size.height * 0.9)
-                            )
-                            .cornerRadius(20)
-                        
-                        Spacer()
                     }
                     .padding()
                 }
                 .navigationDestination(for: String.self) { destination in
                     if destination == "AdminView" {
-                        AdminView()
+                        AddLibrarianView()
                     } else if destination == "LibrarianView" {
                         LibrarianView()
                     }
@@ -123,21 +119,17 @@ struct LoginView: View {
                 }
             }
 
-            let librarianRef = db.collection("librarians").whereField("email", isEqualTo: email).whereField("password", isEqualTo: password)
-            librarianRef.getDocuments { querySnapshot, error in
+            // Check librarian credentials using Firebase Authentication
+            Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
                 if let error = error {
-                    print("Error fetching librarian documents: \(error.localizedDescription)")
-                    loginError = "Error fetching data"
-                    return
-                }
-
-                guard let documents = querySnapshot?.documents, !documents.isEmpty else {
+                    print("Error signing in: \(error.localizedDescription)")
                     loginError = "Invalid credentials"
                     return
                 }
-
+                
+                // Successfully signed in
                 DispatchQueue.main.async {
-                    navigateToView(view: "LibrarianView")
+                    // here
                 }
             }
         }
@@ -147,8 +139,6 @@ struct LoginView: View {
         navigationPath.append(view)
     }
 }
-
-
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {

@@ -44,7 +44,7 @@ struct SidebarView: View {
             }
             
             if showAnalytics {
-                AddBookView()
+                AddBookViewNew()
                     .frame(width: 1500)
                     .transition(.move(edge: .leading))
                     .animation(.easeInOut)
