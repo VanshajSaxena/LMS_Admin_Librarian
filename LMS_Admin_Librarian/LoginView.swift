@@ -9,6 +9,8 @@ struct LoginView: View {
     @State private var isRememberMe: Bool = false
     @State private var isShowingForgotPassword: Bool = false
     @State private var loginError: String?
+    @State private var showAlert = false
+    @State private var alertMessage = ""
     @State private var navigationPath = NavigationPath()
 
     var body: some View {
@@ -18,12 +20,11 @@ struct LoginView: View {
                     Color("BackgroundColor")
                         .edgesIgnoringSafeArea(.all)
                     HStack {
-//                        Spacer()
-                        
                         Image("LoginAdminlibrarian")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: geometry.size.width * 0.4)
+                            .frame(width: geometry.size.width * 0.5)
+                            .padding(.top, 250)
                         
                         Spacer()
                         
@@ -38,6 +39,8 @@ struct LoginView: View {
                                 .background(Color(.white))
                                 .cornerRadius(12)
                                 .keyboardType(.emailAddress)
+                                
+                               
                                 .autocapitalization(.none)
                             
                             SecureField("Password", text: $password)
@@ -55,10 +58,10 @@ struct LoginView: View {
                                 Button(action: {
                                     isRememberMe.toggle()
                                 }) {
-                                    HStack {
-                                        Image(systemName: isRememberMe ? "checkmark.square" : "square")
-                                        Text("Remember me!")
-                                    }
+    //                                    HStack {
+    //                                        Image(systemName: isRememberMe ? "checkmark.square" : "square")
+    //                                        Text("Remember me!")
+    //                                    }
                                 }
                                 Spacer()
                                 Button(action: {
@@ -75,7 +78,7 @@ struct LoginView: View {
                                 Text("Login")
                                     .foregroundColor(.white)
                                     .padding()
-                                    .frame(width: geometry.size.width * 0.4)
+                                    .frame(width: geometry.size.width * 0.2)
                                     .background(Color("ThemeOrange"))
                                     .cornerRadius(12)
                                     .padding(.top, 50)
@@ -98,11 +101,30 @@ struct LoginView: View {
                 .sheet(isPresented: $isShowingForgotPassword) {
                     ForgetPasswordView()
                 }
+                .alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text("Login Error"),
+                        message: Text(alertMessage),
+                        dismissButton: .default(Text("OK"))
+                    )
+                }
             }
         }
     }
 
     func login() {
+        guard !email.isEmpty else {
+            alertMessage = "Please enter your email."
+            showAlert = true
+            return
+        }
+        
+        guard !password.isEmpty else {
+            alertMessage = "Please enter your password."
+            showAlert = true
+            return
+        }
+
         let db = Firestore.firestore()
         let adminRef = db.collection("admin").document("allowedadmin")
         adminRef.getDocument { document, error in
@@ -123,7 +145,8 @@ struct LoginView: View {
             Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
                 if let error = error {
                     print("Error signing in: \(error.localizedDescription)")
-                    loginError = "Invalid credentials"
+                    alertMessage = "Invalid credentials"
+                    showAlert = true
                     return
                 }
                 
@@ -135,7 +158,6 @@ struct LoginView: View {
         }
     }
 
-    
     func navigateToView(view: String) {
         navigationPath.append(view)
     }
