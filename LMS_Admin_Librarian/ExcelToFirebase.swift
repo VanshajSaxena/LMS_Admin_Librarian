@@ -9,15 +9,15 @@ import Foundation
 import FirebaseFirestore
 import CoreXLSX
 
-struct BookMetaData {
-    let title: String
-    let authors: String
-    let publishedDate: String
-    let pageCount: String
-    let language: String
-    let imageLinks: String
-    let isbn: String
-}
+//struct BookMetaData {
+//    let title: String
+//    let authors: String
+//    let publishedDate: String
+//    let pageCount: String
+//    let language: String
+//    let imageLinks: String
+//    let isbn: String
+//}
 
 struct BookRecord {
     let isbnOfTheBook: String
