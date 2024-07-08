@@ -17,19 +17,15 @@ struct LoginView: View {
                 ZStack {
                     Color("BackgroundColor")
                         .edgesIgnoringSafeArea(.all)
-                    HStack(spacing: 20) {
-                        Spacer()
+                    HStack {
+//                        Spacer()
                         
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(Color("ThemeOrange"))
-                            .frame(width: geometry.size.width * 0.4, height: geometry.size.height * 0.9)
-                            .overlay(
-                                Image(systemName: "photo")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: geometry.size.width * 0.4, height: geometry.size.height * 0.9)
-                            )
-                            .cornerRadius(20)
+                        Image("LoginAdminlibrarian")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: geometry.size.width * 0.4)
+                        
+                        Spacer()
                         
                         VStack(alignment: .center, spacing: 30) {
                             Text("Welcome Back 👋")
