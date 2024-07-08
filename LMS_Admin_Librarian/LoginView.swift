@@ -133,7 +133,7 @@ struct LoginView: View {
                 
                 // Successfully signed in
                 DispatchQueue.main.async {
-                    navigateToView(view: "LibrarianView")
+                    // here
                 }
             }
         }

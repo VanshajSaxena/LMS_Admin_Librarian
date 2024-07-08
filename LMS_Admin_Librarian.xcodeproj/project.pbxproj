@@ -11,6 +11,8 @@
 		1A1214562C36EF99009E1BD1 /* CoreXLSX in Frameworks */ = {isa = PBXBuildFile; productRef = 1A1214552C36EF99009E1BD1 /* CoreXLSX */; };
 		1A12145B2C370869009E1BD1 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 1A12145A2C370869009E1BD1 /* FirebaseFirestoreCombine-Community */; };
 		1A12145D2C370869009E1BD1 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1A12145C2C370869009E1BD1 /* FirebaseFirestoreSwift */; };
+		1A8EAE772C3B8B0C00E89592 /* InventoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8EAE762C3B8B0C00E89592 /* InventoryView.swift */; };
+		1A8EAE7B2C3B8BDE00E89592 /* AddBookViewNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8EAE7A2C3B8BDE00E89592 /* AddBookViewNew.swift */; };
 		329E0A592C3823EC00E8925A /* ForgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329E0A582C3823EC00E8925A /* ForgetPasswordView.swift */; };
 		32D84C142C3708C500E489F7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D84C132C3708C500E489F7 /* LoginView.swift */; };
 		32D84C162C370E0A00E489F7 /* AdminView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D84C152C370E0A00E489F7 /* AdminView.swift */; };
@@ -18,7 +20,6 @@
 		32D84C1D2C37213E00E489F7 /* LibrarianView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D84C1C2C37213E00E489F7 /* LibrarianView.swift */; };
 		32E4A7272C3AEC22003D0D6C /* AddLibrarianView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E4A7262C3AEC22003D0D6C /* AddLibrarianView.swift */; };
 		5FDAB7952C371F1000FEC1C2 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDAB7932C371F1000FEC1C2 /* SidebarView.swift */; };
-		5FDAB7962C371F1000FEC1C2 /* AddBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDAB7942C371F1000FEC1C2 /* AddBookView.swift */; };
 		8016A7DD2C353E8B0037D386 /* LMS_Admin_LibrarianApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8016A7DC2C353E8B0037D386 /* LMS_Admin_LibrarianApp.swift */; };
 		8016A7DF2C353E8B0037D386 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8016A7DE2C353E8B0037D386 /* ContentView.swift */; };
 		8016A7E12C353E8D0037D386 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8016A7E02C353E8D0037D386 /* Assets.xcassets */; };
@@ -33,13 +34,14 @@
 
 /* Begin PBXFileReference section */
 		1A1214522C36EDAB009E1BD1 /* ExcelToFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcelToFirebase.swift; sourceTree = "<group>"; };
+		1A8EAE762C3B8B0C00E89592 /* InventoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryView.swift; sourceTree = "<group>"; };
+		1A8EAE7A2C3B8BDE00E89592 /* AddBookViewNew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddBookViewNew.swift; path = ../../../Documents/AddBook/AddBook/AddBookViewNew.swift; sourceTree = "<group>"; };
 		329E0A582C3823EC00E8925A /* ForgetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordView.swift; sourceTree = "<group>"; };
 		32D84C132C3708C500E489F7 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		32D84C152C370E0A00E489F7 /* AdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminView.swift; sourceTree = "<group>"; };
 		32D84C1C2C37213E00E489F7 /* LibrarianView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarianView.swift; sourceTree = "<group>"; };
 		32E4A7262C3AEC22003D0D6C /* AddLibrarianView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLibrarianView.swift; sourceTree = "<group>"; };
 		5FDAB7932C371F1000FEC1C2 /* SidebarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
-		5FDAB7942C371F1000FEC1C2 /* AddBookView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBookView.swift; sourceTree = "<group>"; };
 		8016A7D92C353E8B0037D386 /* LMS_Admin_Librarian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LMS_Admin_Librarian.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8016A7DC2C353E8B0037D386 /* LMS_Admin_LibrarianApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LMS_Admin_LibrarianApp.swift; sourceTree = "<group>"; };
 		8016A7DE2C353E8B0037D386 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -97,11 +99,12 @@
 			isa = PBXGroup;
 			children = (
 				8016A7DC2C353E8B0037D386 /* LMS_Admin_LibrarianApp.swift */,
-				5FDAB7942C371F1000FEC1C2 /* AddBookView.swift */,
 				5FDAB7932C371F1000FEC1C2 /* SidebarView.swift */,
 				8016A7DE2C353E8B0037D386 /* ContentView.swift */,
 				329E0A582C3823EC00E8925A /* ForgetPasswordView.swift */,
+				1A8EAE762C3B8B0C00E89592 /* InventoryView.swift */,
 				1A1214522C36EDAB009E1BD1 /* ExcelToFirebase.swift */,
+				1A8EAE7A2C3B8BDE00E89592 /* AddBookViewNew.swift */,
 				32D84C132C3708C500E489F7 /* LoginView.swift */,
 				32D84C152C370E0A00E489F7 /* AdminView.swift */,
 				32E4A7262C3AEC22003D0D6C /* AddLibrarianView.swift */,
@@ -206,15 +209,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A1214532C36EDAB009E1BD1 /* ExcelToFirebase.swift in Sources */,
+				1A8EAE772C3B8B0C00E89592 /* InventoryView.swift in Sources */,
 				5FDAB7952C371F1000FEC1C2 /* SidebarView.swift in Sources */,
 				32D84C142C3708C500E489F7 /* LoginView.swift in Sources */,
 				8016A7DF2C353E8B0037D386 /* ContentView.swift in Sources */,
 				329E0A592C3823EC00E8925A /* ForgetPasswordView.swift in Sources */,
 				32E4A7272C3AEC22003D0D6C /* AddLibrarianView.swift in Sources */,
+				1A8EAE7B2C3B8BDE00E89592 /* AddBookViewNew.swift in Sources */,
 				32D84C1D2C37213E00E489F7 /* LibrarianView.swift in Sources */,
 				32D84C162C370E0A00E489F7 /* AdminView.swift in Sources */,
 				8016A7DD2C353E8B0037D386 /* LMS_Admin_LibrarianApp.swift in Sources */,
-				5FDAB7962C371F1000FEC1C2 /* AddBookView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
