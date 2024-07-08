@@ -15,7 +15,6 @@ struct InventoryView: View {
     @State private var searchQuery: String = ""
     @State private var isShowingAddBookView = false
 
-    // Sample data
     @State private var books: [BookInventoryView] = [
         BookInventoryView(name: "For Whom The Bell Tolls", author: "Ernest Hemingway", genre: "War, Thriller, Action", pages: 300, copies: 5, column: "Col 2", shelf: "Shelf 4"),
         BookInventoryView(name: "The Three Musketeers", author: "Alexandre Dumas", genre: "Adventure, Fiction", pages: 230, copies: 3, column: "Col 2", shelf: "Shelf 3")
@@ -31,7 +30,7 @@ struct InventoryView: View {
                             .fontWeight(.bold)
                             .padding(.leading, 50)
                         Spacer()
-
+                        
                         // My Account action
                         Button(action: {
                             // My Account action
@@ -48,7 +47,7 @@ struct InventoryView: View {
                         .padding(.trailing, 50)
                     }
                     .padding(.top, 50)
-
+                    
                     // Search bar
                     HStack(spacing: 10) {
                         ZStack {
@@ -214,16 +213,14 @@ struct InventoryView: View {
     }
 }
 
-
-
 struct InventoryView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             InventoryView()
-                .previewDevice("iPad Pro (11-inch) (3rd generation)")
+                
                 .previewInterfaceOrientation(.landscapeLeft)
             InventoryView()
-                .previewDevice("iPhone 12 Pro")
+                
         }
     }
 }

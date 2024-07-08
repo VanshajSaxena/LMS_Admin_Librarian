@@ -20,25 +20,23 @@ struct AddBookView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .font(.title)
                     .fontWeight(.bold)
-                    .padding(.horizontal, 50)
+                    .padding(.horizontal, 100)
             }
             
-            ScrollView {
-                formSection
-                    .padding(.horizontal, 50)
-            }
+            formSection
             
             doneButton
                 .padding(.horizontal, 250)
                 .padding(.top, 30)
         }
-        .background(Color("BackgroundColor")
-            .edgesIgnoringSafeArea(.all))
-            .ignoresSafeArea()
+
+        .background(Color("BackgroundColor"))
+        .ignoresSafeArea()
     }
     
     private var buttonSection: some View {
         HStack(spacing: 30) {
+
             //            Button (action: {
             //
             //            }) {
@@ -71,8 +69,7 @@ struct AddBookView: View {
                 .background(Color.themeOrange)
             
             
-            
-            
+
         }
         .padding(.top,30)
             
@@ -133,6 +130,7 @@ struct AddBookView: View {
             formField(title: "Column", text: $column, placeholder: "Enter the column")
             formField(title: "Shelf", text: $shelf, placeholder: "Enter the shelf")
         }
+        .padding(.horizontal, 100) // Adjusted padding to make the form wider
     }
     
     private func formField(title: String, text: Binding<String>, placeholder: String) -> some View {
@@ -155,7 +153,7 @@ struct AddBookView: View {
     
     private var doneButton: some View {
         Button(action: {
-            // Add done action
+            // Add book action
         }) {
             Text("Done")
                 .font(.headline)
