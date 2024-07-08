@@ -43,13 +43,14 @@ struct BookDetailsView: View {
                 }
                 
             }.navigationBarTitle("Books")
-                .navigationBarItems(trailing:
-                                        Button(action: {
+                .navigationBarItems(trailing: Button(action: {
                     self.isPresented.toggle()
                 }) {
                     Image(systemName: "barcode.viewfinder")
-                }.sheet(isPresented: $isPresented) {
-                    BarCodeScanner(isbn: $isbn, foundBooks: $foundBooks)
+                }
+                    .sheet(isPresented: $isPresented) {
+                    BarCodeScanner(isbn: $isbn,
+                                   foundBooks: $foundBooks)
                 }
                 )
             

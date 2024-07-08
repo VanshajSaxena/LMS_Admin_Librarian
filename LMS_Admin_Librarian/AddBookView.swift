@@ -7,6 +7,10 @@ struct AddBookView: View {
     @State private var shelf: String = ""
     @State private var selectedButton: String? = nil
     
+    @State private var isPresented = false
+    @State private var isbn: String?
+    @State private var foundBooks: Books?
+    
     var body: some View {
         VStack(spacing: 30) {
             buttonSection
@@ -28,37 +32,99 @@ struct AddBookView: View {
                 .padding(.horizontal, 250)
                 .padding(.top, 30)
         }
-        .background(Color("BackgroundColor").edgesIgnoringSafeArea(.all))
-        .ignoresSafeArea()
+        .background(Color("BackgroundColor")
+            .edgesIgnoringSafeArea(.all))
+            .ignoresSafeArea()
     }
     
     private var buttonSection: some View {
         HStack(spacing: 30) {
-            selectableButton(title: "Scan ISBN").frame(width: 165)     //Scan ISBN
-            Rectangle().frame(width: 1, height: 70).foregroundColor(Color("ThemeOrange")).padding(.top, 20)
-            selectableButton(title: "Import CSV").frame(width: 165)   //Import CSV
+            //            Button (action: {
+            //
+            //            }) {
+            //                Text("Scan ISBN")
+            //                    .frame(width: 165)
+            //                    .foregroundStyle(.themeOrange)
+            //            }
+            //                .frame(width: 165)     //Scan ISBN
+            
+            Button(action: {
+                isPresented.toggle()
+            }, label: {
+                Text("Scan ISBN")
+                    .foregroundStyle(.themeOrange)
+                    .padding()
+                    .overlay(){
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color.themeOrange, lineWidth: 1)
+                    }
+            })
+            .sheet(isPresented: $isPresented) {
+                BarCodeScanner(isbn: $isbn,
+                               foundBooks: $foundBooks)
+            }
+            
+            Divider()
+                .frame(width: 1.5, height: 70)
+                
+                .padding(.top,20)
+                .background(Color.themeOrange)
+            
+            
+            
+            
         }
-        .padding(.horizontal, 200)
-    }
+        .padding(.top,30)
+            
+//            NavigationLink(){
+//                Button(action: {
+//                    isPresented.toggle()
+//                }, label: {
+//                    Text("Scan ISBN")
+//                        .foregroundStyle(.themeOrange)
+//                        .padding()
+//                        .overlay(){ RoundedRectangle(cornerRadius: 8)
+//                                .stroke(Color.themeOrange,lineWidth: 1)
+//                        }
+//                    
+//                })
+                //            Rectangle()
+                //            .frame(width: width, height: height)
+                //            .overlay(
+                //                Text(title)
+                //                    .foregroundStyle(.themeOrange)
+                //                    .background(Color.white)
+                //            )
+           
+//                .padding(.top,17)
+            
+            
+//            customButton(title: "Import CSV", width: 165, height: 35, destination: BarCodeScanner(isbn: $isbn , foundBooks: $foundBooks))
+//                .padding(.top,17)
+            
+                
+        }
+        
+//    }
     
-    private func selectableButton(title: String) -> some View {
-        Button(action: {
-            selectedButton = title
-        }) {
-            Text(title)
-                .padding()
-                .frame(maxWidth: .infinity)
-                .background(selectedButton == title ? Color("ThemeOrange") : Color.clear)
-                .foregroundColor(selectedButton == title ? Color.white : Color("ThemeOrange"))
-                .cornerRadius(8)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color("ThemeOrange"), lineWidth: 1)
-                )
-        }
-        .padding(.top)
-        .buttonStyle(PlainButtonStyle())
-    }
+//    private func selectableButton(title: String) -> some View {
+//        Button(action: {
+//            selectedButton = title
+//        }) {
+//            Text(title)
+//                .padding()
+//                .frame(maxWidth: .infinity)
+//                .background(selectedButton == title ? Color("ThemeOrange") : Color.clear)
+//                .foregroundColor(selectedButton == title ? Color.white : Color("ThemeOrange"))
+//                .cornerRadius(8)
+//                .overlay(
+//                    RoundedRectangle(cornerRadius: 8)
+//                        .stroke(Color("ThemeOrange"), lineWidth: 1)
+//                )
+//        }
+//        .padding(.top)
+//        .buttonStyle(PlainButtonStyle())
+//    }
     
     private var formSection: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -107,3 +173,34 @@ struct AddBookView_Previews: PreviewProvider {
         AddBookView()
     }
 }
+
+
+//struct customButton<Destination : View> : View {
+//    var title : String
+//    var width : Double
+//    var height : Double
+//    var destination : Destination
+//    
+//    var body: some View {
+//        NavigationLink(destination : destination){
+//            Button(action: {
+//                isPresented.toggle()
+//            }, label: {
+//                Text(title)
+//                    .foregroundStyle(.themeOrange)
+//                    .padding()
+//                    .overlay(){ RoundedRectangle(cornerRadius: 8)
+//                            .stroke(Color.themeOrange,lineWidth: 1)
+//                    }
+//                
+//            })
+//            //            Rectangle()
+//            //            .frame(width: width, height: height)
+//            //            .overlay(
+//            //                Text(title)
+//            //                    .foregroundStyle(.themeOrange)
+//            //                    .background(Color.white)
+//            //            )
+//        }
+//    }
+//}
