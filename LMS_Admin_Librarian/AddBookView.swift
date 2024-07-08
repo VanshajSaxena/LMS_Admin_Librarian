@@ -5,6 +5,7 @@ struct AddBookView: View {
     @State private var column: String = ""
     @State private var shelf: String = ""
     @State private var selectedButton: String? = nil
+    @Environment(\.presentationMode) var presentationMode
     
     // to get data from barcode scanning
     @State private var isPresented = false
@@ -15,25 +16,28 @@ struct AddBookView: View {
     @State private var selectedFileURL: URL?
 
     var body: some View {
-        VStack(spacing: 30) {
-            buttonSection
-            
-            VStack {
-                Text("Add Book")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .padding(.horizontal, 100)
+        ScrollView {
+            VStack(spacing: 30) {
+                
+                buttonSection
+                
+                VStack {
+                    Text("Add Book")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .padding(.horizontal, 100)
+                }
+                
+                formSection
+                
+                doneButton
+                    .padding(.horizontal, 250)
+                    .padding(.top, 30)
             }
-            
-            formSection
-            
-            doneButton
-                .padding(.horizontal, 250)
-                .padding(.top, 30)
+            .background(Color(.white))
         }
 
-        .background(Color("BackgroundColor"))
         .ignoresSafeArea()
     }
     
@@ -122,24 +126,7 @@ struct AddBookView: View {
         
 //    }
     
-//    private func selectableButton(title: String) -> some View {
-//        Button(action: {
-//            selectedButton = title
-//        }) {
-//            Text(title)
-//                .padding()
-//                .frame(maxWidth: .infinity)
-//                .background(selectedButton == title ? Color("ThemeOrange") : Color.clear)
-//                .foregroundColor(selectedButton == title ? Color.white : Color("ThemeOrange"))
-//                .cornerRadius(8)
-//                .overlay(
-//                    RoundedRectangle(cornerRadius: 8)
-//                        .stroke(Color("ThemeOrange"), lineWidth: 1)
-//                )
-//        }
-//        .padding(.top)
-//        .buttonStyle(PlainButtonStyle())
-//    }
+
     
     private var formSection: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -171,6 +158,7 @@ struct AddBookView: View {
     
     private var doneButton: some View {
         Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
             // Add book action
             parseExcelFile(at: selectedFileURL!, completion: { books in updateFirestore(with: books)})
         }) {
@@ -181,7 +169,7 @@ struct AddBookView: View {
                 .frame(width: 300)
                 .background(Color("ThemeOrange"))
                 .cornerRadius(8)
-                .padding(.bottom, 50)
+                .padding(.bottom, 70)
         }
     }
 }
