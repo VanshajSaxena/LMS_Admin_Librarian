@@ -12,6 +12,11 @@ struct LoginView: View {
     @State private var showAlert = false
     @State private var alertMessage = ""
     @State private var navigationPath = NavigationPath()
+    
+    @State private var isEmailValid = false
+    @State private var emailValidationMessage = ""
+    @State private var isPasswordValid = false
+    @State private var passwordValidationMessage = ""
 
     var body: some View {
         NavigationStack(path: $navigationPath) {
@@ -28,25 +33,49 @@ struct LoginView: View {
                         
                         Spacer()
                         
-                        VStack(alignment: .center, spacing: 30) {
+                        VStack(alignment: .center, spacing: 20) {
                             Text("Welcome Back 👋")
                                 .font(.largeTitle)
                                 .fontWeight(.bold)
                                 .padding(30)
                             
-                            TextField("Email", text: $email)
-                                .padding()
-                                .background(Color(.white))
-                                .cornerRadius(12)
-                                .keyboardType(.emailAddress)
+                            VStack(alignment: .leading) {
+                                TextField("Email", text: $email)
+                                    .padding()
+                                    .background(Color(.white))
+                                    .cornerRadius(12)
+                                    .keyboardType(.emailAddress)
+                                    .autocapitalization(.none)
+                                    .onChange(of: email) { newValue in
+                                        (isEmailValid, emailValidationMessage) = validateEmail(newValue)
+                                    }
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(isEmailValid ? Color.green : Color.red, lineWidth: 1)
+                                    )
                                 
-                               
-                                .autocapitalization(.none)
-                            
-                            SecureField("Password", text: $password)
-                                .padding()
-                                .background(Color(.white))
-                                .cornerRadius(12)
+                                Text(emailValidationMessage)
+                                    .font(.caption)
+                                    .foregroundColor(isEmailValid ? .green : .red)
+                            }
+
+                            VStack(alignment: .leading) {
+                                SecureField("Password", text: $password)
+                                    .padding()
+                                    .background(Color(.white))
+                                    .cornerRadius(12)
+                                    .onChange(of: password) { newValue in
+                                        (isPasswordValid, passwordValidationMessage) = validatePassword(newValue)
+                                    }
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(isPasswordValid ? Color.green : Color.red, lineWidth: 1)
+                                    )
+                                
+                                Text(passwordValidationMessage)
+                                    .font(.caption)
+                                    .foregroundColor(isPasswordValid ? .green : .red)
+                            }
                             
                             if let loginError = loginError {
                                 Text(loginError)
@@ -58,10 +87,7 @@ struct LoginView: View {
                                 Button(action: {
                                     isRememberMe.toggle()
                                 }) {
-    //                                    HStack {
-    //                                        Image(systemName: isRememberMe ? "checkmark.square" : "square")
-    //                                        Text("Remember me!")
-    //                                    }
+                                    // Remember Me button (optional implementation)
                                 }
                                 Spacer()
                                 Button(action: {
@@ -113,13 +139,13 @@ struct LoginView: View {
     }
 
     func login() {
-        guard !email.isEmpty else {
-            alertMessage = "Please enter your email."
+        guard isEmailValid else {
+            alertMessage = "Please enter a valid email."
             showAlert = true
             return
         }
         
-        guard !password.isEmpty else {
+        guard isPasswordValid else {
             alertMessage = "Please enter your password."
             showAlert = true
             return
@@ -160,6 +186,20 @@ struct LoginView: View {
 
     func navigateToView(view: String) {
         navigationPath.append(view)
+    }
+
+    func validateEmail(_ email: String) -> (Bool, String) {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Z0-9a-z.-]+\\.[A-Za-z]{2,64}"
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        let isValid = emailPred.evaluate(with: email)
+        let message = isValid ? "Valid email format." : "Invalid email format."
+        return (isValid, message)
+    }
+
+    func validatePassword(_ password: String) -> (Bool, String) {
+        let isValid = !password.isEmpty
+        let message = isValid ? "Password is valid." : "Password cannot be empty."
+        return (isValid, message)
     }
 }
 
