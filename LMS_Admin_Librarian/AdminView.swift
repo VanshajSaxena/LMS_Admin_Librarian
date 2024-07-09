@@ -22,6 +22,8 @@ struct AdminView: View {
     @State private var passwordValidationMessage = ""
     @State private var isUserIDValid = false
     @State private var userIDValidationMessage = ""
+    @State private var isNameValid = false
+    @State private var nameValidationMessage = ""
     
     var onAdd: (String, String, String, String, String) -> Void
     
@@ -50,6 +52,13 @@ struct AdminView: View {
                                         .stroke(Color.gray, lineWidth: 1)
                                 )
                                 .multilineTextAlignment(.leading)
+                                .onChange(of: name) { newValue in
+                                    validateName(newValue)
+                                }
+                            
+                            Text(nameValidationMessage)
+                                .font(.caption)
+                                .foregroundColor(isNameValid ? .green : .red)
                             
                             Text("Age")
                                 .foregroundColor(.orange)
@@ -188,6 +197,11 @@ struct AdminView: View {
     }
     
     func createLibrarian() {
+        guard isNameValid else {
+            showAlert(title: "Error", message: "Please enter a valid name with different first and last names.")
+            return
+        }
+
         guard !userID.isEmpty else {
             showAlert(title: "Error", message: "Please enter a user ID")
             return
@@ -275,9 +289,9 @@ struct AdminView: View {
     }
     
     func validateEmail(_ email: String) {
-        guard isValidGmail(email: email) else {
-            isEmailValid = false
-            emailValidationMessage = "Invalid Gmail address."
+        if !isValidGmail(email: email) {
+            self.emailValidationMessage = "Invalid Gmail address."
+            self.isEmailValid = false
             return
         }
         
@@ -311,6 +325,20 @@ struct AdminView: View {
                 self.userIDValidationMessage = "User ID is available."
                 self.isUserIDValid = true
             }
+        }
+    }
+    
+    func validateName(_ name: String) {
+        let parts = name.split(separator: " ")
+        if parts.count < 2 {
+            self.nameValidationMessage = "Please enter both first and last names."
+            self.isNameValid = false
+        } else if parts[0].lowercased() == parts[1].lowercased() {
+            self.nameValidationMessage = "First and last names should be different."
+            self.isNameValid = false
+        } else {
+            self.nameValidationMessage = "Valid name."
+            self.isNameValid = true
         }
     }
     
