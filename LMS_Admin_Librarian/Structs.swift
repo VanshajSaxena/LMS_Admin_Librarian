@@ -20,18 +20,18 @@ var bookDataFromAPI : BooksAPI?
 struct BookMetaData: Identifiable {
     var id = UUID() // to conform to Identifiable
     
-    let title: String
-    let authors: String
-    let genre: String
-    let publishedDate: String
-    let pageCount: Int
-    let language: String
+    var title: String
+    var authors: String
+    var genre: String
+    var publishedDate: String
+    var pageCount: Int
+    var language: String
     let coverImageLink: String
     let isbn: String
-    let totalNumberOfCopies: Int
+    var totalNumberOfCopies: Int
     let numberOfIssuedCopies: Int
-    let bookColumn: String
-    let bookShelf: String
+    var bookColumn: String
+    var bookShelf: String
 }
 
 // to get book details from backend to front-end

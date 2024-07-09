@@ -16,7 +16,8 @@ struct InventoryView: View {
     @State private var showAddBookView: Bool = false
 
     // Sample data
-    @State private var books: [BookInventoryView] = []
+    @State private var books: [BookMetaData] = LibraryBooks
+    
 
     var body: some View {
         GeometryReader { geometry in
@@ -147,25 +148,25 @@ struct InventoryView: View {
                 List {
                     ForEach(books) { book in
                         HStack {
-                            Text(book.name)
+                            Text("\(book.title)")
                                 .frame(maxWidth: .infinity, alignment: .leading)
 
-                            Text(book.author)
+                            Text("\(book.authors)")
                                 .frame(maxWidth: .infinity, alignment: .leading)
 
-                            Text(book.genre)
+                            Text("\(book.genre)")
                                 .frame(maxWidth: .infinity, alignment: .leading)
 
-                            Text("\(book.pages)")
+                            Text("\(book.pageCount)")
                                 .frame(maxWidth: .infinity, alignment: .leading)
 
-                            Text("\(book.copies)")
+                            Text("\(book.totalNumberOfCopies)")
                                 .frame(maxWidth: .infinity, alignment: .leading)
 
-                            Text(book.column)
+                            Text("\(book.bookColumn)")
                                 .frame(maxWidth: .infinity, alignment: .leading)
 
-                            Text(book.shelf)
+                            Text("\(book.bookShelf)")
                                 .frame(maxWidth: .infinity, alignment: .leading)
 
                             // Edit button
