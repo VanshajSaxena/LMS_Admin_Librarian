@@ -10,63 +10,115 @@ import SwiftUI
 import Firebase
 import FirebaseFirestore
 
+@MainActor
 class InventoryViewModel: ObservableObject {
     @Published var books: [BookMetaData] = []
     @Published var searchQuery: String = ""
 
-    init() {
-        fetchBookDetails()
-    }
+    // Example usage
+
+    init() { }
     
-    func fetchBookDetails() {
-        LibraryBooks.removeAll()
-        fetchBooks { [weak self] books, error in
-            guard let books = books else {
-                print("Error fetching books: \(String(describing: error))")
-                return
-            }
-
-            let dispatchGroup = DispatchGroup()
-            var updatedBooks: [BookMetaData] = []
-
-            for bookRecord in books {
-                dispatchGroup.enter()
-                print("DispatchGroup enter for ISBN: \(bookRecord.isbnOfTheBook)")
-                fetchBookDataFromAPI(isbn: bookRecord.isbnOfTheBook) { bookFromAPI in
-                    let volumeInfo = bookFromAPI?.items.first?.volumeInfo
-                    let newBook = BookMetaData(
-                        title: volumeInfo?.title ?? "-",
-                        authors: volumeInfo?.authors.first ?? "-",
-                        genre: volumeInfo?.categories.first ?? "-",
-                        publishedDate: volumeInfo?.publishedDate ?? "-",
-                        pageCount: volumeInfo?.pageCount ?? 0,
-                        language: volumeInfo?.language ?? "...",
-                        coverImageLink: volumeInfo?.imageLinks.thumbnail ?? "...",
-                        isbn: bookRecord.isbnOfTheBook,
-                        totalNumberOfCopies: bookRecord.totalNumberOfCopies,
-                        numberOfIssuedCopies: bookRecord.numberOfIssuedCopies,
-                        bookColumn: bookRecord.bookColumn,
-                        bookShelf: bookRecord.bookShelf
+    func fetchBookDetailsList(isbnList: [String]) {
+    let dispatchGroup = DispatchGroup()
+    var bookDetailsList: [BookMetaData] = []
+    
+    for isbn in isbnList {
+        dispatchGroup.enter()
+        print("DispatchGroup enter for ISBN: \(isbn)")
+        
+        fetchBookData(for: isbn) { result in
+            switch result {
+            case .success(let booksAPI):
+                if let bookItem = booksAPI.items.first {
+                    let volumeInfo = bookItem.volumeInfo
+                    
+                    let coverImageLink = volumeInfo.imageLinks?.thumbnail ?? "URL_TO_PLACEHOLDER_IMAGE"
+                    let bookMetaData = BookMetaData(
+                        id: UUID().uuidString,
+                        title: volumeInfo.title,
+                        authors: volumeInfo.authors.joined(separator: ", "),
+                        genre: volumeInfo.categories?.first ?? "Unknown",
+                        publishedDate: volumeInfo.publishedDate,
+                        pageCount: volumeInfo.pageCount,
+                        language: volumeInfo.language,
+                        coverImageLink: coverImageLink,
+                        isbn: isbn,
+                        totalNumberOfCopies: Int.random(in: 10...30), // Assuming you generate these values
+                        numberOfIssuedCopies: 0,
+                        bookColumn: "A", // Example, customize as needed
+                        bookShelf: "1"   // Example, customize as needed
                     )
-                    print("Fetched book details: \(newBook)")
-                    updatedBooks.append(newBook)
-                    dispatchGroup.leave()
-                    print("DispatchGroup leave for ISBN: \(bookRecord.isbnOfTheBook)")
+                    
+                    print("Fetched book details: \(bookMetaData)")
+                    bookDetailsList.append(bookMetaData)
                 }
+            case .failure(let error):
+                print("Error fetching data for ISBN \(isbn): \(error)")
             }
-
-            DispatchQueue.main.async {
-                print("DispatchGroup main called")
-                self?.books = updatedBooks
-                print("Books fetched: \(updatedBooks)")
-            }
-//            dispatchGroup.notify(queue: .main) {
-//                print("DispatchGroup notify called")
-//                self?.books = updatedBooks
-//                print("Books fetched: \(updatedBooks)")
-//            }
+            
+            print("DispatchGroup leave for ISBN: \(isbn)")
+            dispatchGroup.leave()
         }
     }
+    
+    dispatchGroup.notify(queue: .main) {
+        print("All book details have been fetched.")
+//        completion(bookDetailsList)
+        
+    }
+        books =  bookDetailsList
+}
+
+    func fetchBookDetails(isbnList: [String], completion: @escaping ([BookMetaData]) -> Void) {
+    let dispatchGroup = DispatchGroup()
+    var bookDetailsList: [BookMetaData] = []
+    
+    for isbn in isbnList {
+        dispatchGroup.enter()
+        print("DispatchGroup enter for ISBN: \(isbn)")
+        
+        fetchBookData(for: isbn) { result in
+            switch result {
+            case .success(let booksAPI):
+                if let bookItem = booksAPI.items.first {
+                    let volumeInfo = bookItem.volumeInfo
+                    
+                    let coverImageLink = volumeInfo.imageLinks?.thumbnail ?? "URL_TO_PLACEHOLDER_IMAGE"
+                    let bookMetaData = BookMetaData(
+                        id: UUID().uuidString,
+                        title: volumeInfo.title,
+                        authors: volumeInfo.authors.joined(separator: ", "),
+                        genre: volumeInfo.categories?.first ?? "Unknown",
+                        publishedDate: volumeInfo.publishedDate,
+                        pageCount: volumeInfo.pageCount,
+                        language: volumeInfo.language,
+                        coverImageLink: coverImageLink,
+                        isbn: isbn,
+                        totalNumberOfCopies: Int.random(in: 10...30), // Assuming you generate these values
+                        numberOfIssuedCopies: 0,
+                        bookColumn: "A", // Example, customize as needed
+                        bookShelf: "1"   // Example, customize as needed
+                    )
+                    
+                    print("Fetched book details: \(bookMetaData)")
+                    bookDetailsList.append(bookMetaData)
+                }
+            case .failure(let error):
+                print("Error fetching data for ISBN \(isbn): \(error)")
+            }
+            
+            print("DispatchGroup leave for ISBN: \(isbn)")
+            dispatchGroup.leave()
+        }
+    }
+    
+    dispatchGroup.notify(queue: .main) {
+        print("All book details have been fetched.")
+        completion(bookDetailsList)
+    }
+}
+
 }
 
 
@@ -75,55 +127,90 @@ func fetchBookDataFromAPI(isbn: String, completion: @escaping (BooksAPI?) -> Voi
         print("Fetched data from API for ISBN \(isbn): \(String(describing: books))")
         completion(books)
     }
-    
-    
-    
 }
 
-// nested structure to fetch data from API
-struct BooksAPI: Decodable {
+// Function to fetch book data from API
+func fetchBookData(for isbn: String, completion: @escaping (Result<BooksAPI, Error>) -> Void) {
+    let urlString = "https://www.googleapis.com/books/v1/volumes?q=isbn:\(isbn)"
+    guard let url = URL(string: urlString) else {
+        completion(.failure(NSError(domain: "Invalid URL", code: -1, userInfo: nil)))
+        return
+    }
+
+    URLSession.shared.dataTask(with: url) { data, response, error in
+        if let error = error {
+            completion(.failure(error))
+            return
+        }
+
+        guard let data = data else {
+            completion(.failure(NSError(domain: "No Data", code: -1, userInfo: nil)))
+            return
+        }
+
+        do {
+            let booksAPI = try JSONDecoder().decode(BooksAPI.self, from: data)
+            completion(.success(booksAPI))
+        } catch {
+            completion(.failure(error))
+        }
+    }.resume()
+}
+
+struct BookMetaData : Identifiable {
+    let id: String
+    let title: String
+    let authors: String
+    let genre: String
+    let publishedDate: String
+    let pageCount: Int
+    let language: String
+    let coverImageLink: String
+    let isbn: String
+    let totalNumberOfCopies: Int
+    let numberOfIssuedCopies: Int
+    let bookColumn: String
+    let bookShelf: String
+}
+
+var LibraryBooks: [BookMetaData] = []
+var bookDataFromAPI : BooksAPI?
+
+// Assuming you have these types already defined
+struct BooksAPI: Codable {
     let items: [BookItem]
 }
 
-struct BookItem: Decodable {
+struct BookItem: Codable {
     let id: String
     let volumeInfo: VolumeInfo
 }
 
-// to store data from the API to further use it in front-end
-struct BookMetaData: Identifiable {
-    var id = UUID() // to conform to Identifiable
-    
-    var title: String
-    var authors: String
-    var genre: String
-    var publishedDate: String
-    var pageCount: Int
-    var language: String
-    let coverImageLink: String
-    let isbn: String
-    var totalNumberOfCopies: Int
-    let numberOfIssuedCopies: Int
-    var bookColumn: String
-    var bookShelf: String
-}
-
-// array of instances for the books available in the library
-var LibraryBooks: [BookMetaData] = []
-var bookDataFromAPI : BooksAPI?
-
-struct VolumeInfo: Decodable {
+struct VolumeInfo: Codable {
     let title: String
-    let subtitle: String?
     let authors: [String]
     let publishedDate: String
     let pageCount: Int
     let language: String
-    let imageLinks: ImageLinks
-    let categories: [String]
+    let imageLinks: ImageLinks?
+    let categories: [String]?
 }
 
-struct ImageLinks: Decodable {
-    let smallThumbnail: String
-    let thumbnail: String
+struct ImageLinks: Codable {
+    let smallThumbnail: String?
+    let thumbnail: String?
 }
+
+let isbnList = [
+    "9780061120084",
+    "9780062316097",
+    "9780141439518",
+    "9780307474278",
+    "9780345391803",
+    "9780385490818",
+    "9780451524935",
+    "9780590353427",
+    "9780618640157",
+    "9780670097111",
+    "9780743273565"
+]

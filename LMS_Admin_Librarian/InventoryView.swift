@@ -3,8 +3,9 @@ import SwiftUI
 struct InventoryView: View {
     @StateObject private var viewModel = InventoryViewModel()
     @State private var showAddBookView: Bool = false
-
+            
     var body: some View {
+        
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 40) {
                 HStack {
@@ -48,6 +49,8 @@ struct InventoryView: View {
                             Spacer()
                             Button(action: {
                                 // Implement Find action here
+                                
+                                    viewModel.fetchBookDetailsList(isbnList: isbnList)
                             }) {
                                 Text("Find")
                                     .foregroundColor(.white)
@@ -183,6 +186,9 @@ struct InventoryView: View {
             .background(Color("BackgroundColor").edgesIgnoringSafeArea(.all))
             .sheet(isPresented: $showAddBookView) {
                 AddBookView()
+            }
+            .onAppear {
+                viewModel.fetchBookDetailsList(isbnList: isbnList)
             }
         }
     }
