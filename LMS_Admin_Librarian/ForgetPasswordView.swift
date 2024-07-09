@@ -8,6 +8,9 @@ struct ForgetPasswordView: View {
     @State private var alertTitle = ""
     @State private var alertMessage = ""
     @State private var resetPasswordSuccess: Bool = false
+    
+    @State private var isEmailValid = false
+    @State private var emailValidationMessage = ""
 
     var body: some View {
         VStack {
@@ -16,15 +19,21 @@ struct ForgetPasswordView: View {
                 .fontWeight(.bold)
                 .padding()
             
-            TextField("Email", text: $email)
-                .padding(10)
+            VStack(alignment: .leading) {
+                TextField("Email", text: $email)
+                    .padding(10)
+                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color("ThemeOrange")))
+                    .frame(width: 480)
+                    .keyboardType(.emailAddress)
+                    .autocapitalization(.none)
+                    .onChange(of: email) { newValue in
+                        (isEmailValid, emailValidationMessage) = validateEmail(newValue)
+                    }
                 
-                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color("ThemeOrange")))
-                .frame(width: 480,height: 280)
-               
-               
-                .keyboardType(.emailAddress)
-                .autocapitalization(.none)
+                Text(emailValidationMessage)
+                    .font(.caption)
+                    .foregroundColor(isEmailValid ? .green : .red)
+            }
             
             Button(action: {
                 checkIfEmailExists()
@@ -48,6 +57,11 @@ struct ForgetPasswordView: View {
     }
     
     func checkIfEmailExists() {
+        guard isEmailValid else {
+            showAlert(title: "Invalid Email", message: "Please enter a valid email.")
+            return
+        }
+        
         let db = Firestore.firestore()
         db.collection("librarians").whereField("email", isEqualTo: email).getDocuments { (querySnapshot, error) in
             if let error = error {
@@ -74,6 +88,14 @@ struct ForgetPasswordView: View {
         self.alertTitle = title
         self.alertMessage = message
         self.showAlert = true
+    }
+    
+    func validateEmail(_ email: String) -> (Bool, String) {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Z0-9a-z.-]+\\.[A-Za-z]{2,64}"
+        let emailPred = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
+        let isValid = emailPred.evaluate(with: email)
+        let message = isValid ? "Valid email format." : "Invalid email format."
+        return (isValid, message)
     }
 }
 
