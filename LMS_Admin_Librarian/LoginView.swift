@@ -4,7 +4,7 @@ import FirebaseFirestore
 import FirebaseAuth
 
 struct LoginView: View {
-    @State private var email: String = ""
+    @State private var userID: String = ""
     @State private var password: String = ""
     @State private var isRememberMe: Bool = false
     @State private var isShowingForgotPassword: Bool = false
@@ -12,6 +12,11 @@ struct LoginView: View {
     @State private var showAlert = false
     @State private var alertMessage = ""
     @State private var navigationPath = NavigationPath()
+    
+    @State private var isUserIDValid = false
+    @State private var userIDValidationMessage = ""
+    @State private var isPasswordValid = false
+    @State private var passwordValidationMessage = ""
 
     var body: some View {
         NavigationStack(path: $navigationPath) {
@@ -28,25 +33,48 @@ struct LoginView: View {
                         
                         Spacer()
                         
-                        VStack(alignment: .center, spacing: 30) {
+                        VStack(alignment: .center, spacing: 20) {
                             Text("Welcome Back 👋")
                                 .font(.largeTitle)
                                 .fontWeight(.bold)
                                 .padding(30)
                             
-                            TextField("Email", text: $email)
-                                .padding()
-                                .background(Color(.white))
-                                .cornerRadius(12)
-                                .keyboardType(.emailAddress)
+                            VStack(alignment: .leading) {
+                                TextField("User ID", text: $userID)
+                                    .padding()
+                                    .background(Color(.white))
+                                    .cornerRadius(12)
+                                    .autocapitalization(.none)
+                                    .onChange(of: userID) { newValue in
+                                        (isUserIDValid, userIDValidationMessage) = validateUserID(newValue)
+                                    }
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(isUserIDValid ? Color.green : Color.red, lineWidth: 1)
+                                    )
                                 
-                               
-                                .autocapitalization(.none)
-                            
-                            SecureField("Password", text: $password)
-                                .padding()
-                                .background(Color(.white))
-                                .cornerRadius(12)
+                                Text(userIDValidationMessage)
+                                    .font(.caption)
+                                    .foregroundColor(isUserIDValid ? .green : .red)
+                            }
+
+                            VStack(alignment: .leading) {
+                                SecureField("Password", text: $password)
+                                    .padding()
+                                    .background(Color(.white))
+                                    .cornerRadius(12)
+                                    .onChange(of: password) { newValue in
+                                        (isPasswordValid, passwordValidationMessage) = validatePassword(newValue)
+                                    }
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(isPasswordValid ? Color.green : Color.red, lineWidth: 1)
+                                    )
+                                
+                                Text(passwordValidationMessage)
+                                    .font(.caption)
+                                    .foregroundColor(isPasswordValid ? .green : .red)
+                            }
                             
                             if let loginError = loginError {
                                 Text(loginError)
@@ -58,10 +86,7 @@ struct LoginView: View {
                                 Button(action: {
                                     isRememberMe.toggle()
                                 }) {
-    //                                    HStack {
-    //                                        Image(systemName: isRememberMe ? "checkmark.square" : "square")
-    //                                        Text("Remember me!")
-    //                                    }
+                                    // Remember Me button (optional implementation)
                                 }
                                 Spacer()
                                 Button(action: {
@@ -113,13 +138,13 @@ struct LoginView: View {
     }
 
     func login() {
-        guard !email.isEmpty else {
-            alertMessage = "Please enter your email."
+        guard isUserIDValid else {
+            alertMessage = "Please enter a valid User ID."
             showAlert = true
             return
         }
         
-        guard !password.isEmpty else {
+        guard isPasswordValid else {
             alertMessage = "Please enter your password."
             showAlert = true
             return
@@ -132,7 +157,7 @@ struct LoginView: View {
                 if let adminData = document.data(),
                    let storedEmail = adminData["email"] as? String,
                    let storedPassword = adminData["password"] as? String {
-                    if email == storedEmail && password == storedPassword {
+                    if userID == storedEmail && password == storedPassword {
                         DispatchQueue.main.async {
                             navigateToView(view: "AdminView")
                         }
@@ -141,25 +166,41 @@ struct LoginView: View {
                 }
             }
 
-            // Check librarian credentials using Firebase Authentication
-            Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-                if let error = error {
-                    print("Error signing in: \(error.localizedDescription)")
-                    alertMessage = "Invalid credentials"
-                    showAlert = true
-                    return
+            // Check librarian credentials using Firestore
+            let librarianRef = db.collection("librarians").document(userID)
+            librarianRef.getDocument { document, error in
+                if let document = document, document.exists {
+                    if let librarianData = document.data(),
+                       let storedPassword = librarianData["password"] as? String {
+                        if password == storedPassword {
+                            DispatchQueue.main.async {
+                                navigateToView(view: "InventoryView")
+                            }
+                            return
+                        }
+                    }
                 }
                 
-                // Successfully signed in
-                DispatchQueue.main.async {
-                    navigateToView(view: "InventoryView")
-                }
+                alertMessage = "Invalid credentials"
+                showAlert = true
             }
         }
     }
 
     func navigateToView(view: String) {
         navigationPath.append(view)
+    }
+
+    func validateUserID(_ userID: String) -> (Bool, String) {
+        let isValid = !userID.isEmpty
+        let message = isValid ? "User ID is valid." : "User ID cannot be empty."
+        return (isValid, message)
+    }
+
+    func validatePassword(_ password: String) -> (Bool, String) {
+        let isValid = !password.isEmpty
+        let message = isValid ? "Password is valid." : "Password cannot be empty."
+        return (isValid, message)
     }
 }
 
