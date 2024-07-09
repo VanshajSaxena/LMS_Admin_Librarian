@@ -30,7 +30,6 @@ struct AddBookView: View {
                         .fontWeight(.bold)
                         .padding(.horizontal, 100)
                 }
-                
                 formSection
                 
                 doneButton
@@ -101,7 +100,6 @@ struct AddBookView: View {
             .alert(isPresented: $showAlert) {
                 Alert(title: Text("Success!"), message: Text("File selected and processed."), dismissButton: .default(Text("OK")))
             }
-            
         }
         .padding(.top,30)
     }

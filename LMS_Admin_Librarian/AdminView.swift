@@ -193,7 +193,6 @@ struct AdminView: View {
             
             if let documents = querySnapshot?.documents, !documents.isEmpty {
                 showAlert(title: "Error", message: "User ID already exists. Please choose another one.")
-
                 return
             }
             
