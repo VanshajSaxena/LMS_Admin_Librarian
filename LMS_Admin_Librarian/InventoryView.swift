@@ -1,23 +1,8 @@
 import SwiftUI
 
-struct BookInventoryView: Identifiable {
-    var id = UUID()
-    var name: String
-    var author: String
-    var genre: String
-    var pages: Int
-    var copies: Int
-    var column: String
-    var shelf: String
-}
-
 struct InventoryView: View {
-    @State private var searchQuery: String = ""
+    @StateObject private var viewModel = InventoryViewModel()
     @State private var showAddBookView: Bool = false
-
-    // Sample data
-    @State private var books: [BookMetaData] = LibraryBooks
-    
 
     var body: some View {
         GeometryReader { geometry in
@@ -31,7 +16,7 @@ struct InventoryView: View {
 
                     // My Account action
                     Button(action: {
-
+                        // Action for My Account
                     }) {
                         HStack {
                             Image(systemName: "person.circle")
@@ -49,7 +34,7 @@ struct InventoryView: View {
                 // Search bar
                 HStack(spacing: 10) {
                     ZStack {
-                        TextField("Search the book", text: $searchQuery)
+                        TextField("Search the book", text: $viewModel.searchQuery)
                             .padding()
                             .background(Color.white)
                             .cornerRadius(8)
@@ -62,7 +47,7 @@ struct InventoryView: View {
                         HStack {
                             Spacer()
                             Button(action: {
-                                // Action for Find button
+                                // Implement Find action here
                             }) {
                                 Text("Find")
                                     .foregroundColor(.white)
@@ -81,7 +66,7 @@ struct InventoryView: View {
 
                     // Filter action
                     Button(action: {
-
+                        // Implement Filter action here
                     }) {
                         HStack {
                             Image(systemName: "line.horizontal.3.decrease.circle")
@@ -112,31 +97,25 @@ struct InventoryView: View {
                     .padding(.trailing, geometry.size.width * 0.05).padding(.leading, 7)
                 }
 
-                HStack(spacing: 90) {
+                HStack(spacing: 20) {
                     Text("Name")
                         .font(.headline)
                         .foregroundColor(Color("ThemeOrange"))
-
                     Text("Author")
                         .font(.headline)
                         .foregroundColor(Color("ThemeOrange"))
-
                     Text("Genre")
                         .font(.headline)
                         .foregroundColor(Color("ThemeOrange"))
-
                     Text("Pages")
                         .font(.headline)
                         .foregroundColor(Color("ThemeOrange"))
-
                     Text("Copies")
                         .font(.headline)
                         .foregroundColor(Color("ThemeOrange"))
-
                     Text("Column")
                         .font(.headline)
                         .foregroundColor(Color("ThemeOrange"))
-
                     Text("Shelf")
                         .font(.headline)
                         .foregroundColor(Color("ThemeOrange"))
@@ -146,7 +125,7 @@ struct InventoryView: View {
 
                 // Book details
                 List {
-                    ForEach(books) { book in
+                    ForEach(viewModel.books) { book in
                         HStack {
                             Text("\(book.title)")
                                 .frame(maxWidth: .infinity, alignment: .leading)

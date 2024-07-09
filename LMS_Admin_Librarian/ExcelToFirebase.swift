@@ -132,22 +132,22 @@ func updateFirestore(with books: [BookRecord]) {
 
 func fetchBooks(completion: @escaping ([BookRecord]?, Error?) -> Void) {
     let db = Firestore.firestore()
-    db.collection("books").getDocuments { snapshot, error in
+    db.collection("books").getDocuments { (querySnapshot, error) in
         if let error = error {
             print("Error getting documents: \(error)")
             completion(nil, error)
         } else {
             var books: [BookRecord] = []
-            for document in snapshot!.documents {
+            for document in querySnapshot!.documents {
                 let data = document.data()
-                if let isbnOfTheBook = data["isbnOfTheBook"] as? String,
-                   let numberOfIssuedCopies = data["numberOfIssuedCopies"] as? Int,
-                   let totalNumberOfCopies = data["totalNumberOfCopies"] as? Int,
-                   let bookColumn = data["bookColumn"] as? String,
-                   let bookShelf = data["bookShelf"] as? String {
-                    let book = BookRecord(isbnOfTheBook: isbnOfTheBook, totalNumberOfCopies: totalNumberOfCopies, numberOfIssuedCopies: numberOfIssuedCopies, bookColumn: bookColumn, bookShelf: bookShelf)
-                    books.append(book)
-                }
+                let book = BookRecord(
+                    isbnOfTheBook: data["isbnOfTheBook"] as? String ?? "",
+                    totalNumberOfCopies: data["totalNumberOfCopies"] as? Int ?? 0,
+                    numberOfIssuedCopies: data["numberOfIssuedCopies"] as? Int ?? 0,
+                    bookColumn: data["bookColumn"] as? String ?? "",
+                    bookShelf: data["bookShelf"] as? String ?? ""
+                )
+                books.append(book)
             }
             completion(books, nil)
         }

@@ -11,6 +11,7 @@
 		1A1214562C36EF99009E1BD1 /* CoreXLSX in Frameworks */ = {isa = PBXBuildFile; productRef = 1A1214552C36EF99009E1BD1 /* CoreXLSX */; };
 		1A12145B2C370869009E1BD1 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 1A12145A2C370869009E1BD1 /* FirebaseFirestoreCombine-Community */; };
 		1A12145D2C370869009E1BD1 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1A12145C2C370869009E1BD1 /* FirebaseFirestoreSwift */; };
+		1A28EC4C2C3D3A5300F2DB17 /* InventoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A28EC4B2C3D3A5300F2DB17 /* InventoryViewModel.swift */; };
 		1A8428C72C3BEDEC00A34F8D /* FilePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8428C62C3BEDEC00A34F8D /* FilePicker.swift */; };
 		329E0A592C3823EC00E8925A /* ForgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329E0A582C3823EC00E8925A /* ForgetPasswordView.swift */; };
 		32D84C142C3708C500E489F7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D84C132C3708C500E489F7 /* LoginView.swift */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		1A1214522C36EDAB009E1BD1 /* ExcelToFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcelToFirebase.swift; sourceTree = "<group>"; };
+		1A28EC4B2C3D3A5300F2DB17 /* InventoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryViewModel.swift; sourceTree = "<group>"; };
 		1A8428C62C3BEDEC00A34F8D /* FilePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePicker.swift; sourceTree = "<group>"; };
 		329E0A582C3823EC00E8925A /* ForgetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordView.swift; sourceTree = "<group>"; };
 		32D84C132C3708C500E489F7 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				67BE8FE42C37F3C900DA1B96 /* BookSearchManager.swift */,
 				67BE8FE62C37F3C900DA1B96 /* Structs.swift */,
 				5FDAB7942C371F1000FEC1C2 /* AddBookView.swift */,
+				1A28EC4B2C3D3A5300F2DB17 /* InventoryViewModel.swift */,
 				8016A7DC2C353E8B0037D386 /* LMS_Admin_LibrarianApp.swift */,
 				1A8428C62C3BEDEC00A34F8D /* FilePicker.swift */,
 				5FDAB7982C3724CF00FEC1C2 /* LoginView.swift */,
@@ -227,6 +230,7 @@
 			files = (
 				1A1214532C36EDAB009E1BD1 /* ExcelToFirebase.swift in Sources */,
 				67BE8FEA2C37F3C900DA1B96 /* Structs.swift in Sources */,
+				1A28EC4C2C3D3A5300F2DB17 /* InventoryViewModel.swift in Sources */,
 				32E4A72B2C3BC3C3003D0D6C /* InventoryView.swift in Sources */,
 				1A8428C72C3BEDEC00A34F8D /* FilePicker.swift in Sources */,
 				5FDAB7952C371F1000FEC1C2 /* SidebarView.swift in Sources */,
