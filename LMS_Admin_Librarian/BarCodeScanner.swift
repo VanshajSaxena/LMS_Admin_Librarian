@@ -2,7 +2,7 @@
 //  BarCodeScanner.swift
 //  BookInfo
 //
-//  Created by Brian Advent on 15.10.20.
+//  Created by Hitesh Rupani on 04/07/24.
 //
 
 import UIKit

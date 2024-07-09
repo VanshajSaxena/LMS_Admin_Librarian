@@ -24,7 +24,6 @@
 		5FDAB79A2C3724CF00FEC1C2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDAB7982C3724CF00FEC1C2 /* LoginView.swift */; };
 		67BE8FE72C37F3C900DA1B96 /* BarCodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BE8FE32C37F3C900DA1B96 /* BarCodeScanner.swift */; };
 		67BE8FE82C37F3C900DA1B96 /* BookSearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BE8FE42C37F3C900DA1B96 /* BookSearchManager.swift */; };
-		67BE8FE92C37F3C900DA1B96 /* BookDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BE8FE52C37F3C900DA1B96 /* BookDetailsView.swift */; };
 		67BE8FEA2C37F3C900DA1B96 /* Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BE8FE62C37F3C900DA1B96 /* Structs.swift */; };
 		8016A7DD2C353E8B0037D386 /* LMS_Admin_LibrarianApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8016A7DC2C353E8B0037D386 /* LMS_Admin_LibrarianApp.swift */; };
 		8016A7DF2C353E8B0037D386 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8016A7DE2C353E8B0037D386 /* ContentView.swift */; };
@@ -52,7 +51,6 @@
 		5FDAB7982C3724CF00FEC1C2 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		67BE8FE32C37F3C900DA1B96 /* BarCodeScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarCodeScanner.swift; sourceTree = "<group>"; };
 		67BE8FE42C37F3C900DA1B96 /* BookSearchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookSearchManager.swift; sourceTree = "<group>"; };
-		67BE8FE52C37F3C900DA1B96 /* BookDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailsView.swift; sourceTree = "<group>"; };
 		67BE8FE62C37F3C900DA1B96 /* Structs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Structs.swift; sourceTree = "<group>"; };
 		67BE8FEB2C37F51800DA1B96 /* LMS-Admin-Librarian-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "LMS-Admin-Librarian-Info.plist"; sourceTree = SOURCE_ROOT; };
 		8016A7D92C353E8B0037D386 /* LMS_Admin_Librarian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LMS_Admin_Librarian.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,7 +111,6 @@
 			isa = PBXGroup;
 			children = (
 				67BE8FE32C37F3C900DA1B96 /* BarCodeScanner.swift */,
-				67BE8FE52C37F3C900DA1B96 /* BookDetailsView.swift */,
 				67BE8FE42C37F3C900DA1B96 /* BookSearchManager.swift */,
 				67BE8FE62C37F3C900DA1B96 /* Structs.swift */,
 				5FDAB7942C371F1000FEC1C2 /* AddBookView.swift */,
@@ -229,7 +226,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A1214532C36EDAB009E1BD1 /* ExcelToFirebase.swift in Sources */,
-				67BE8FE92C37F3C900DA1B96 /* BookDetailsView.swift in Sources */,
 				67BE8FEA2C37F3C900DA1B96 /* Structs.swift in Sources */,
 				32E4A72B2C3BC3C3003D0D6C /* InventoryView.swift in Sources */,
 				1A8428C72C3BEDEC00A34F8D /* FilePicker.swift in Sources */,

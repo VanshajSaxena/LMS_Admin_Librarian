@@ -30,22 +30,24 @@ struct AddBookView: View {
                         .fontWeight(.bold)
                         .padding(.horizontal, 100)
                 }
-                
                 formSection
                 
                 doneButton
                     .padding(.horizontal, 250)
                     .padding(.top, 30)
+                //                .alert(isPresented: $isPresented) {
+                //                    Alert(title: Text("Success!"), message: Text("The ISBN has been uploaded successfully."), dismissButton: .default(Text("OK")))
+                //                }
             }
-            .background(Color(.white))
+            
+            .background(Color.white)
+            .ignoresSafeArea()
         }
-
-        .ignoresSafeArea()
     }
     
     private var buttonSection: some View {
         HStack(spacing: 30) {
-
+            
             //            Button (action: {
             //
             //            }) {
@@ -73,7 +75,7 @@ struct AddBookView: View {
             
             Divider()
                 .frame(width: 1.5, height: 70)
-                
+            
                 .padding(.top,20)
                 .background(Color.themeOrange)
             
@@ -98,9 +100,9 @@ struct AddBookView: View {
             .alert(isPresented: $showAlert) {
                 Alert(title: Text("Success!"), message: Text("File selected and processed."), dismissButton: .default(Text("OK")))
             }
-
         }
         .padding(.top,30)
+    }
             
 //            NavigationLink(){
 //                Button(action: {
@@ -127,9 +129,7 @@ struct AddBookView: View {
             
 //            customButton(title: "Import CSV", width: 165, height: 35, destination: BarCodeScanner(isbn: $isbn , foundBooks: $foundBooks))
 //                .padding(.top,17)
-            
-                
-        }
+
         
 //    }
     
@@ -138,7 +138,9 @@ struct AddBookView: View {
     private var formSection: some View {
         VStack(alignment: .leading, spacing: 20) {
             formField(title: "ISBN Number", text: $isbn, placeholder: "Enter the ISBN number")
-            formField(title: "No of Copies", text: $numberOfCopies, placeholder: "Enter the number of copies")
+                .keyboardType(.numbersAndPunctuation)
+            formField(title: "No. of Copies", text: $numberOfCopies, placeholder: "Enter the number of copies")
+                .keyboardType(.numbersAndPunctuation)
             formField(title: "Column", text: $column, placeholder: "Enter the column")
             formField(title: "Shelf", text: $shelf, placeholder: "Enter the shelf")
         }
@@ -167,6 +169,13 @@ struct AddBookView: View {
         Button(action: {
             self.presentationMode.wrappedValue.dismiss()
             // Add book action
+            updateFirestore(with: [BookRecord(isbnOfTheBook: isbn,
+                                              totalNumberOfCopies: Int(numberOfCopies)!,
+                                              numberOfIssuedCopies: 0,
+                                              bookColumn: column,
+                                              bookShelf: shelf)])
+            
+            
         }) {
             Text("Done")
                 .font(.headline)
@@ -177,6 +186,7 @@ struct AddBookView: View {
                 .cornerRadius(8)
                 .padding(.bottom, 70)
         }
+
     }
 }
 
