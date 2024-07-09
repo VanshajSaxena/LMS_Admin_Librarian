@@ -4,7 +4,7 @@ import FirebaseFirestore
 import FirebaseAuth
 
 struct LoginView: View {
-    @State private var userID: String = ""
+    @State private var email: String = ""
     @State private var password: String = ""
     @State private var isRememberMe: Bool = false
     @State private var isShowingForgotPassword: Bool = false
@@ -13,8 +13,8 @@ struct LoginView: View {
     @State private var alertMessage = ""
     @State private var navigationPath = NavigationPath()
     
-    @State private var isUserIDValid = false
-    @State private var userIDValidationMessage = ""
+    @State private var isEmailValid = false
+    @State private var emailValidationMessage = ""
     @State private var isPasswordValid = false
     @State private var passwordValidationMessage = ""
 
@@ -40,22 +40,23 @@ struct LoginView: View {
                                 .padding(30)
                             
                             VStack(alignment: .leading) {
-                                TextField("User ID", text: $userID)
+                                TextField("Email", text: $email)
                                     .padding()
                                     .background(Color(.white))
                                     .cornerRadius(12)
+                                    .keyboardType(.emailAddress)
                                     .autocapitalization(.none)
-                                    .onChange(of: userID) { newValue in
-                                        (isUserIDValid, userIDValidationMessage) = validateUserID(newValue)
+                                    .onChange(of: email) { newValue in
+                                        (isEmailValid, emailValidationMessage) = validateEmail(newValue)
                                     }
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 12)
-                                            .stroke(isUserIDValid ? Color.green : Color.red, lineWidth: 1)
+                                            .stroke(isEmailValid ? Color.green : Color.red, lineWidth: 1)
                                     )
                                 
-                                Text(userIDValidationMessage)
+                                Text(emailValidationMessage)
                                     .font(.caption)
-                                    .foregroundColor(isUserIDValid ? .green : .red)
+                                    .foregroundColor(isEmailValid ? .green : .red)
                             }
 
                             VStack(alignment: .leading) {
@@ -138,8 +139,8 @@ struct LoginView: View {
     }
 
     func login() {
-        guard isUserIDValid else {
-            alertMessage = "Please enter a valid User ID."
+        guard isEmailValid else {
+            alertMessage = "Please enter a valid email."
             showAlert = true
             return
         }
@@ -157,7 +158,7 @@ struct LoginView: View {
                 if let adminData = document.data(),
                    let storedEmail = adminData["email"] as? String,
                    let storedPassword = adminData["password"] as? String {
-                    if userID == storedEmail && password == storedPassword {
+                    if email == storedEmail && password == storedPassword {
                         DispatchQueue.main.async {
                             navigateToView(view: "AdminView")
                         }
@@ -166,23 +167,19 @@ struct LoginView: View {
                 }
             }
 
-            // Check librarian credentials using Firestore
-            let librarianRef = db.collection("librarians").document(userID)
-            librarianRef.getDocument { document, error in
-                if let document = document, document.exists {
-                    if let librarianData = document.data(),
-                       let storedPassword = librarianData["password"] as? String {
-                        if password == storedPassword {
-                            DispatchQueue.main.async {
-                                navigateToView(view: "InventoryView")
-                            }
-                            return
-                        }
-                    }
+            // Check librarian credentials using Firebase Authentication
+            Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+                if let error = error {
+                    print("Error signing in: \(error.localizedDescription)")
+                    alertMessage = "Invalid credentials"
+                    showAlert = true
+                    return
                 }
                 
-                alertMessage = "Invalid credentials"
-                showAlert = true
+                // Successfully signed in
+                DispatchQueue.main.async {
+                    navigateToView(view: "InventoryView")
+                }
             }
         }
     }
@@ -191,9 +188,11 @@ struct LoginView: View {
         navigationPath.append(view)
     }
 
-    func validateUserID(_ userID: String) -> (Bool, String) {
-        let isValid = !userID.isEmpty
-        let message = isValid ? "User ID is valid." : "User ID cannot be empty."
+    func validateEmail(_ email: String) -> (Bool, String) {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Z0-9a-z.-]+\\.[A-Za-z]{2,64}"
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        let isValid = emailPred.evaluate(with: email)
+        let message = isValid ? "Valid email format." : "Invalid email format."
         return (isValid, message)
     }
 
