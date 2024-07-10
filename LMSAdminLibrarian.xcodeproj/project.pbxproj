@@ -147,7 +147,7 @@
 				1AEB21C02C3E9E1B000BD7B2 /* Views */,
 				67BE8FEB2C37F51800DA1B96 /* LMS-Admin-Librarian-Info.plist */,
 				8016A8132C3546D60037D386 /* GoogleService-Info.plist */,
-				8016A7DB2C353E8B0037D386 /* LMS_Admin_Librarian */,
+				8016A7DB2C353E8B0037D386 /* LMSAdminLibrarian */,
 				8016A7DA2C353E8B0037D386 /* Products */,
 				32D84C192C37118600E489F7 /* Frameworks */,
 			);
@@ -161,7 +161,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8016A7DB2C353E8B0037D386 /* LMS_Admin_Librarian */ = {
+		8016A7DB2C353E8B0037D386 /* LMSAdminLibrarian */ = {
 			isa = PBXGroup;
 			children = (
 				67BE8FE62C37F3C900DA1B96 /* Structs.swift */,
@@ -169,7 +169,7 @@
 				8016A7E02C353E8D0037D386 /* Assets.xcassets */,
 				8016A7E22C353E8D0037D386 /* Preview Content */,
 			);
-			path = LMS_Admin_Librarian;
+			path = LMSAdminLibrarian;
 			sourceTree = "<group>";
 		};
 		8016A7E22C353E8D0037D386 /* Preview Content */ = {
@@ -413,7 +413,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"LMS_Admin_Librarian/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"LMSAdminLibrarian/Preview Content\"";
 				DEVELOPMENT_TEAM = 63W22LRA9Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -446,7 +446,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"LMS_Admin_Librarian/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"LMSAdminLibrarian/Preview Content\"";
 				DEVELOPMENT_TEAM = 63W22LRA9Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
