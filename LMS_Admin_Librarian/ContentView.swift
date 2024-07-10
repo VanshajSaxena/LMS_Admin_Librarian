@@ -1,15 +1,21 @@
 //
 //  ContentView.swift
-//  LMS_Admin_Librarian
+//  sidebarviewdemo
 //
-//  Created by Aida Sharon Bruce on 03/07/24.
+//  Created by Mahak garg on 10/07/24.
 //
 
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-       LoginView()
+        VStack {
+            Image(systemName: "globe")
+                .imageScale(.large)
+                .foregroundStyle(.tint)
+            Text("Hello, world!")
+        }
+        .padding()
     }
 }
 

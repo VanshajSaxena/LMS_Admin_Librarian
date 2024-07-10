@@ -12,6 +12,11 @@
 		1A12145B2C370869009E1BD1 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 1A12145A2C370869009E1BD1 /* FirebaseFirestoreCombine-Community */; };
 		1A12145D2C370869009E1BD1 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1A12145C2C370869009E1BD1 /* FirebaseFirestoreSwift */; };
 		1A8428C72C3BEDEC00A34F8D /* FilePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8428C62C3BEDEC00A34F8D /* FilePicker.swift */; };
+		326BD2422C3E62B4008F1EB2 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326BD2412C3E62B4008F1EB2 /* AuthViewModel.swift */; };
+		326BD2462C3E66EC008F1EB2 /* AdminMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326BD2452C3E66EC008F1EB2 /* AdminMainView.swift */; };
+		326BD2482C3E670E008F1EB2 /* LibrarianMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326BD2472C3E670E008F1EB2 /* LibrarianMainView.swift */; };
+		326BD24A2C3E674C008F1EB2 /* AdminSideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326BD2492C3E674C008F1EB2 /* AdminSideBar.swift */; };
+		326BD24E2C3E6786008F1EB2 /* LibrarianSideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326BD24D2C3E6786008F1EB2 /* LibrarianSideBar.swift */; };
 		329E0A592C3823EC00E8925A /* ForgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329E0A582C3823EC00E8925A /* ForgetPasswordView.swift */; };
 		32D84C142C3708C500E489F7 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D84C132C3708C500E489F7 /* LoginView.swift */; };
 		32D84C162C370E0A00E489F7 /* AdminView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D84C152C370E0A00E489F7 /* AdminView.swift */; };
@@ -19,7 +24,6 @@
 		32D84C1D2C37213E00E489F7 /* LibrarianView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D84C1C2C37213E00E489F7 /* LibrarianView.swift */; };
 		32E4A7272C3AEC22003D0D6C /* AddLibrarianView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E4A7262C3AEC22003D0D6C /* AddLibrarianView.swift */; };
 		32E4A72B2C3BC3C3003D0D6C /* InventoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E4A72A2C3BC3C3003D0D6C /* InventoryView.swift */; };
-		5FDAB7952C371F1000FEC1C2 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDAB7932C371F1000FEC1C2 /* SidebarView.swift */; };
 		5FDAB7962C371F1000FEC1C2 /* AddBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDAB7942C371F1000FEC1C2 /* AddBookView.swift */; };
 		5FDAB79A2C3724CF00FEC1C2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDAB7982C3724CF00FEC1C2 /* LoginView.swift */; };
 		67BE8FE72C37F3C900DA1B96 /* BarCodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BE8FE32C37F3C900DA1B96 /* BarCodeScanner.swift */; };
@@ -40,13 +44,17 @@
 /* Begin PBXFileReference section */
 		1A1214522C36EDAB009E1BD1 /* ExcelToFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcelToFirebase.swift; sourceTree = "<group>"; };
 		1A8428C62C3BEDEC00A34F8D /* FilePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePicker.swift; sourceTree = "<group>"; };
+		326BD2412C3E62B4008F1EB2 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		326BD2452C3E66EC008F1EB2 /* AdminMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMainView.swift; sourceTree = "<group>"; };
+		326BD2472C3E670E008F1EB2 /* LibrarianMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarianMainView.swift; sourceTree = "<group>"; };
+		326BD2492C3E674C008F1EB2 /* AdminSideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminSideBar.swift; sourceTree = "<group>"; };
+		326BD24D2C3E6786008F1EB2 /* LibrarianSideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarianSideBar.swift; sourceTree = "<group>"; };
 		329E0A582C3823EC00E8925A /* ForgetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordView.swift; sourceTree = "<group>"; };
 		32D84C132C3708C500E489F7 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		32D84C152C370E0A00E489F7 /* AdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminView.swift; sourceTree = "<group>"; };
 		32D84C1C2C37213E00E489F7 /* LibrarianView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarianView.swift; sourceTree = "<group>"; };
 		32E4A7262C3AEC22003D0D6C /* AddLibrarianView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLibrarianView.swift; sourceTree = "<group>"; };
 		32E4A72A2C3BC3C3003D0D6C /* InventoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryView.swift; sourceTree = "<group>"; };
-		5FDAB7932C371F1000FEC1C2 /* SidebarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		5FDAB7942C371F1000FEC1C2 /* AddBookView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBookView.swift; sourceTree = "<group>"; };
 		5FDAB7982C3724CF00FEC1C2 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		67BE8FE32C37F3C900DA1B96 /* BarCodeScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarCodeScanner.swift; sourceTree = "<group>"; };
@@ -115,10 +123,14 @@
 				67BE8FE62C37F3C900DA1B96 /* Structs.swift */,
 				5FDAB7942C371F1000FEC1C2 /* AddBookView.swift */,
 				8016A7DC2C353E8B0037D386 /* LMS_Admin_LibrarianApp.swift */,
+				326BD2452C3E66EC008F1EB2 /* AdminMainView.swift */,
+				326BD2472C3E670E008F1EB2 /* LibrarianMainView.swift */,
+				326BD2492C3E674C008F1EB2 /* AdminSideBar.swift */,
+				326BD24D2C3E6786008F1EB2 /* LibrarianSideBar.swift */,
+				326BD2412C3E62B4008F1EB2 /* AuthViewModel.swift */,
 				1A8428C62C3BEDEC00A34F8D /* FilePicker.swift */,
 				5FDAB7982C3724CF00FEC1C2 /* LoginView.swift */,
 				32E4A72A2C3BC3C3003D0D6C /* InventoryView.swift */,
-				5FDAB7932C371F1000FEC1C2 /* SidebarView.swift */,
 				8016A7DE2C353E8B0037D386 /* ContentView.swift */,
 				329E0A582C3823EC00E8925A /* ForgetPasswordView.swift */,
 				1A1214522C36EDAB009E1BD1 /* ExcelToFirebase.swift */,
@@ -225,19 +237,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				326BD24E2C3E6786008F1EB2 /* LibrarianSideBar.swift in Sources */,
 				1A1214532C36EDAB009E1BD1 /* ExcelToFirebase.swift in Sources */,
 				67BE8FEA2C37F3C900DA1B96 /* Structs.swift in Sources */,
 				32E4A72B2C3BC3C3003D0D6C /* InventoryView.swift in Sources */,
 				1A8428C72C3BEDEC00A34F8D /* FilePicker.swift in Sources */,
-				5FDAB7952C371F1000FEC1C2 /* SidebarView.swift in Sources */,
 				32D84C142C3708C500E489F7 /* LoginView.swift in Sources */,
 				67BE8FE72C37F3C900DA1B96 /* BarCodeScanner.swift in Sources */,
+				326BD2422C3E62B4008F1EB2 /* AuthViewModel.swift in Sources */,
 				8016A7DF2C353E8B0037D386 /* ContentView.swift in Sources */,
+				326BD2462C3E66EC008F1EB2 /* AdminMainView.swift in Sources */,
 				329E0A592C3823EC00E8925A /* ForgetPasswordView.swift in Sources */,
 				32E4A7272C3AEC22003D0D6C /* AddLibrarianView.swift in Sources */,
 				32D84C1D2C37213E00E489F7 /* LibrarianView.swift in Sources */,
 				32D84C162C370E0A00E489F7 /* AdminView.swift in Sources */,
+				326BD2482C3E670E008F1EB2 /* LibrarianMainView.swift in Sources */,
 				8016A7DD2C353E8B0037D386 /* LMS_Admin_LibrarianApp.swift in Sources */,
+				326BD24A2C3E674C008F1EB2 /* AdminSideBar.swift in Sources */,
 				5FDAB7962C371F1000FEC1C2 /* AddBookView.swift in Sources */,
 				67BE8FE82C37F3C900DA1B96 /* BookSearchManager.swift in Sources */,
 				5FDAB79A2C3724CF00FEC1C2 /* LoginView.swift in Sources */,

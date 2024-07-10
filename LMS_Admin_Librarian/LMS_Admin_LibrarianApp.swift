@@ -20,12 +20,23 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct LMS_Admin_LibrarianApp: App {
+    @StateObject private var authViewModel = AuthViewModel()
+
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
-        WindowGroup {
-                LoginView()
-
-            
-        }
-    }
-}
+           WindowGroup {
+               if authViewModel.isAuthenticated {
+                   if authViewModel.userType == .admin {
+                       AdminMainView()
+                           .environmentObject(authViewModel)
+                   } else if authViewModel.userType == .librarian {
+                       LibrarianMainView()
+                           .environmentObject(authViewModel)
+                   }
+               } else {
+                   LoginView()
+                       .environmentObject(authViewModel)
+               }
+           }
+       }
+   }
