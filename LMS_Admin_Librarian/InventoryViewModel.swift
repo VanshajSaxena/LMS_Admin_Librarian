@@ -21,8 +21,6 @@ class InventoryViewModel: ObservableObject {
     
     func fetchBookDetailsList(isbnList: [String]) {
     let dispatchGroup = DispatchGroup()
-    var bookDetailsList: [BookMetaData] = []
-    
     for isbn in isbnList {
         dispatchGroup.enter()
         print("DispatchGroup enter for ISBN: \(isbn)")
@@ -51,7 +49,7 @@ class InventoryViewModel: ObservableObject {
                     )
                     
                     print("Fetched book details: \(bookMetaData)")
-                    bookDetailsList.append(bookMetaData)
+                    self.books.append(bookMetaData)
                 }
             case .failure(let error):
                 print("Error fetching data for ISBN \(isbn): \(error)")
@@ -60,6 +58,7 @@ class InventoryViewModel: ObservableObject {
             print("DispatchGroup leave for ISBN: \(isbn)")
             dispatchGroup.leave()
         }
+        
     }
     
     dispatchGroup.notify(queue: .main) {
@@ -67,57 +66,8 @@ class InventoryViewModel: ObservableObject {
 //        completion(bookDetailsList)
         
     }
-        books =  bookDetailsList
 }
 
-    func fetchBookDetails(isbnList: [String], completion: @escaping ([BookMetaData]) -> Void) {
-    let dispatchGroup = DispatchGroup()
-    var bookDetailsList: [BookMetaData] = []
-    
-    for isbn in isbnList {
-        dispatchGroup.enter()
-        print("DispatchGroup enter for ISBN: \(isbn)")
-        
-        fetchBookData(for: isbn) { result in
-            switch result {
-            case .success(let booksAPI):
-                if let bookItem = booksAPI.items.first {
-                    let volumeInfo = bookItem.volumeInfo
-                    
-                    let coverImageLink = volumeInfo.imageLinks?.thumbnail ?? "URL_TO_PLACEHOLDER_IMAGE"
-                    let bookMetaData = BookMetaData(
-                        id: UUID().uuidString,
-                        title: volumeInfo.title,
-                        authors: volumeInfo.authors.joined(separator: ", "),
-                        genre: volumeInfo.categories?.first ?? "Unknown",
-                        publishedDate: volumeInfo.publishedDate,
-                        pageCount: volumeInfo.pageCount,
-                        language: volumeInfo.language,
-                        coverImageLink: coverImageLink,
-                        isbn: isbn,
-                        totalNumberOfCopies: Int.random(in: 10...30), // Assuming you generate these values
-                        numberOfIssuedCopies: 0,
-                        bookColumn: "A", // Example, customize as needed
-                        bookShelf: "1"   // Example, customize as needed
-                    )
-                    
-                    print("Fetched book details: \(bookMetaData)")
-                    bookDetailsList.append(bookMetaData)
-                }
-            case .failure(let error):
-                print("Error fetching data for ISBN \(isbn): \(error)")
-            }
-            
-            print("DispatchGroup leave for ISBN: \(isbn)")
-            dispatchGroup.leave()
-        }
-    }
-    
-    dispatchGroup.notify(queue: .main) {
-        print("All book details have been fetched.")
-        completion(bookDetailsList)
-    }
-}
 
 }
 
