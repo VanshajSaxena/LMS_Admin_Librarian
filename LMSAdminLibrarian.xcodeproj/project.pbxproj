@@ -53,7 +53,7 @@
 		67BE8FE42C37F3C900DA1B96 /* BookSearchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookSearchManager.swift; sourceTree = "<group>"; };
 		67BE8FE62C37F3C900DA1B96 /* Structs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Structs.swift; sourceTree = "<group>"; };
 		67BE8FEB2C37F51800DA1B96 /* LMS-Admin-Librarian-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "LMS-Admin-Librarian-Info.plist"; sourceTree = SOURCE_ROOT; };
-		8016A7D92C353E8B0037D386 /* LMS_Admin_Librarian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LMS_Admin_Librarian.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8016A7D92C353E8B0037D386 /* LMSAdminLibrarian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LMSAdminLibrarian.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8016A7DC2C353E8B0037D386 /* LMSAdminLibrarian.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LMSAdminLibrarian.swift; sourceTree = "<group>"; };
 		8016A7DE2C353E8B0037D386 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8016A7E02C353E8D0037D386 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -156,7 +156,7 @@
 		8016A7DA2C353E8B0037D386 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8016A7D92C353E8B0037D386 /* LMS_Admin_Librarian.app */,
+				8016A7D92C353E8B0037D386 /* LMSAdminLibrarian.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -183,9 +183,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8016A7D82C353E8B0037D386 /* LMS_Admin_Librarian */ = {
+		8016A7D82C353E8B0037D386 /* LMSAdminLibrarian */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8016A7E72C353E8D0037D386 /* Build configuration list for PBXNativeTarget "LMS_Admin_Librarian" */;
+			buildConfigurationList = 8016A7E72C353E8D0037D386 /* Build configuration list for PBXNativeTarget "LMSAdminLibrarian" */;
 			buildPhases = (
 				8016A7D52C353E8B0037D386 /* Sources */,
 				8016A7D62C353E8B0037D386 /* Frameworks */,
@@ -195,7 +195,7 @@
 			);
 			dependencies = (
 			);
-			name = LMS_Admin_Librarian;
+			name = LMSAdminLibrarian;
 			packageProductDependencies = (
 				8016A7ED2C3544B30037D386 /* FirebaseAnalytics */,
 				8016A7EF2C3544B30037D386 /* FirebaseAnalyticsWithoutAdIdSupport */,
@@ -207,7 +207,7 @@
 				32D84C1A2C37118600E489F7 /* FirebaseFirestore */,
 			);
 			productName = LMS_Admin_Librarian;
-			productReference = 8016A7D92C353E8B0037D386 /* LMS_Admin_Librarian.app */;
+			productReference = 8016A7D92C353E8B0037D386 /* LMSAdminLibrarian.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -225,7 +225,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8016A7D42C353E8B0037D386 /* Build configuration list for PBXProject "LMS_Admin_Librarian" */;
+			buildConfigurationList = 8016A7D42C353E8B0037D386 /* Build configuration list for PBXProject "LMSAdminLibrarian" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -242,7 +242,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8016A7D82C353E8B0037D386 /* LMS_Admin_Librarian */,
+				8016A7D82C353E8B0037D386 /* LMSAdminLibrarian */,
 			);
 		};
 /* End PBXProject section */
@@ -475,7 +475,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8016A7D42C353E8B0037D386 /* Build configuration list for PBXProject "LMS_Admin_Librarian" */ = {
+		8016A7D42C353E8B0037D386 /* Build configuration list for PBXProject "LMSAdminLibrarian" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8016A7E52C353E8D0037D386 /* Debug */,
@@ -484,7 +484,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8016A7E72C353E8D0037D386 /* Build configuration list for PBXNativeTarget "LMS_Admin_Librarian" */ = {
+		8016A7E72C353E8D0037D386 /* Build configuration list for PBXNativeTarget "LMSAdminLibrarian" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8016A7E82C353E8D0037D386 /* Debug */,
