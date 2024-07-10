@@ -11,48 +11,89 @@ struct ForgetPasswordView: View {
     
     @State private var isEmailValid = false
     @State private var emailValidationMessage = ""
-
+    
     var body: some View {
-        VStack {
-            Text("Forgot Password")
-                .font(.title)
-                .fontWeight(.bold)
-                .padding()
-            
-            VStack(alignment: .leading) {
-                TextField("Email", text: $email)
-                    .padding(10)
-                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color("ThemeOrange")))
-                    .frame(width: 480)
-                    .keyboardType(.emailAddress)
-                    .autocapitalization(.none)
-                    .onChange(of: email) { newValue in
-                        (isEmailValid, emailValidationMessage) = validateEmail(newValue)
-                    }
+        GeometryReader { geometry in
+            HStack {
+                // Spacer()
+                // Illustration
+                VStack {
+                    Spacer()
+                    Image("ForgotPassword")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 580, height: 600)
+                    //                    .padding(.leading, 90)
+                    //Spacer()
+                }
+                //.frame(width: UIScreen.main.bounds.width / 2)
+                .background(Color.clear)
                 
-                Text(emailValidationMessage)
-                    .font(.caption)
-                    .foregroundColor(isEmailValid ? .green : .red)
+                // Forgot Password Form
+                VStack(alignment: .center) {
+                    Spacer()
+//                    HStack {
+//                        Spacer()
+                        Text("Forgot Password")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .padding(.bottom, 50)
+//                        Spacer()
+//                    }
+                    .padding(.top,-40)
+                    // Spacer()
+                    
+                    TextField("Email", text: $email)
+                        .padding()
+                        .background(Color(UIColor.clear))
+                        .cornerRadius(10)
+                        .padding(.horizontal, 20)
+                        .keyboardType(.emailAddress)
+                        .autocapitalization(.none)
+                        .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color("ThemeOrange")))
+                        .frame(maxWidth: .infinity)
+                        .onChange(of: email) { newValue in
+                            (isEmailValid, emailValidationMessage) = validateEmail(newValue)
+                        }
+                    
+                    Text(emailValidationMessage)
+                        .font(.caption)
+                        .foregroundColor(isEmailValid ? .green : .red)
+                    
+                    
+                    
+                    Button(action: {
+                        checkIfEmailExists()
+                    }) {
+                        Spacer()
+                        Text("Send link")
+                            .fontWeight(.bold)
+                                                .frame(maxWidth: 220)
+                            .padding()
+                            .background(Color("ThemeOrange"))
+                            .foregroundColor(.white)
+                            .cornerRadius(12)
+                            .padding(.top, 90)
+                                           //     .frame(maxWidth: 800)
+                           // .frame(width: geometry.size.width * 2)
+                        Spacer()
+                    }
+                    
+                    Spacer()
+                }
+                .alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text(alertTitle),
+                        message: Text(alertMessage),
+                        dismissButton: .default(Text("OK"))
+                    )
+                }
+                .padding(40)
+                // .frame(width: UIScreen.main.bounds.width / 2)
             }
-            
-            Button(action: {
-                checkIfEmailExists()
-            }) {
-                Text("Change Password")
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(Color("ThemeOrange"))
-                    .cornerRadius(12)
-                    .padding(.top, 50)
-            }
-            .padding()
-        }
-        .alert(isPresented: $showAlert) {
-            Alert(
-                title: Text(alertTitle),
-                message: Text(alertMessage),
-                dismissButton: .default(Text("OK"))
-            )
+            .padding(.leading, 50)
+            .padding(.trailing, 50)
+            .background(Color.background)
         }
     }
     
@@ -102,5 +143,7 @@ struct ForgetPasswordView: View {
 struct ForgetPasswordView_Previews: PreviewProvider {
     static var previews: some View {
         ForgetPasswordView()
+            .previewInterfaceOrientation(.landscapeLeft)
+            .previewDevice("iPad Pro (11-inch) (3rd generation)")
     }
 }
