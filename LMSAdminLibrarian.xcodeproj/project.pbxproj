@@ -100,6 +100,8 @@
 		1AEB21C12C3E9E58000BD7B2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8016A7DC2C353E8B0037D386 /* LMSAdminLibrarian.swift */,
+				67BE8FE62C37F3C900DA1B96 /* Structs.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -140,11 +142,6 @@
 		8016A7D02C353E8B0037D386 = {
 			isa = PBXGroup;
 			children = (
-				1AEB21C42C3E9F19000BD7B2 /* Utilities */,
-				1AEB21C32C3E9EAD000BD7B2 /* Services */,
-				1AEB21C22C3E9E70000BD7B2 /* ViewModels */,
-				1AEB21C12C3E9E58000BD7B2 /* Models */,
-				1AEB21C02C3E9E1B000BD7B2 /* Views */,
 				67BE8FEB2C37F51800DA1B96 /* LMS-Admin-Librarian-Info.plist */,
 				8016A8132C3546D60037D386 /* GoogleService-Info.plist */,
 				8016A7DB2C353E8B0037D386 /* LMSAdminLibrarian */,
@@ -164,8 +161,11 @@
 		8016A7DB2C353E8B0037D386 /* LMSAdminLibrarian */ = {
 			isa = PBXGroup;
 			children = (
-				67BE8FE62C37F3C900DA1B96 /* Structs.swift */,
-				8016A7DC2C353E8B0037D386 /* LMSAdminLibrarian.swift */,
+				1AEB21C12C3E9E58000BD7B2 /* Models */,
+				1AEB21C02C3E9E1B000BD7B2 /* Views */,
+				1AEB21C22C3E9E70000BD7B2 /* ViewModels */,
+				1AEB21C32C3E9EAD000BD7B2 /* Services */,
+				1AEB21C42C3E9F19000BD7B2 /* Utilities */,
 				8016A7E02C353E8D0037D386 /* Assets.xcassets */,
 				8016A7E22C353E8D0037D386 /* Preview Content */,
 			);
