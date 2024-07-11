@@ -1,50 +1,81 @@
 import SwiftUI
 
-struct LibrarianSidebar: View {
+struct LibrarianSideBar: View {
+    @State private var selectedButton: String? = nil
+    @EnvironmentObject var authViewModel: AuthViewModel
+       @State private var isLoggedOut = false
+
     var body: some View {
-        List {
-            NavigationLink(destination: InventoryView()) {
-                Label("Add Inventory", systemImage: "books.vertical")
+        VStack {
+            Text("App Name")
+                .font(.largeTitle)
+                .fontWeight(.black)
+                .foregroundColor(.white)
+                .padding(.top, 150)
+                .padding(.bottom, 50)
+                .padding(.leading, 100)
+
+            VStack(alignment: .leading, spacing: 30) {
+                SidebarButton(imageName: "chart.bar", text: "Analytics", selectedButton: $selectedButton)
+                SidebarButton(imageName: "archivebox", text: "Inventory", selectedButton: $selectedButton)
+                SidebarButton(imageName: "person", text: "Profile", selectedButton: $selectedButton)
+                SidebarButton(imageName: "gearshape", text: "Settings", selectedButton: $selectedButton)
             }
-            NavigationLink(destination: LibrarianInventoryView()) {
-                Label("Analytics", systemImage: "books.vertical")
+            .padding(.horizontal, 30)
+
+            Spacer()
+
+            Button(action: {
+                // Log out action
+                authViewModel.logout()
+                              
+                               isLoggedOut = true
+            }) {
+                HStack {
+                    Image(systemName: "power")
+                    Text("LogOut")
+                        .fontWeight(.bold)
+                }
+                .foregroundColor(.orange)
+                .frame(maxWidth: 150, alignment: .center)
+                .padding()
+                .background(Color.white)
+                .cornerRadius(12)
+                .padding(.leading, 120)
+                .padding(.trailing , 20)
+                .imageScale(.large)
             }
-            // Add more links as needed
+            .padding(.bottom, 30)
+            .onReceive(authViewModel.$isAuthenticated) { isAuthenticated in
+                        if !isAuthenticated {
+                            isLoggedOut = true
+                        }
+                    }
+                    .sheet(isPresented: $isLoggedOut) {
+                        LoginView()
+                    }
         }
-        .listStyle(SidebarListStyle())
-        .navigationTitle("Librarian Sidebar")
+        .frame(maxWidth: 430)
+        .background(Color("ThemeOrange"))
+        .edgesIgnoringSafeArea(.all)
     }
 }
 
 
-import SwiftUI
-
-
-
-struct AdminInventoryView: View {
-    var body: some View {
-        Text("Admin Inventory View")
-            .navigationTitle("Admin Inventory")
+    @ViewBuilder
+    func destinationView(for text: String) -> some View {
+        switch text {
+        case "Analytics":
+            AnalyticsView()
+        case "Inventory":
+            InventoryView()
+        case "Profile":
+            ProfileView()
+        case "Settings":
+            SettingsView()
+        default:
+            EmptyView()
+        }
     }
-}
 
-struct LibrarianInventoryView: View {
-    var body: some View {
-        Text("Librarian Inventory View")
-            .navigationTitle("Librarian Inventory")
-    }
-}
 
-struct AdminDefaultView: View {
-    var body: some View {
-        Text("Admin Default View")
-            .navigationTitle("Admin Default View")
-    }
-}
-
-struct LibrarianDefaultView: View {
-    var body: some View {
-        Text("Librarian Default View")
-            .navigationTitle("Librarian Default View")
-    }
-}

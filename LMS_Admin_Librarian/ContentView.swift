@@ -1,24 +1,24 @@
+////
+////  ContentView.swift
+////  sidebarviewdemo
+////
+////  Created by Mahak garg on 10/07/24.
+////
 //
-//  ContentView.swift
-//  sidebarviewdemo
+//import SwiftUI
 //
-//  Created by Mahak garg on 10/07/24.
+//struct ContentView: View {
+//    var body: some View {
+//        VStack {
+//            Image(systemName: "globe")
+//                .imageScale(.large)
+//                .foregroundStyle(.tint)
+//            Text("Hello, world!")
+//        }
+//        .padding()
+//    }
+//}
 //
-
-import SwiftUI
-
-struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
-    }
-}
-
-#Preview {
-    ContentView()
-}
+//#Preview {
+//    ContentView()
+//}

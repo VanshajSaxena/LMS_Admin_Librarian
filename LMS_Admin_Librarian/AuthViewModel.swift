@@ -56,4 +56,16 @@ class AuthViewModel: ObservableObject {
             }
         }
     }
+    
+    func logout() {
+            do {
+                try Auth.auth().signOut()
+                self.isAuthenticated = false
+                self.userType = nil
+                // Optionally reset other session-related variables if needed
+            } catch let signOutError as NSError {
+                print("Error signing out: %@", signOutError)
+                // Handle sign-out error gracefully, if needed
+            }
+        }
 }
