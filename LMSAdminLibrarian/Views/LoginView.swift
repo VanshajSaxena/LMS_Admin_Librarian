@@ -141,6 +141,8 @@ struct LoginView: View {
             .padding(.trailing, 200)
             .padding(.bottom, -50)
           
+        }.onAppear{
+            
         }
     }
 
