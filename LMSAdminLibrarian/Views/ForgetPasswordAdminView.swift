@@ -1,8 +1,15 @@
+//
+//  ForgetPasswordAdminView.swift
+//  LMS_Admin_Librarian
+//
+//  Created by Aida Sharon Bruce on 11/07/24.
+//
+
 import SwiftUI
 import Firebase
 import LocalAuthentication
 
-struct ForgetPasswordView: View {
+struct ForgetPasswordAdminView: View {
     @State private var email: String = ""
     @State private var showAlert = false
     @State private var alertTitle = ""
@@ -57,7 +64,7 @@ struct ForgetPasswordView: View {
                         checkIfEmailExists()
                     }) {
                         Spacer()
-                        Text("Send link")
+                        Text("Next")
                             .fontWeight(.bold)
                                                 .frame(maxWidth: 220)
                             .padding()
@@ -128,9 +135,9 @@ struct ForgetPasswordView: View {
     }
 }
 
-struct ForgetPasswordView_Previews: PreviewProvider {
+struct ForgetPasswordAdminView_Previews: PreviewProvider {
     static var previews: some View {
-        ForgetPasswordView()
+        ForgetPasswordAdminView()
             .previewInterfaceOrientation(.landscapeLeft)
             .previewDevice("iPad Pro (11-inch) (3rd generation)")
     }

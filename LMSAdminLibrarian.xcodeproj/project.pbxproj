@@ -37,6 +37,10 @@
 		8016A7F42C3544B30037D386 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 8016A7F32C3544B30037D386 /* FirebaseDatabase */; };
 		8016A7F62C3544B30037D386 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 8016A7F52C3544B30037D386 /* FirebaseStorage */; };
 		8016A8142C3546D60037D386 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8016A8132C3546D60037D386 /* GoogleService-Info.plist */; };
+		8069BF852C3E4A7B0075475D /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = 8069BF842C3E4A7B0075475D /* SwiftProtobuf */; };
+		8069BF872C3E4A7B0075475D /* SwiftProtobufPluginLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 8069BF862C3E4A7B0075475D /* SwiftProtobufPluginLibrary */; };
+		8092BE4B2C3FA1A400D895F5 /* ForgetPasswordAdminView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8092BE4A2C3FA1A400D895F5 /* ForgetPasswordAdminView.swift */; };
+		8092BE4D2C3FA28500D895F5 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8092BE4C2C3FA28500D895F5 /* ResetPasswordView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +67,8 @@
 		8016A7E02C353E8D0037D386 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8016A7E32C353E8D0037D386 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8016A8132C3546D60037D386 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8092BE4A2C3FA1A400D895F5 /* ForgetPasswordAdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ForgetPasswordAdminView.swift; path = ForgetPasswordAdminView.swift; sourceTree = "<group>"; };
+		8092BE4C2C3FA28500D895F5 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ResetPasswordView.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,11 +79,13 @@
 				1A1214562C36EF99009E1BD1 /* CoreXLSX in Frameworks */,
 				1A12145B2C370869009E1BD1 /* FirebaseFirestoreCombine-Community in Frameworks */,
 				8016A7EE2C3544B30037D386 /* FirebaseAnalytics in Frameworks */,
+				8069BF852C3E4A7B0075475D /* SwiftProtobuf in Frameworks */,
 				8016A7F22C3544B30037D386 /* FirebaseAuth in Frameworks */,
 				8016A7F42C3544B30037D386 /* FirebaseDatabase in Frameworks */,
 				8016A7F62C3544B30037D386 /* FirebaseStorage in Frameworks */,
 				8016A7F02C3544B30037D386 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				1A12145D2C370869009E1BD1 /* FirebaseFirestoreSwift in Frameworks */,
+				8069BF872C3E4A7B0075475D /* SwiftProtobufPluginLibrary in Frameworks */,
 				32D84C1B2C37118600E489F7 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -104,6 +112,8 @@
 				329E0A582C3823EC00E8925A /* ForgetPasswordView.swift */,
 				32D84C152C370E0A00E489F7 /* AdminView.swift */,
 				32D84C132C3708C500E489F7 /* LoginView.swift */,
+				8092BE4C2C3FA28500D895F5 /* ResetPasswordView.swift */,
+				8092BE4A2C3FA1A400D895F5 /* ForgetPasswordAdminView.swift */,
 				3C51AEB42C3E628D00C39117 /* AdminAnalyticsView.swift */,
 				3C41F1EA2C3FF5BB000454E9 /* CustomDatePicker.swift */,
 			);
@@ -145,6 +155,13 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		1AFA994A2C404E42000D81CF /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		32D84C192C37118600E489F7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -160,7 +177,7 @@
 				8016A7DB2C353E8B0037D386 /* LMSAdminLibrarian */,
 				8016A7DA2C353E8B0037D386 /* Products */,
 				32D84C192C37118600E489F7 /* Frameworks */,
-				1A3B60152C404BB3005738F9 /* Recovered References */,
+				1AFA994A2C404E42000D81CF /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -219,6 +236,8 @@
 				1A1214552C36EF99009E1BD1 /* CoreXLSX */,
 				1A12145A2C370869009E1BD1 /* FirebaseFirestoreCombine-Community */,
 				32D84C1A2C37118600E489F7 /* FirebaseFirestore */,
+				8069BF842C3E4A7B0075475D /* SwiftProtobuf */,
+				8069BF862C3E4A7B0075475D /* SwiftProtobufPluginLibrary */,
 			);
 			productName = LMS_Admin_Librarian;
 			productReference = 8016A7D92C353E8B0037D386 /* LMSAdminLibrarian.app */;
@@ -251,6 +270,7 @@
 			packageReferences = (
 				8016A7EC2C3544B30037D386 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				1A1214542C36EF99009E1BD1 /* XCRemoteSwiftPackageReference "CoreXLSX" */,
+				8069BF832C3E4A7B0075475D /* XCRemoteSwiftPackageReference "swift-protobuf" */,
 			);
 			productRefGroup = 8016A7DA2C353E8B0037D386 /* Products */;
 			projectDirPath = "";
@@ -284,11 +304,13 @@
 				67BE8FEA2C37F3C900DA1B96 /* Structs.swift in Sources */,
 				1A28EC4C2C3D3A5300F2DB17 /* InventoryViewModel.swift in Sources */,
 				32E4A72B2C3BC3C3003D0D6C /* InventoryView.swift in Sources */,
+				8092BE4D2C3FA28500D895F5 /* ResetPasswordView.swift in Sources */,
 				1A8428C72C3BEDEC00A34F8D /* FilePicker.swift in Sources */,
 				5FDAB7952C371F1000FEC1C2 /* SidebarView.swift in Sources */,
 				32D84C142C3708C500E489F7 /* LoginView.swift in Sources */,
 				67BE8FE72C37F3C900DA1B96 /* BarCodeScanner.swift in Sources */,
 				8016A7DF2C353E8B0037D386 /* ContentView.swift in Sources */,
+				8092BE4B2C3FA1A400D895F5 /* ForgetPasswordAdminView.swift in Sources */,
 				329E0A592C3823EC00E8925A /* ForgetPasswordView.swift in Sources */,
 				32E4A7272C3AEC22003D0D6C /* AddLibrarianView.swift in Sources */,
 				32D84C1D2C37213E00E489F7 /* LibrarianView.swift in Sources */,
@@ -439,8 +461,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -472,8 +494,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -528,6 +550,14 @@
 				minimumVersion = 10.28.1;
 			};
 		};
+		8069BF832C3E4A7B0075475D /* XCRemoteSwiftPackageReference "swift-protobuf" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-protobuf.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.27.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -575,6 +605,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8016A7EC2C3544B30037D386 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		8069BF842C3E4A7B0075475D /* SwiftProtobuf */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8069BF832C3E4A7B0075475D /* XCRemoteSwiftPackageReference "swift-protobuf" */;
+			productName = SwiftProtobuf;
+		};
+		8069BF862C3E4A7B0075475D /* SwiftProtobufPluginLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8069BF832C3E4A7B0075475D /* XCRemoteSwiftPackageReference "swift-protobuf" */;
+			productName = SwiftProtobufPluginLibrary;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
