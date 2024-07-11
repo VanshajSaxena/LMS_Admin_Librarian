@@ -45,7 +45,7 @@ struct LoginView: View {
                                     .cornerRadius(12)
                                     .keyboardType(.emailAddress)
                                     .autocapitalization(.none)
-                                    .onChange(of: email) { newValue in
+                                    .onChange(of: email) { oldValue, newValue in
                                         (isEmailValid, emailValidationMessage) = validateEmail(newValue)
                                     }
                                     .overlay(
@@ -63,7 +63,7 @@ struct LoginView: View {
                                     .padding()
                                     .background(Color(.white))
                                     .cornerRadius(12)
-                                    .onChange(of: password) { newValue in
+                                    .onChange(of: password) { oldValue, newValue in
                                         (isPasswordValid, passwordValidationMessage) = validatePassword(newValue)
                                     }
                                     .overlay(

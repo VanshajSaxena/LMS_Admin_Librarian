@@ -26,7 +26,7 @@ struct ForgetPasswordView: View {
                     .frame(width: 480)
                     .keyboardType(.emailAddress)
                     .autocapitalization(.none)
-                    .onChange(of: email) { newValue in
+                    .onChange(of: email) { oldValue, newValue in
                         (isEmailValid, emailValidationMessage) = validateEmail(newValue)
                     }
                 
