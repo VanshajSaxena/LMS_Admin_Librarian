@@ -133,6 +133,7 @@ struct VolumeInfo: Codable {
     let language: String
     let imageLinks: ImageLinks?
     let categories: [String]?
+    let description: String
 }
 
 struct ImageLinks: Codable {
@@ -149,6 +150,7 @@ struct BookMetaData : Identifiable {
     let pageCount: Int
     let language: String
     let coverImageLink: String
+    let description: String
     let isbn: String
     let totalNumberOfCopies: Int
     let numberOfIssuedCopies: Int

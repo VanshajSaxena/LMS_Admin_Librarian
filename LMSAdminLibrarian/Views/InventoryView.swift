@@ -49,8 +49,14 @@ struct InventoryView: View {
                             Spacer()
                             Button(action: {
                                 // Implement Find action here
+                                Task {
+                                    do {
+                                        await viewModel.getBookDetailsList(isbnList: isbnList)
+                                    } catch {
+                                        print("Error: \(error.localizedDescription)")
+                                    }
+                                }
                                 
-                                    viewModel.fetchBookDetailsList(isbnList: isbnList)
                             }) {
                                 Text("Find")
                                     .foregroundColor(.white)
@@ -188,7 +194,13 @@ struct InventoryView: View {
                 AddBookView()
             }
             .onAppear {
-                viewModel.fetchBookDetailsList(isbnList: isbnList)
+                Task {
+                    do {
+                        await viewModel.getBookDetailsList(isbnList: isbnList)
+                    } catch {
+                        print("Error: \(error.localizedDescription)")
+                    }
+                }
             }
         }
     }

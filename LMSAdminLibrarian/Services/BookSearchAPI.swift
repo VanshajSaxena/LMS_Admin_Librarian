@@ -11,9 +11,9 @@ protocol URLQueryParameterStringConvertible {
     var queryParameters: String {get}
 }
 
-final class BookSearchAPI {
+final class BookSearchService {
     private func fetchBookInfoFromAPI(for isbn: String) async throws -> BooksAPI {
-        let urlString = "https://www.googleapis.com/books/v1/volumes?q="
+        let urlString = "https://www.googleapis.com/books/v1/volumes"
 
         let URLParam = ["q": "isbn:\(isbn)"]
 
@@ -42,9 +42,7 @@ final class BookSearchAPI {
     
     public func getBookMetaData(isbn: String) async throws -> BooksAPI {
         do {
-            let bookSearchAPI = BookSearchAPI()
-            let booksAPI = try await bookSearchAPI.fetchBookInfoFromAPI(for: isbn)
-            return booksAPI
+            return try await fetchBookInfoFromAPI(for: isbn)
         } catch {
             print("Error fetching data for ISBN \(isbn): \(error)")
             throw error

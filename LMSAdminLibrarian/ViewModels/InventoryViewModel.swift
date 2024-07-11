@@ -15,6 +15,50 @@ class InventoryViewModel: ObservableObject {
     @Published var books: [BookMetaData] = []
     @Published var searchQuery: String = ""
     
+    func getBookDetailsList(isbnList: [String]) async {
+        let bookSearchService = BookSearchService()
+        await withTaskGroup(of: BookMetaData?.self) { group in
+            for isbn in isbnList {
+                group.addTask {
+                    do {
+                        let bookAPI = try await bookSearchService.getBookMetaData(isbn: isbn)
+                        if let bookItem = bookAPI.items.first {
+                            let volumeInfo = bookItem.volumeInfo
+                            let coverImageLink = volumeInfo.imageLinks?.thumbnail ?? "URL_TO_PLACEHOLDER_IMAGE"
+                            let bookMetaData = BookMetaData(
+                                id: UUID().uuidString,
+                                title: volumeInfo.title,
+                                authors: volumeInfo.authors.joined(separator: ", "),
+                                genre: volumeInfo.categories?.first ?? "Unknown",
+                                publishedDate: volumeInfo.publishedDate,
+                                pageCount: volumeInfo.pageCount,
+                                language: volumeInfo.language,
+                                coverImageLink: coverImageLink,
+                                description: volumeInfo.description,
+                                isbn: isbn,
+                                totalNumberOfCopies: Int.random(in: 10...30), //
+                                numberOfIssuedCopies: 0,
+                                bookColumn: "A",
+                                bookShelf: "1")
+                            print(bookMetaData)
+                            return bookMetaData
+                        }
+                    } catch {
+                        print("Error: \(error.localizedDescription)")
+                    }
+                    return nil
+                }
+            }
+            for await result in group {
+                if let bookMetaData = result {
+                    self.books.append(bookMetaData)
+                }
+            }
+        }
+    }
+}
+
+
     /*
     func fetchBookDetailsList(isbnList: [String]) {
     let dispatchGroup = DispatchGroup()
@@ -63,10 +107,6 @@ class InventoryViewModel: ObservableObject {
 //        completion(bookDetailsList)
         
     }
-}
-*/
-
-}
 
 
 
@@ -98,6 +138,7 @@ func fetchBookData(for isbn: String, completion: @escaping (Result<BooksAPI, Err
     }.resume()
 }
 
+*/
 
 var LibraryBooks: [BookMetaData] = []
 var bookDataFromAPI : BooksAPI?
