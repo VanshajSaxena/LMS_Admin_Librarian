@@ -16,38 +16,29 @@ struct ForgetPasswordView: View {
         GeometryReader { geometry in
             HStack {
                 // Spacer()
-                // Illustration
                 VStack {
                     Spacer()
                     Image("ForgotPassword")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 580, height: 600)
-                    //                    .padding(.leading, 90)
-                    //Spacer()
                 }
-                //.frame(width: UIScreen.main.bounds.width / 2)
+    
                 .background(Color.clear)
                 
                 // Forgot Password Form
                 VStack(alignment: .center) {
                     Spacer()
-//                    HStack {
-//                        Spacer()
                         Text("Forgot Password")
                             .font(.largeTitle)
                             .fontWeight(.bold)
                             .padding(.bottom, 50)
-//                        Spacer()
-//                    }
                     .padding(.top,-40)
-                    // Spacer()
                     
                     TextField("Email", text: $email)
                         .padding()
                         .background(Color(UIColor.clear))
                         .cornerRadius(10)
-                        .padding(.horizontal, 20)
                         .keyboardType(.emailAddress)
                         .autocapitalization(.none)
                         .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color("ThemeOrange")))
@@ -74,9 +65,7 @@ struct ForgetPasswordView: View {
                             .foregroundColor(.white)
                             .cornerRadius(12)
                             .padding(.top, 90)
-                                           //     .frame(maxWidth: 800)
-                           // .frame(width: geometry.size.width * 2)
-                        Spacer()
+              Spacer()
                     }
                     
                     Spacer()
@@ -89,7 +78,6 @@ struct ForgetPasswordView: View {
                     )
                 }
                 .padding(40)
-                // .frame(width: UIScreen.main.bounds.width / 2)
             }
             .padding(.leading, 50)
             .padding(.trailing, 50)

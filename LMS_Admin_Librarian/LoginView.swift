@@ -29,11 +29,8 @@ struct LoginView: View {
                             Image("LoginAdminlibrarian")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                            //  .frame(width: geometry.size.width * 0.5)
                                 .frame(width: 700, height: 700)
                                 .padding(.leading, 0)
-                            
-                            //     Spacer()
                         }
                         .background(Color.clear)
                         
@@ -99,7 +96,7 @@ struct LoginView: View {
                                 }) {
                                     NavigationLink(destination: ForgetPasswordView()) {
                                         Text("Forgot Password?")
-                                            .foregroundColor(.blue)
+                                            .foregroundColor(.accentColor)
                                     }
                                 }
                             }
@@ -111,12 +108,9 @@ struct LoginView: View {
                                     .foregroundColor(.white)
                                     .frame(maxWidth: 220)
                                     .padding()
-                                   // .frame(width: geometry.size.width * 0.2)
                                     .background(Color("ThemeOrange"))
                                     .cornerRadius(12)
                                     .padding(.top, 50)
-                                   // .frame(maxWidth: .infinity)
-                                   // .frame(maxWidth: 300)
                             }
                             .padding()
                         }
@@ -149,8 +143,6 @@ struct LoginView: View {
             .padding(.bottom, -50)
           
         }
-//        .padding(.leading, 50)
-//        .padding(.trailing, 50)
     }
 
     func login() {
