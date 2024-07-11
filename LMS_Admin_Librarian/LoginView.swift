@@ -43,7 +43,6 @@ struct LoginView: View {
                             VStack(alignment: .leading) {
                                 TextField("Email", text: $email)
                                     .padding()
-                                    .padding(.horizontal, 20)
                                     .frame(maxWidth: 600)
                                     .background(Color(.clear))
                                     .cornerRadius(12)

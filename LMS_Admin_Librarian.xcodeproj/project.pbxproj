@@ -37,6 +37,8 @@
 		8016A8142C3546D60037D386 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8016A8132C3546D60037D386 /* GoogleService-Info.plist */; };
 		8069BF852C3E4A7B0075475D /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = 8069BF842C3E4A7B0075475D /* SwiftProtobuf */; };
 		8069BF872C3E4A7B0075475D /* SwiftProtobufPluginLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 8069BF862C3E4A7B0075475D /* SwiftProtobufPluginLibrary */; };
+		8092BE4B2C3FA1A400D895F5 /* ForgetPasswordAdminView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8092BE4A2C3FA1A400D895F5 /* ForgetPasswordAdminView.swift */; };
+		8092BE4D2C3FA28500D895F5 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8092BE4C2C3FA28500D895F5 /* ResetPasswordView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +63,8 @@
 		8016A7E02C353E8D0037D386 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8016A7E32C353E8D0037D386 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8016A8132C3546D60037D386 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8092BE4A2C3FA1A400D895F5 /* ForgetPasswordAdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordAdminView.swift; sourceTree = "<group>"; };
+		8092BE4C2C3FA28500D895F5 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +129,8 @@
 				8016A7DE2C353E8B0037D386 /* ContentView.swift */,
 				5FDAB7982C3724CF00FEC1C2 /* LoginView.swift */,
 				329E0A582C3823EC00E8925A /* ForgetPasswordView.swift */,
+				8092BE4A2C3FA1A400D895F5 /* ForgetPasswordAdminView.swift */,
+				8092BE4C2C3FA28500D895F5 /* ResetPasswordView.swift */,
 				1A1214522C36EDAB009E1BD1 /* ExcelToFirebase.swift */,
 				32D84C132C3708C500E489F7 /* LoginView.swift */,
 				32D84C152C370E0A00E489F7 /* AdminView.swift */,
@@ -235,11 +241,13 @@
 				1A1214532C36EDAB009E1BD1 /* ExcelToFirebase.swift in Sources */,
 				67BE8FEA2C37F3C900DA1B96 /* Structs.swift in Sources */,
 				32E4A72B2C3BC3C3003D0D6C /* InventoryView.swift in Sources */,
+				8092BE4D2C3FA28500D895F5 /* ResetPasswordView.swift in Sources */,
 				1A8428C72C3BEDEC00A34F8D /* FilePicker.swift in Sources */,
 				5FDAB7952C371F1000FEC1C2 /* SidebarView.swift in Sources */,
 				32D84C142C3708C500E489F7 /* LoginView.swift in Sources */,
 				67BE8FE72C37F3C900DA1B96 /* BarCodeScanner.swift in Sources */,
 				8016A7DF2C353E8B0037D386 /* ContentView.swift in Sources */,
+				8092BE4B2C3FA1A400D895F5 /* ForgetPasswordAdminView.swift in Sources */,
 				329E0A592C3823EC00E8925A /* ForgetPasswordView.swift in Sources */,
 				32E4A7272C3AEC22003D0D6C /* AddLibrarianView.swift in Sources */,
 				32D84C1D2C37213E00E489F7 /* LibrarianView.swift in Sources */,
