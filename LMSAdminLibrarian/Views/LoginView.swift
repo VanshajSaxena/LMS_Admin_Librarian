@@ -135,6 +135,8 @@ struct LoginView: View {
                     )
                 }
             }
+        }.onAppear{
+            
         }
     }
 
