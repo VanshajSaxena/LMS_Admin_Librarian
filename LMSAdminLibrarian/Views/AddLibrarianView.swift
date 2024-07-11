@@ -12,13 +12,13 @@ struct Librarian: Identifiable, Codable {
 }
 
 struct AddLibrarianView: View {
-    @State private var librarians: [Librarian] = []
     @State private var isShowingAddLibrarian = false
     @State private var searchQuery: String = ""
-
+    @State private var librarians: [Librarian] = []
     var body: some View {
         GeometryReader { geometry in
-            VStack(alignment: .leading, spacing: 40) {
+            VStack(alignment: .leading, spacing: 20) {
+                // Title and Account button
                 HStack {
                     Text("Staff")
                         .font(.largeTitle)
@@ -40,8 +40,10 @@ struct AddLibrarianView: View {
                     .padding(.trailing, 50)
                 }
                 .padding(.top, 50)
-
+                
+                // Search and filter row
                 HStack(spacing: 10) {
+                    // Search field and button
                     ZStack {
                         TextField("Search the staff", text: $searchQuery)
                             .padding()
@@ -69,7 +71,10 @@ struct AddLibrarianView: View {
                     }
                     .frame(maxWidth: geometry.size.width * 0.5)
                     .padding(.leading, geometry.size.width * 0.05)
+                    
                     Spacer()
+                    
+                    // Filter and add button
                     Button(action: {
                         // Filter action
                     }) {
@@ -83,7 +88,9 @@ struct AddLibrarianView: View {
                         .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color("ThemeOrange")))
                     }
                     .padding(.trailing, 10)
+                    
                     Rectangle().frame(width: 1, height: 65).foregroundColor(Color("ThemeOrange"))
+                    
                     Button(action: {
                         isShowingAddLibrarian.toggle()
                     }) {
@@ -96,6 +103,7 @@ struct AddLibrarianView: View {
                         .foregroundColor(.white)
                         .cornerRadius(8)
                         .sheet(isPresented: $isShowingAddLibrarian) {
+                            // Add new librarian view
                             AdminView(onAdd: { name, age, yearsOfExperience, userID, librarianEmail in
                                 // Add new librarian to Firestore
                                 let db = Firestore.firestore()
@@ -116,56 +124,79 @@ struct AddLibrarianView: View {
                             })
                         }
                     }
-                    .padding(.trailing, geometry.size.width * 0.05).padding(.leading, 7)
+                    .padding(.trailing, geometry.size.width * 0.05)
+                    .padding(.leading, 7)
                 }
                 .onAppear(perform: fetchLibrarians)
                 .navigationTitle("Librarians")
-
-                HStack(spacing: 130) {
-                    Text("Name")
-                        .font(.headline)
-                        .foregroundColor(Color("ThemeOrange"))
-                    Text("Age")
-                        .font(.headline)
-                        .foregroundColor(Color("ThemeOrange"))
-                    Text("Email")
-                        .font(.headline)
-                        .foregroundColor(Color("ThemeOrange"))
-                    Text("Years Of Experience")
-                        .font(.headline)
-                        .foregroundColor(Color("ThemeOrange"))
-                    Text("UserID")
-                        .font(.headline)
-                        .foregroundColor(Color("ThemeOrange"))
-                }
-                .padding(.horizontal, geometry.size.width * 0.05)
-                .padding(.top, 40)
-
-                List {
-                    ForEach(librarians) { librarian in
-                        LibrarianRow(librarian: librarian) {
-                            deleteLibrarian(librarian)
+                
+                Table(librarians) {
+                    TableColumn("Name", value: \.name)
+                        
+                    TableColumn("Age", value: \.age)
+                    TableColumn("Email", value: \.email)
+                    TableColumn("Years of Experience", value: \.yearsOfExperience)
+                    TableColumn("User Id", value: \.userID)
+                    TableColumn("Actions") { book in
+                        HStack {
+                            Button(action: {
+                                // Edit action
+                            }) {
+                                Image(systemName: "pencil")
+                                    .foregroundColor(.black)
+                            }
+                            // Delete button
+                            Button(action: {
+                                // Delete action
+                            }) {
+                                Image(systemName: "trash")
+                                    .foregroundColor(.red)
+                            }
                         }
                     }
-                }
-                .padding(.horizontal, 15)
                 
-
-                
-
-                HStack {
-                    Text("This is the End Folks!")
-                        .font(.system(size: 40))
-                        .fontWeight(.bold)
-                        .foregroundColor(Color("ThemeOrange"))
-                    Spacer()
                 }
-                .padding(35)
+                .padding(.horizontal, 50)
+                Spacer() // Push the footer to the bottom
+//                HStack {
+//                    Text("This is the \n End Folks!")
+//                        .font(.system(size: 40))
+//                        .fontWeight(.bold)
+//                        .foregroundColor(Color("ThemeOrange"))
+//                    Spacer()
+//                }
+//                .padding(40)
             }
             .background(Color("BackgroundColor").edgesIgnoringSafeArea(.all))
+            .sheet(isPresented: $isShowingAddLibrarian) {
+                //AddBookView()
+            }
         }
     }
-
+    //.background(Color("BackgroundColor").edgesIgnoringSafeArea(.all))
+    
+    //}
+    //}
+    
+    //    func headerRow(geometry: GeometryProxy) -> some View {
+    //        HStack(spacing: 10) {
+    //            columnHeader("Name", width: geometry.size.width * 0.16)
+    //            columnHeader("Age", width: geometry.size.width * 0.16)
+    //            columnHeader("Email", width: geometry.size.width * 0.15)
+    //            columnHeader("Years Of Experience", width: geometry.size.width * 0.2)
+    //            columnHeader("UserID", width: geometry.size.width * 0.1)
+    //        }
+    //        .padding(.horizontal, geometry.size.width * 0.025)
+    //        .padding(.top, 20)
+    //    }
+    //
+    //    func columnHeader(_ title: String, width: CGFloat) -> some View {
+    //        Text(title)
+    //            .font(.headline)
+    //            .foregroundColor(Color("ThemeOrange"))
+    //            .frame(width: width, alignment: .leading)
+    //    }
+    
     func fetchLibrarians() {
         let db = Firestore.firestore()
         db.collection("librarians").getDocuments { snapshot, error in
@@ -180,7 +211,7 @@ struct AddLibrarianView: View {
             }
         }
     }
-
+    
     func searchLibrariansByName() {
         let db = Firestore.firestore()
         db.collection("librarians")
@@ -198,7 +229,7 @@ struct AddLibrarianView: View {
                 }
             }
     }
-
+    
     func deleteLibrarian(at offsets: IndexSet) {
         let db = Firestore.firestore()
         offsets.forEach { index in
@@ -215,7 +246,7 @@ struct AddLibrarianView: View {
             }
         }
     }
-
+    
     func deleteLibrarian(_ librarian: Librarian) {
         let db = Firestore.firestore()
         if let librarianID = librarian.id {
@@ -234,36 +265,41 @@ struct AddLibrarianView: View {
 struct LibrarianRow: View {
     var librarian: Librarian
     var onDelete: () -> Void
-
+    
     var body: some View {
-        HStack(spacing: 130) {
+        HStack(spacing: 10) {
             Text(librarian.name)
-                .frame(alignment: .leading)
-               
+                .frame(maxWidth: .infinity, alignment: .leading)
             Text(librarian.age)
-                
+                .frame(maxWidth: .infinity, alignment: .leading)
             Text(librarian.email)
-                .frame(alignment: .leading)
-                .lineSpacing(100)
-                
+                .frame(maxWidth: .infinity, alignment: .leading)
             Text(librarian.yearsOfExperience)
-                .frame(alignment: .leading)
-              
+                .frame(maxWidth: .infinity, alignment: .leading)
             Text(librarian.userID)
-               
-            Button(action: {
-                onDelete()
-            }) {
-                Image(systemName: "trash")
-                    .foregroundColor(.red)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            HStack{
+                Button(action: {
+                    onDelete()
+                }) {
+                    Image(systemName: "trash")
+                        .foregroundColor(.red)
+                        .font(.title)
+                }
+                Button(action:{
+                    
+                }){
+                    Image(systemName: "pencil")
+                        .foregroundColor(.black)
+                        .font(.title)
+                        .frame(width: 100,height: 40)
+                }
             }
-            .padding(.horizontal, 1)
         }
         .padding()
         .background(Color.white)
         .cornerRadius(8)
-        
-        .padding(.horizontal , 2)
+        .padding(.horizontal, 2)
         .padding(.vertical, 4)
     }
 }
