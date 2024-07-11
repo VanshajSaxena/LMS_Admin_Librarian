@@ -115,3 +115,44 @@ struct ImageLinks: Decodable {
 }
 
 */
+
+struct BooksAPI: Codable {
+    let items: [BookItem]
+}
+
+struct BookItem: Codable {
+    let id: String
+    let volumeInfo: VolumeInfo
+}
+
+struct VolumeInfo: Codable {
+    let title: String
+    let authors: [String]
+    let publishedDate: String
+    let pageCount: Int
+    let language: String
+    let imageLinks: ImageLinks?
+    let categories: [String]?
+}
+
+struct ImageLinks: Codable {
+    let smallThumbnail: String?
+    let thumbnail: String?
+}
+
+struct BookMetaData : Identifiable {
+    let id: String
+    let title: String
+    let authors: String
+    let genre: String
+    let publishedDate: String
+    let pageCount: Int
+    let language: String
+    let coverImageLink: String
+    let isbn: String
+    let totalNumberOfCopies: Int
+    let numberOfIssuedCopies: Int
+    let bookColumn: String
+    let bookShelf: String
+}
+

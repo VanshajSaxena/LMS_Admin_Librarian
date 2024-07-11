@@ -11,6 +11,7 @@
 		1A1214562C36EF99009E1BD1 /* CoreXLSX in Frameworks */ = {isa = PBXBuildFile; productRef = 1A1214552C36EF99009E1BD1 /* CoreXLSX */; };
 		1A12145B2C370869009E1BD1 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 1A12145A2C370869009E1BD1 /* FirebaseFirestoreCombine-Community */; };
 		1A12145D2C370869009E1BD1 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1A12145C2C370869009E1BD1 /* FirebaseFirestoreSwift */; };
+		1A25BA012C3F03F60069BED6 /* BookSearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A25BA002C3F03F60069BED6 /* BookSearchAPI.swift */; };
 		1A28EC4C2C3D3A5300F2DB17 /* InventoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A28EC4B2C3D3A5300F2DB17 /* InventoryViewModel.swift */; };
 		1A8428C72C3BEDEC00A34F8D /* FilePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8428C62C3BEDEC00A34F8D /* FilePicker.swift */; };
 		329E0A592C3823EC00E8925A /* ForgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329E0A582C3823EC00E8925A /* ForgetPasswordView.swift */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		1A1214522C36EDAB009E1BD1 /* ExcelToFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcelToFirebase.swift; sourceTree = "<group>"; };
+		1A25BA002C3F03F60069BED6 /* BookSearchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchAPI.swift; sourceTree = "<group>"; };
 		1A28EC4B2C3D3A5300F2DB17 /* InventoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryViewModel.swift; sourceTree = "<group>"; };
 		1A8428C62C3BEDEC00A34F8D /* FilePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePicker.swift; sourceTree = "<group>"; };
 		329E0A582C3823EC00E8925A /* ForgetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordView.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				67BE8FE42C37F3C900DA1B96 /* BookSearchManager.swift */,
+				1A25BA002C3F03F60069BED6 /* BookSearchAPI.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				67BE8FE72C37F3C900DA1B96 /* BarCodeScanner.swift in Sources */,
 				8016A7DF2C353E8B0037D386 /* ContentView.swift in Sources */,
 				329E0A592C3823EC00E8925A /* ForgetPasswordView.swift in Sources */,
+				1A25BA012C3F03F60069BED6 /* BookSearchAPI.swift in Sources */,
 				32E4A7272C3AEC22003D0D6C /* AddLibrarianView.swift in Sources */,
 				32D84C1D2C37213E00E489F7 /* LibrarianView.swift in Sources */,
 				32D84C162C370E0A00E489F7 /* AdminView.swift in Sources */,

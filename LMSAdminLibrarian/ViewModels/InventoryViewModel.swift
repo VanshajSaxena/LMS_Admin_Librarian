@@ -14,11 +14,8 @@ import FirebaseFirestore
 class InventoryViewModel: ObservableObject {
     @Published var books: [BookMetaData] = []
     @Published var searchQuery: String = ""
-
-    // Example usage
-
-    init() { }
     
+    /*
     func fetchBookDetailsList(isbnList: [String]) {
     let dispatchGroup = DispatchGroup()
     for isbn in isbnList {
@@ -67,17 +64,11 @@ class InventoryViewModel: ObservableObject {
         
     }
 }
-
+*/
 
 }
 
 
-func fetchBookDataFromAPI(isbn: String, completion: @escaping (BooksAPI?) -> Void) {
-    BookSearchManager().getBookInfo(isbn: isbn) { books in
-        print("Fetched data from API for ISBN \(isbn): \(String(describing: books))")
-        completion(books)
-    }
-}
 
 // Function to fetch book data from API
 func fetchBookData(for isbn: String, completion: @escaping (Result<BooksAPI, Error>) -> Void) {
@@ -107,49 +98,11 @@ func fetchBookData(for isbn: String, completion: @escaping (Result<BooksAPI, Err
     }.resume()
 }
 
-struct BookMetaData : Identifiable {
-    let id: String
-    let title: String
-    let authors: String
-    let genre: String
-    let publishedDate: String
-    let pageCount: Int
-    let language: String
-    let coverImageLink: String
-    let isbn: String
-    let totalNumberOfCopies: Int
-    let numberOfIssuedCopies: Int
-    let bookColumn: String
-    let bookShelf: String
-}
 
 var LibraryBooks: [BookMetaData] = []
 var bookDataFromAPI : BooksAPI?
 
 // Assuming you have these types already defined
-struct BooksAPI: Codable {
-    let items: [BookItem]
-}
-
-struct BookItem: Codable {
-    let id: String
-    let volumeInfo: VolumeInfo
-}
-
-struct VolumeInfo: Codable {
-    let title: String
-    let authors: [String]
-    let publishedDate: String
-    let pageCount: Int
-    let language: String
-    let imageLinks: ImageLinks?
-    let categories: [String]?
-}
-
-struct ImageLinks: Codable {
-    let smallThumbnail: String?
-    let thumbnail: String?
-}
 
 let isbnList = [
     "9780061120084",
