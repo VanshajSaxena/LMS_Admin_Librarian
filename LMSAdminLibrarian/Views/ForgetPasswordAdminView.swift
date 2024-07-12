@@ -30,17 +30,17 @@ struct ForgetPasswordAdminView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 580, height: 600)
                 }
-    
+                
                 .background(Color.clear)
                 
                 // Forgot Password Form
                 VStack(alignment: .center) {
                     Spacer()
-                        Text("Forgot Password")
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-                            .padding(.bottom, 50)
-                    .padding(.top,-40)
+                    Text("Forgot Password")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .padding(.bottom, 50)
+                        .padding(.top,-40)
                     
                     TextField("Email", text: $email)
                         .padding()
@@ -66,13 +66,13 @@ struct ForgetPasswordAdminView: View {
                         Spacer()
                         Text("Next")
                             .fontWeight(.bold)
-                                                .frame(maxWidth: 220)
+                            .frame(maxWidth: 220)
                             .padding()
                             .background(Color("ThemeOrange"))
                             .foregroundColor(.white)
                             .cornerRadius(12)
                             .padding(.top, 90)
-              Spacer()
+                        Spacer()
                     }
                     
                     Spacer()

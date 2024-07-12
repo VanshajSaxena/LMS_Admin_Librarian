@@ -16,12 +16,12 @@ struct LoginView: View {
     @State private var emailValidationMessage = ""
     @State private var isPasswordValid = false
     @State private var passwordValidationMessage = ""
-
+    
     var body: some View {
         NavigationStack(path: $navigationPath) {
             GeometryReader { geometry in
                 ZStack {
-                   
+                    
                     HStack {
                         VStack {
                             Spacer()
@@ -58,7 +58,7 @@ struct LoginView: View {
                                     .font(.caption)
                                     .foregroundColor(isEmailValid ? .green : .red)
                             }
-
+                            
                             VStack(alignment: .leading) {
                                 SecureField("Password", text: $password)
                                     .padding()
@@ -69,7 +69,7 @@ struct LoginView: View {
                                     }
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 12)
-                                           .stroke(Color("ThemeOrange")))
+                                            .stroke(Color("ThemeOrange")))
                                 
                                 Text(passwordValidationMessage)
                                     .font(.caption)
@@ -136,12 +136,12 @@ struct LoginView: View {
             .padding(.leading, -50)
             .padding(.trailing, 200)
             .padding(.bottom, -50)
-          
+            
         }.onAppear{
             
         }
     }
-
+    
     func login() {
         guard isEmailValid else {
             authViewModel.loginError = "Please enter a valid email."
@@ -154,7 +154,7 @@ struct LoginView: View {
             authViewModel.showAlert = true
             return
         }
-
+        
         authViewModel.login(email: email, password: password) { success in
             if !success {
                 authViewModel.loginError = "Invalid credentials"
@@ -162,7 +162,7 @@ struct LoginView: View {
             }
         }
     }
-
+    
     func validateEmail(_ email: String) -> (Bool, String) {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Z0-9a-z.-]+\\.[A-Za-z]{2,64}"
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
@@ -170,7 +170,7 @@ struct LoginView: View {
         let message = isValid ? "Valid email format." : "Invalid email format."
         return (isValid, message)
     }
-
+    
     func validatePassword(_ password: String) -> (Bool, String) {
         let isValid = !password.isEmpty
         let message = isValid ? "Password is valid." : "Password cannot be empty."

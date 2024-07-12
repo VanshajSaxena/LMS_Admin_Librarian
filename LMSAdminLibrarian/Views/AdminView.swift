@@ -201,7 +201,7 @@ struct AdminView: View {
             showAlert(title: "Error", message: "Please enter a valid name with different first and last names.")
             return
         }
-
+        
         guard !userID.isEmpty else {
             showAlert(title: "Error", message: "Please enter a user ID")
             return
@@ -243,11 +243,11 @@ struct AdminView: View {
             
             print("Admin authenticated successfully.")
             
-//            guard let user = result?.user else {
-//                showAlert(title: "Error", message: "Error creating librarian: No user")
-//                return
-//            }
-//            
+            //            guard let user = result?.user else {
+            //                showAlert(title: "Error", message: "Error creating librarian: No user")
+            //                return
+            //            }
+            //
             Auth.auth().createUser(withEmail: librarianEmail, password: librarianPassword) { (authResult, error) in
                 if let error = error {
                     showAlert(title: "Error", message: "Error creating librarian: \(error.localizedDescription)")

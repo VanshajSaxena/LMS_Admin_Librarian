@@ -9,23 +9,23 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
-        var body: some View {
-                Group {
-                    if authViewModel.isAuthenticated {
-                        switch authViewModel.userType {
-                        case .admin:
-                            AdminMainView()
-                        case .librarian:
-                            LibrarianMainView()
-                        default:
-                            LoginView()
-                        }
-                    } else {
-                        LoginView()
-                    }
+    var body: some View {
+        Group {
+            if authViewModel.isAuthenticated {
+                switch authViewModel.userType {
+                case .admin:
+                    AdminMainView()
+                case .librarian:
+                    LibrarianMainView()
+                default:
+                    LoginView()
                 }
+            } else {
+                LoginView()
             }
+        }
     }
+}
 
 
 #Preview {

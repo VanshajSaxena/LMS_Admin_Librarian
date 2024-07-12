@@ -132,7 +132,7 @@ struct AddLibrarianView: View {
                 
                 Table(librarians) {
                     TableColumn("Name", value: \.name)
-                        
+                    
                     TableColumn("Age", value: \.age)
                     TableColumn("Email", value: \.email)
                     TableColumn("Years of Experience", value: \.yearsOfExperience)
@@ -154,18 +154,18 @@ struct AddLibrarianView: View {
                             }
                         }
                     }
-                
+                    
                 }
                 .padding(.horizontal, 50)
                 Spacer() // Push the footer to the bottom
-//                HStack {
-//                    Text("This is the \n End Folks!")
-//                        .font(.system(size: 40))
-//                        .fontWeight(.bold)
-//                        .foregroundColor(Color("ThemeOrange"))
-//                    Spacer()
-//                }
-//                .padding(40)
+                //                HStack {
+                //                    Text("This is the \n End Folks!")
+                //                        .font(.system(size: 40))
+                //                        .fontWeight(.bold)
+                //                        .foregroundColor(Color("ThemeOrange"))
+                //                    Spacer()
+                //                }
+                //                .padding(40)
             }
             .background(Color("BackgroundColor").edgesIgnoringSafeArea(.all))
             .sheet(isPresented: $isShowingAddLibrarian) {

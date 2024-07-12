@@ -16,7 +16,7 @@ struct AddBookView: View {
     
     @State private var isShowingFilePicker = false
     @State private var selectedFileURL: URL?
-
+    
     var body: some View {
         ScrollView {
             VStack(spacing: 30) {
@@ -35,9 +35,6 @@ struct AddBookView: View {
                 doneButton
                     .padding(.horizontal, 250)
                     .padding(.top, 30)
-                //                .alert(isPresented: $isPresented) {
-                //                    Alert(title: Text("Success!"), message: Text("The ISBN has been uploaded successfully."), dismissButton: .default(Text("OK")))
-                //                }
             }
             
             .background(Color.white)
@@ -47,15 +44,6 @@ struct AddBookView: View {
     
     private var buttonSection: some View {
         HStack(spacing: 30) {
-            
-            //            Button (action: {
-            //
-            //            }) {
-            //                Text("Scan ISBN")
-            //                    .frame(width: 165)
-            //                    .foregroundStyle(.themeOrange)
-            //            }
-            //                .frame(width: 165)     //Scan ISBN
             
             Button(action: {
                 isPresented.toggle()
@@ -94,7 +82,7 @@ struct AddBookView: View {
                 FilePicker( documentTypes: ["public.item"], onPick: {url in self.selectedFileURL = url
                     self.isShowingFilePicker = false
                     parseExcelFile(at: selectedFileURL!, completion: { books in updateFirestore(with: books)})
-                   showAlert = true
+                    showAlert = true
                 }, showAlert: $showAlert)
             }
             .alert(isPresented: $showAlert) {
@@ -103,37 +91,7 @@ struct AddBookView: View {
         }
         .padding(.top,30)
     }
-            
-//            NavigationLink(){
-//                Button(action: {
-//                    isPresented.toggle()
-//                }, label: {
-//                    Text("Scan ISBN")
-//                        .foregroundStyle(.themeOrange)
-//                        .padding()
-//                        .overlay(){ RoundedRectangle(cornerRadius: 8)
-//                                .stroke(Color.themeOrange,lineWidth: 1)
-//                        }
-//                    
-//                })
-                //            Rectangle()
-                //            .frame(width: width, height: height)
-                //            .overlay(
-                //                Text(title)
-                //                    .foregroundStyle(.themeOrange)
-                //                    .background(Color.white)
-                //            )
-           
-//                .padding(.top,17)
-            
-            
-//            customButton(title: "Import CSV", width: 165, height: 35, destination: BarCodeScanner(isbn: $isbn , foundBooks: $foundBooks))
-//                .padding(.top,17)
-
-        
-//    }
     
-
     
     private var formSection: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -186,7 +144,7 @@ struct AddBookView: View {
                 .cornerRadius(8)
                 .padding(.bottom, 70)
         }
-
+        
     }
 }
 
@@ -195,34 +153,3 @@ struct AddBookView_Previews: PreviewProvider {
         AddBookView()
     }
 }
-
-
-//struct customButton<Destination : View> : View {
-//    var title : String
-//    var width : Double
-//    var height : Double
-//    var destination : Destination
-//    
-//    var body: some View {
-//        NavigationLink(destination : destination){
-//            Button(action: {
-//                isPresented.toggle()
-//            }, label: {
-//                Text(title)
-//                    .foregroundStyle(.themeOrange)
-//                    .padding()
-//                    .overlay(){ RoundedRectangle(cornerRadius: 8)
-//                            .stroke(Color.themeOrange,lineWidth: 1)
-//                    }
-//                
-//            })
-//            //            Rectangle()
-//            //            .frame(width: width, height: height)
-//            //            .overlay(
-//            //                Text(title)
-//            //                    .foregroundStyle(.themeOrange)
-//            //                    .background(Color.white)
-//            //            )
-//        }
-//    }
-//}
