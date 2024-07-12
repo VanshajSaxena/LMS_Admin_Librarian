@@ -11,16 +11,18 @@ protocol URLQueryParameterStringConvertible {
     var queryParameters: String {get}
 }
 
-final class BookSearchService {
+final class GoogleBookService {
+    // Fetches book data from the API
     private func fetchBookInfoFromAPI(for isbn: String) async throws -> BooksAPI {
         let urlString = "https://www.googleapis.com/books/v1/volumes"
-
+        
         let URLParam = ["q": "isbn:\(isbn)"]
-
+        
         guard var url = URL(string: urlString) else {
+            
             throw NSError(domain: "Invalid URL", code: -1, userInfo: nil)
         }
-
+        
         url = url.appendingQueryParameters(URLParam)
         
         var request: URLRequest = URLRequest(url: url)
@@ -40,11 +42,39 @@ final class BookSearchService {
         }
     }
     
-    public func getBookMetaData(isbn: String) async throws -> BooksAPI {
+    // Fetches book metadata from the API
+    func getBookMetaData(isbn: String) async throws -> BooksAPI {
         do {
             return try await fetchBookInfoFromAPI(for: isbn)
         } catch {
             print("Error fetching data for ISBN \(isbn): \(error)")
+            throw error
+        }
+    }
+    
+    func createGoogleBookMetaData(isbn: String) async throws -> GoogleBookMetaData {
+        do {
+            let bookAPI = try await getBookMetaData(isbn: isbn)
+            if let bookItem = bookAPI.items.first {
+                let volumeInfo = bookItem.volumeInfo
+                let coverImageLink = volumeInfo.imageLinks?.thumbnail ?? "Default Image"
+                let googleBookMetaData = GoogleBookMetaData(
+                    id: UUID().uuidString,
+                    title: volumeInfo.title,
+                    authors: volumeInfo.authors.joined(separator: ", "),
+                    genre: volumeInfo.categories?.joined(separator: ", ") ?? "Unknown",
+                    publishedDate: volumeInfo.publishedDate,
+                    pageCount: volumeInfo.pageCount,
+                    language: volumeInfo.language,
+                    coverImageLink: coverImageLink,
+                    description: volumeInfo.description,
+                    isbn: isbn
+                )
+                return googleBookMetaData
+            } else {
+                throw NSError(domain: "No book found", code: 404, userInfo: nil)
+            }
+        } catch {
             throw error
         }
     }
@@ -81,3 +111,4 @@ extension Dictionary : URLQueryParameterStringConvertible {
     }
     
 }
+

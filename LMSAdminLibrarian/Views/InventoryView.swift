@@ -51,9 +51,7 @@ struct InventoryView: View {
                                 // Implement Find action here
                                 Task {
                                     do {
-                                        await viewModel.getBookDetailsList(isbnList: isbnList)
-                                    } catch {
-                                        print("Error: \(error.localizedDescription)")
+                                        await viewModel.updateInventoryTableView(isbnList: isbnList)
                                     }
                                 }
                                 
@@ -196,9 +194,7 @@ struct InventoryView: View {
             .onAppear {
                 Task {
                     do {
-                        await viewModel.getBookDetailsList(isbnList: isbnList)
-                    } catch {
-                        print("Error: \(error.localizedDescription)")
+                        await viewModel.updateInventoryTableView(isbnList: isbnList)
                     }
                 }
             }

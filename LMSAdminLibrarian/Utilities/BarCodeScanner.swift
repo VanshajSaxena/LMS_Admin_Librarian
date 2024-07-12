@@ -79,32 +79,36 @@ struct BarCodeScanner : UIViewControllerRepresentable {
             self.parent = parent
         }
         
-        func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) async {
             
             if let metadataObject = metadataObjects.first {
                 guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
                 guard let stringValue = readableObject.stringValue else { return }
                 AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-                found(code: stringValue)
+                await found(code: stringValue)
                 captureSession.stopRunning()
                 parent.presentationMode.wrappedValue.dismiss()
             }
         }
         
-        func found(code: String) {
+        func found(code: String) async {
             print(code)
             parent.isbn = code
+            let metaData: BooksAPI = BooksAPI(items: [])
             
-            BookSearchManager().getBookInfo(isbn: code) { books in
-                DispatchQueue.main.async {
-                    self.parent.foundBooks = books
-                    
-                    print(books.items.first?.volumeInfo ?? "didn't work")
-                }
+            do {
+                var metaData = try await GoogleBookService().getBookMetaData(isbn: code)
+                
+            } catch {
+                print("Error: \(error.localizedDescription)")
             }
-    
+            DispatchQueue.main.async {
+                self.parent.foundBooks = metaData
+                
+                print(metaData.items.first?.volumeInfo ?? "didn't work")
+            }
         }
-        
     }
 }
+
 
