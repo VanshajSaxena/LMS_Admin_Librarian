@@ -202,6 +202,7 @@ import SwiftUI
 struct InventoryView: View {
     @State private var searchQuery: String = ""
     @State private var showAddBookView: Bool = false
+    @StateObject private var viewModel = InventoryViewModel()
     @State private var books: [BookInventoryView] = [
         // Sample data
         BookInventoryView(name: "Book1", author: "Author1", genre: "Genre1", pages: 123, copies: 1, column: "A", shelf: "1"),
