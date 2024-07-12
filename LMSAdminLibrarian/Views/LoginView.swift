@@ -21,27 +21,29 @@ struct LoginView: View {
         NavigationStack(path: $navigationPath) {
             GeometryReader { geometry in
                 ZStack {
-                    Color("BackgroundColor")
-                        .edgesIgnoringSafeArea(.all)
+                   
                     HStack {
-                        Image("LoginAdminlibrarian")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: geometry.size.width * 0.5)
-                            .padding(.top, 250)
-                        
-                        Spacer()
+                        VStack {
+                            Spacer()
+                            Image("LoginAdminlibrarian")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 700, height: 700)
+                                .padding(.leading, 0)
+                        }
+                        .background(Color.clear)
                         
                         VStack(alignment: .center, spacing: 20) {
-                            Text("Welcome Back 👋")
+                            Text("Welcome Back")
                                 .font(.largeTitle)
                                 .fontWeight(.bold)
-                                .padding(30)
+                                .padding(.bottom, 50)
                             
                             VStack(alignment: .leading) {
                                 TextField("Email", text: $email)
                                     .padding()
-                                    .background(Color(.white))
+                                    .frame(maxWidth: 600)
+                                    .background(Color(.clear))
                                     .cornerRadius(12)
                                     .keyboardType(.emailAddress)
                                     .autocapitalization(.none)
@@ -50,8 +52,7 @@ struct LoginView: View {
                                     }
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 12)
-                                            .stroke(isEmailValid ? Color.green : Color.red, lineWidth: 1)
-                                    )
+                                            .stroke(Color("ThemeOrange")))
                                 
                                 Text(emailValidationMessage)
                                     .font(.caption)
@@ -61,15 +62,14 @@ struct LoginView: View {
                             VStack(alignment: .leading) {
                                 SecureField("Password", text: $password)
                                     .padding()
-                                    .background(Color(.white))
+                                    .background(Color(.clear))
                                     .cornerRadius(12)
                                     .onChange(of: password) { oldValue, newValue in
                                         (isPasswordValid, passwordValidationMessage) = validatePassword(newValue)
                                     }
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 12)
-                                            .stroke(isPasswordValid ? Color.green : Color.red, lineWidth: 1)
-                                    )
+                                           .stroke(Color("ThemeOrange")))
                                 
                                 Text(passwordValidationMessage)
                                     .font(.caption)
@@ -87,8 +87,10 @@ struct LoginView: View {
                                 Button(action: {
                                     isShowingForgotPassword.toggle()
                                 }) {
-                                    Text("Forgot Password?")
-                                        .foregroundColor(.blue)
+                                    NavigationLink(destination: ForgetPasswordView()) {
+                                        Text("Forgot Password?")
+                                            .foregroundColor(.accentColor)
+                                    }
                                 }
                             }
                             .padding(.leading)
@@ -99,8 +101,8 @@ struct LoginView: View {
                             }) {
                                 Text("Login")
                                     .foregroundColor(.white)
+                                    .frame(maxWidth: 220)
                                     .padding()
-                                    .frame(width: geometry.size.width * 0.2)
                                     .background(Color("ThemeOrange"))
                                     .cornerRadius(12)
                                     .padding(.top, 50)
@@ -131,6 +133,12 @@ struct LoginView: View {
                     )
                 }
             }
+            .padding(.leading, -50)
+            .padding(.trailing, 200)
+            .padding(.bottom, -50)
+          
+        }.onAppear{
+            
         }
     }
 

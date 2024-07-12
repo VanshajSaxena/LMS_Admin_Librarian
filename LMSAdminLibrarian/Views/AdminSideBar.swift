@@ -4,7 +4,7 @@ struct AdminSideBar: View {
     @State private var selectedButton: String? = "Analytics" // Set the initial selected button
     @EnvironmentObject var authViewModel: AuthViewModel
     @State private var isLoggedOut = false
-
+    
     var body: some View {
         VStack {
             Text("App Name")
@@ -14,7 +14,7 @@ struct AdminSideBar: View {
                 .padding(.top, 150)
                 .padding(.bottom, 50)
                 .padding(.leading, 100)
-
+            
             VStack(alignment: .leading, spacing: 30) {
                 SidebarButton(imageName: "chart.bar", text: "Analytics", selectedButton: $selectedButton)
                 SidebarButton(imageName: "archivebox", text: "Inventory", selectedButton: $selectedButton)
@@ -22,9 +22,9 @@ struct AdminSideBar: View {
                 SidebarButton(imageName: "gearshape", text: "Settings", selectedButton: $selectedButton)
             }
             .padding(.horizontal, 30)
-
+            
             Spacer()
-
+            
             Button(action: {
                 // Log out action
                 authViewModel.logout()
@@ -58,6 +58,7 @@ struct AdminSideBar: View {
         .background(Color("ThemeOrange"))
         .edgesIgnoringSafeArea(.all)
     }
+}
     
     
 
