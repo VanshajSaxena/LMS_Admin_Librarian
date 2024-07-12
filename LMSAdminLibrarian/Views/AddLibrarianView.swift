@@ -303,3 +303,6 @@ struct LibrarianRow: View {
         .padding(.vertical, 4)
     }
 }
+#Preview {
+    AddLibrarianView()
+}

@@ -19,11 +19,25 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 }
 
 @main
-struct LMSAdminLibrarian: App {
+struct LMS_Admin_LibrarianApp: App {
+    @StateObject private var authViewModel = AuthViewModel()
+
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
-        WindowGroup {
-            LoginView()
+           WindowGroup {
+               ContentView()
+                               .environmentObject(authViewModel)
+                               .onAppear {
+                                   checkAuthentication()
+                               }
+           }
+       }
+   
+
+private func checkAuthentication() {
+        if authViewModel.isAuthenticated, let userTypeRaw = authViewModel.storedUserType, let userType = UserType(rawValue: userTypeRaw) {
+            authViewModel.userType = userType
         }
     }
+
 }
