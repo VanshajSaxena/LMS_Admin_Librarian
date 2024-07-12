@@ -1,9 +1,9 @@
 import SwiftUI
 
 struct LibrarianSideBar: View {
-    @State private var selectedButton: String? = nil
+    @State private var selectedButton: String? = "Analytics" // Set the initial selected button
     @EnvironmentObject var authViewModel: AuthViewModel
-       @State private var isLoggedOut = false
+    @State private var isLoggedOut = false
 
     var body: some View {
         VStack {
@@ -28,8 +28,7 @@ struct LibrarianSideBar: View {
             Button(action: {
                 // Log out action
                 authViewModel.logout()
-                              
-                               isLoggedOut = true
+                isLoggedOut = true
             }) {
                 HStack {
                     Image(systemName: "power")
@@ -42,26 +41,24 @@ struct LibrarianSideBar: View {
                 .background(Color.white)
                 .cornerRadius(12)
                 .padding(.leading, 120)
-                .padding(.trailing , 20)
+                .padding(.trailing, 20)
                 .imageScale(.large)
             }
             .padding(.bottom, 30)
-            .onReceive(authViewModel.$isAuthenticated) { isAuthenticated in
-                        if !isAuthenticated {
-                            isLoggedOut = true
-                        }
-                    }
-                    .sheet(isPresented: $isLoggedOut) {
-                        LoginView()
-                    }
+            .onChange(of: authViewModel.isAuthenticated) { isAuthenticated in
+                if !isAuthenticated {
+                    isLoggedOut = true
+                }
+            }
+            .sheet(isPresented: $isLoggedOut) {
+                LoginView()
+            }
         }
         .frame(maxWidth: 430)
         .background(Color("ThemeOrange"))
         .edgesIgnoringSafeArea(.all)
     }
-}
-
-
+    
     @ViewBuilder
     func destinationView(for text: String) -> some View {
         switch text {
@@ -77,5 +74,5 @@ struct LibrarianSideBar: View {
             EmptyView()
         }
     }
-
+}
 

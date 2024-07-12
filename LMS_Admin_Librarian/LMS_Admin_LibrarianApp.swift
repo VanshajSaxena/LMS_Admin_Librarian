@@ -25,18 +25,19 @@ struct LMS_Admin_LibrarianApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
            WindowGroup {
-               if authViewModel.isAuthenticated {
-                   if authViewModel.userType == .admin {
-                       AdminMainView()
-                           .environmentObject(authViewModel)
-                   } else if authViewModel.userType == .librarian {
-                       LibrarianMainView()
-                           .environmentObject(authViewModel)
-                   }
-               } else {
-                   LoginView()
-                       .environmentObject(authViewModel)
-               }
+               ContentView()
+                               .environmentObject(authViewModel)
+                               .onAppear {
+                                   checkAuthentication()
+                               }
            }
        }
-   }
+   
+
+private func checkAuthentication() {
+        if authViewModel.isAuthenticated, let userTypeRaw = authViewModel.storedUserType, let userType = UserType(rawValue: userTypeRaw) {
+            authViewModel.userType = userType
+        }
+    }
+
+}

@@ -3,19 +3,25 @@ import Combine
 import FirebaseAuth
 import FirebaseFirestore
 
-enum UserType {
+enum UserType: String {
     case admin
     case librarian
 }
 
 class AuthViewModel: ObservableObject {
-    @Published var isAuthenticated = false
+    @AppStorage("isAuthenticated") var isAuthenticated = false
+    @AppStorage("userType") var storedUserType: String?
+    
     @Published var email = ""
     @Published var password = ""
     @Published var loginError: String?
     @Published var showAlert = false
-    @Published var userType: UserType?
-
+    @Published var userType: UserType? {
+        didSet {
+            storedUserType = userType?.rawValue
+        }
+    }
+    
     func login(email: String, password: String, completion: @escaping (Bool) -> Void) {
         let db = Firestore.firestore()
         let adminRef = db.collection("admin").document("allowedadmin")
@@ -58,14 +64,12 @@ class AuthViewModel: ObservableObject {
     }
     
     func logout() {
-            do {
-                try Auth.auth().signOut()
-                self.isAuthenticated = false
-                self.userType = nil
-                // Optionally reset other session-related variables if needed
-            } catch let signOutError as NSError {
-                print("Error signing out: %@", signOutError)
-                // Handle sign-out error gracefully, if needed
-            }
+        do {
+            try Auth.auth().signOut()
+            self.isAuthenticated = false
+            self.userType = nil
+        } catch let signOutError as NSError {
+            print("Error signing out: %@", signOutError)
         }
+    }
 }
