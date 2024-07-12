@@ -31,35 +31,35 @@ struct BarCodeScanner : UIViewControllerRepresentable {
         
         context.coordinator.captureSession = AVCaptureSession()
         
-
+        
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { fatalError() }
         let videoInput: AVCaptureDeviceInput
         videoInput = try! AVCaptureDeviceInput(device: videoCaptureDevice)
         
-
+        
         if (context.coordinator.captureSession.canAddInput(videoInput)) {
             context.coordinator.captureSession.addInput(videoInput)
         } else {
             print("Could not add input to capture session")
         }
-
+        
         let metadataOutput = AVCaptureMetadataOutput()
-
+        
         if (context.coordinator.captureSession.canAddOutput(metadataOutput)) {
             context.coordinator.captureSession.addOutput(metadataOutput)
-
+            
             metadataOutput.setMetadataObjectsDelegate(context.coordinator, queue: DispatchQueue.main)
             metadataOutput.metadataObjectTypes = [.ean8, .ean13, .pdf417]
         } else {
-           
+            
             print("Outputproblem")
         }
-
+        
         context.coordinator.previewLayer = AVCaptureVideoPreviewLayer(session: context.coordinator.captureSession)
         context.coordinator.previewLayer.frame = vc.view.layer.bounds
         context.coordinator.previewLayer.videoGravity = .resizeAspectFill
         vc.view.layer.addSublayer(context.coordinator.previewLayer)
-
+        
         context.coordinator.captureSession.startRunning()
         
         
@@ -67,7 +67,7 @@ struct BarCodeScanner : UIViewControllerRepresentable {
     }
     
     
-  
+    
     
     class Coordinator : NSObject, AVCaptureMetadataOutputObjectsDelegate {
         let parent: BarCodeScanner

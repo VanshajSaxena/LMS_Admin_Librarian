@@ -59,8 +59,8 @@ struct AdminSideBar: View {
         .edgesIgnoringSafeArea(.all)
     }
 }
-    
-    
+
+
 
 
 
@@ -68,7 +68,7 @@ struct SidebarButton: View {
     var imageName: String
     var text: String
     @Binding var selectedButton: String?
-
+    
     var body: some View {
         NavigationLink(destination: destinationView(for: text), tag: text, selection: $selectedButton) {
             HStack {
@@ -91,7 +91,7 @@ struct SidebarButton: View {
         }
         .buttonStyle(PlainButtonStyle()) // Ensure NavigationLink behaves like a button
     }
-
+    
     @ViewBuilder
     func destinationView(for text: String) -> some View {
         switch text {

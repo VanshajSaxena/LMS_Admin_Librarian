@@ -41,7 +41,7 @@ class AuthViewModel: ObservableObject {
                     }
                 }
             }
-
+            
             // Check librarian credentials using Firebase Authentication
             Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
                 if let error = error {

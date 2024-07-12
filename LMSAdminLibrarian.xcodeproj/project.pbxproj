@@ -30,7 +30,6 @@
 		3C41F1EB2C3FF5BB000454E9 /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C41F1EA2C3FF5BB000454E9 /* CustomDatePicker.swift */; };
 		3C51AEB52C3E628D00C39117 /* AdminAnalyticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C51AEB42C3E628D00C39117 /* AdminAnalyticsView.swift */; };
 		3C7290B72C40F6060047AEC0 /* BookDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7290B62C40F6060047AEC0 /* BookDetailsView.swift */; };
-		5FDAB7952C371F1000FEC1C2 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDAB7932C371F1000FEC1C2 /* SidebarView.swift */; };
 		5FDAB7962C371F1000FEC1C2 /* AddBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDAB7942C371F1000FEC1C2 /* AddBookView.swift */; };
 		67BE8FE72C37F3C900DA1B96 /* BarCodeScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BE8FE32C37F3C900DA1B96 /* BarCodeScanner.swift */; };
 		67BE8FE82C37F3C900DA1B96 /* BookMetaDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BE8FE42C37F3C900DA1B96 /* BookMetaDataService.swift */; };
@@ -57,11 +56,11 @@
 		1A28EC4B2C3D3A5300F2DB17 /* InventoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryViewModel.swift; sourceTree = "<group>"; };
 		1A8428C62C3BEDEC00A34F8D /* FilePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePicker.swift; sourceTree = "<group>"; };
 		1A8CC0572C412D3D00020D8A /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
-		326BD2412C3E62B4008F1EB2 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthViewModel.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
-		326BD2452C3E66EC008F1EB2 /* AdminMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AdminMainView.swift; path = AdminMainView.swift; sourceTree = "<group>"; };
-		326BD2472C3E670E008F1EB2 /* LibrarianMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LibrarianMainView.swift; path = LibrarianMainView.swift; sourceTree = "<group>"; };
-		326BD2492C3E674C008F1EB2 /* AdminSideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AdminSideBar.swift; path = AdminSideBar.swift; sourceTree = "<group>"; };
-		326BD24D2C3E6786008F1EB2 /* LibrarianSideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LibrarianSideBar.swift; path = LibrarianSideBar.swift; sourceTree = "<group>"; };
+		326BD2412C3E62B4008F1EB2 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		326BD2452C3E66EC008F1EB2 /* AdminMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMainView.swift; sourceTree = "<group>"; };
+		326BD2472C3E670E008F1EB2 /* LibrarianMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarianMainView.swift; sourceTree = "<group>"; };
+		326BD2492C3E674C008F1EB2 /* AdminSideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminSideBar.swift; sourceTree = "<group>"; };
+		326BD24D2C3E6786008F1EB2 /* LibrarianSideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarianSideBar.swift; sourceTree = "<group>"; };
 		329E0A582C3823EC00E8925A /* ForgetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordView.swift; sourceTree = "<group>"; };
 		32D84C132C3708C500E489F7 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		32D84C152C370E0A00E489F7 /* AdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminView.swift; sourceTree = "<group>"; };
@@ -127,7 +126,6 @@
 				3C51AEB42C3E628D00C39117 /* AdminAnalyticsView.swift */,
 				3C7290B62C40F6060047AEC0 /* BookDetailsView.swift */,
 				326BD24D2C3E6786008F1EB2 /* LibrarianSideBar.swift */,
-				326BD2412C3E62B4008F1EB2 /* AuthViewModel.swift */,
 				326BD2452C3E66EC008F1EB2 /* AdminMainView.swift */,
 				326BD2472C3E670E008F1EB2 /* LibrarianMainView.swift */,
 				326BD2492C3E674C008F1EB2 /* AdminSideBar.swift */,
@@ -147,6 +145,7 @@
 		1AEB21C22C3E9E70000BD7B2 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				326BD2412C3E62B4008F1EB2 /* AuthViewModel.swift */,
 				1A28EC4B2C3D3A5300F2DB17 /* InventoryViewModel.swift */,
 			);
 			path = ViewModels;
