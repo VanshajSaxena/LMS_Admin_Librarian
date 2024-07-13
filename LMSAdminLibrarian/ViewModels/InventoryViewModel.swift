@@ -23,6 +23,7 @@ final class InventoryViewModel: ObservableObject {
             let completeData = await self.bookMetaDataService.getCompleteBookMetadata(isbnList: isbnList)
             DispatchQueue.main.async {
                 self.books = completeData
+                print("books fetched")
             }
         }
         

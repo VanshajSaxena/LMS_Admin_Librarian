@@ -25,7 +25,7 @@ struct AddCampaignEventsView: View {
                         Text("Add Campaigns")
                     }
                     .padding()
-                    .background(Color.orange)
+                    .background(Color.themeOrange)
                     .foregroundColor(.white)
                     .cornerRadius(10)
                 }
@@ -83,7 +83,7 @@ struct AddCampaignEventsView: View {
                 .overlay(
                     Image(systemName: "plus")
                         .font(.largeTitle)
-                        .foregroundColor(.orange)
+                        .foregroundColor(.themeOrange)
                 )
         }
         .sheet(isPresented: $showingAddCampaignSheet) {
