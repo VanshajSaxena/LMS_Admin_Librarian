@@ -111,6 +111,7 @@ struct SidebarButton: View {
 
 struct AnalyticsView: View {
     var body: some View {
+        AddCampaignEventsView()
         Text("Analytics View")
     }
 }

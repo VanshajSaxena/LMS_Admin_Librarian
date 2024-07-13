@@ -1,7 +1,8 @@
 import SwiftUI
 
-struct AddCampaign: View {
+struct AddCampaignEventsView: View {
     @State private var showingAddCampaignSheet = false
+    @StateObject var viewModel = AddCampaignEventsViewModel()
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.verticalSizeClass) var verticalSizeClass
     
@@ -30,7 +31,7 @@ struct AddCampaign: View {
                 }
                 .padding()
                 .sheet(isPresented: $showingAddCampaignSheet) {
-                    AddCampaignSheet() // Replace with your actual view
+                    AddCampaignEventsSheetView(viewModel: viewModel) // Replace with your actual view
                 }
             }
             
@@ -86,7 +87,7 @@ struct AddCampaign: View {
                 )
         }
         .sheet(isPresented: $showingAddCampaignSheet) {
-            AddCampaignSheet() // Replace with your actual view
+            AddCampaignEventsSheetView(viewModel: viewModel) // Replace with your actual view
         }
     }
 }
@@ -95,10 +96,10 @@ struct AddCampaign: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            AddCampaign()
+            AddCampaignEventsView()
                 .previewDevice("iPad Pro (11-inch)")
             
-            AddCampaign()
+            AddCampaignEventsView()
                 .previewDevice("iPad Pro (12.9-inch) (5th generation)")
         }
     }
