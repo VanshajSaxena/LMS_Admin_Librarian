@@ -1,13 +1,10 @@
 import SwiftUI
 
-struct AddCampaignSheet: View {
-    @State private var campaignName: String = ""
-    @State private var price: Double = 0
-    @State private var startDate: Date = Date()
-    @State private var endDate: Date = Date()
+struct AddCampaignEventsSheetView: View {
     @State private var showStartDatePicker: Bool = false
     @State private var showEndDatePicker: Bool = false
     @State private var campaignDetails: String = ""
+    @ObservedObject var viewModel : AddCampaignEventsViewModel
 
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.verticalSizeClass) var verticalSizeClass
@@ -25,7 +22,7 @@ struct AddCampaignSheet: View {
                         .font(.headline)
                         .foregroundColor(.orange)
                         .padding(10)
-                    TextField("Enter the Name of the Campaign", text: $campaignName)
+                    TextField("Enter the Name of the Campaign", text: $viewModel.title)
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 5).strokeBorder(Color.gray, lineWidth: 1))
                 }
@@ -35,8 +32,8 @@ struct AddCampaignSheet: View {
                     Text("Price")
                         .font(.headline)
                         .foregroundColor(.orange)
-                    Slider(value: $price, in: 0...100000, step: 1)
-                    Text("\(Int(price))")
+                    Slider(value: $viewModel.price, in: 0...10000, step: 1)
+                    Text("\(Int(viewModel.price))")
                         .font(.footnote)
                         .foregroundColor(.gray)
                 }
@@ -56,14 +53,14 @@ struct AddCampaignSheet: View {
 
                             //Spacer()
 
-                            Text(startDate, style: .date)
+                            Text(viewModel.startDate, style: .date)
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 5).strokeBorder(Color.orange, lineWidth: 1))
                                 .onTapGesture {
                                     self.showStartDatePicker.toggle()
                                 }
                                 .popover(isPresented: $showStartDatePicker) {
-                                    DatePicker("Select Start Date", selection: $startDate, displayedComponents: .date)
+                                    DatePicker("Select Start Date", selection: $viewModel.startDate, displayedComponents: .date)
                                         .datePickerStyle(GraphicalDatePickerStyle())
                                         .frame(width: 300, height: 300)
                                         .padding()
@@ -78,14 +75,14 @@ struct AddCampaignSheet: View {
 
                                 //Spacer()
 
-                            Text(endDate, style: .date)
+                            Text(viewModel.endDate, style: .date)
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 5).strokeBorder(Color.orange, lineWidth: 1))
                                 .onTapGesture {
                                     self.showEndDatePicker.toggle()
                                 }
                                 .popover(isPresented: $showEndDatePicker) {
-                                    DatePicker("Select End Date", selection: $endDate, in: startDate..., displayedComponents: .date)
+                                    DatePicker("Select End Date", selection: $viewModel.endDate, in: viewModel.startDate..., displayedComponents: .date)
                                         .datePickerStyle(GraphicalDatePickerStyle())
                                         .frame(width: 300, height: 300)
                                         .padding()
@@ -100,14 +97,11 @@ struct AddCampaignSheet: View {
                         .font(.headline)
                         .foregroundColor(.orange)
                     
-                    TextEditor(text: $campaignDetails)
+                    TextEditor(text: $viewModel.description)
                         .frame(height: 200)
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 5).strokeBorder(Color.gray, lineWidth: 1))
-                        .onChange(of: campaignDetails) { newValue in
-                            if campaignDetails.count > 250 {
-                                campaignDetails = String(campaignDetails.prefix(250))
-                            }
+                        .onChange(of: viewModel.description) { newValue, perform in
                         }
                 }
                 .padding(20)
@@ -115,7 +109,7 @@ struct AddCampaignSheet: View {
                 HStack {
                     Spacer()
                     Button(action: {
-                        // Action for send request
+                        viewModel.addCampaign()
                     }) {
                         Text("Send Request")
                             .padding()
@@ -140,9 +134,9 @@ struct AddCampaignSheet: View {
 struct AddCampaignView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            AddCampaignSheet()
+            AddCampaignEventsSheetView(viewModel: AddCampaignEventsViewModel.sample)
                 .previewDevice("iPad Pro (11-inch) (3rd generation)")
-            AddCampaignSheet()
+            AddCampaignEventsSheetView(viewModel: AddCampaignEventsViewModel.sample)
                 .previewDevice("iPad Pro (12.9-inch) (5th generation)")
         }
     }
