@@ -23,17 +23,17 @@ struct ResetPasswordView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 580, height: 600)
                 }
-    
+                
                 .background(Color.clear)
                 
                 // Forgot Password Form
                 VStack(alignment: .center) {
                     Spacer()
-                        Text("Forgot Password")
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-                            .padding(.bottom, 50)
-                    .padding(.top,-40)
+                    Text("Forgot Password")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .padding(.bottom, 50)
+                        .padding(.top,-40)
                     
                     VStack(alignment: .leading) {
                         SecureField("New password", text: $password)
@@ -57,23 +57,23 @@ struct ResetPasswordView: View {
                             .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color("ThemeOrange")))
                             .frame(maxWidth: .infinity)
                     }
-                        
+                    
                     
                     
                     
                     Button(action: {
-                       //
+                        //
                     }) {
                         Spacer()
                         Text("Done")
                             .fontWeight(.bold)
-                                                .frame(maxWidth: 220)
+                            .frame(maxWidth: 220)
                             .padding()
                             .background(Color("ThemeOrange"))
                             .foregroundColor(.white)
                             .cornerRadius(12)
                             .padding(.top, 90)
-              Spacer()
+                        Spacer()
                     }
                     
                     Spacer()
@@ -86,7 +86,7 @@ struct ResetPasswordView: View {
         }
     }
     
-  
+    
 }
 
 struct ResetPasswordView_Previews: PreviewProvider {
