@@ -19,7 +19,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 }
 
 @main
-struct LMS_Admin_LibrarianApp: App {
+struct LMSAdminLibrarian: App {
     @StateObject private var authViewModel = AuthViewModel()
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate

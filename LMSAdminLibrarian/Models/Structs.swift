@@ -1,3 +1,5 @@
+import Foundation
+
 struct BooksAPI: Codable {
     let items: [BookItem]
 }
@@ -76,6 +78,15 @@ struct FirestoreMetadata {
     var numberOfIssuedCopies: Int
     var bookColumn: String
     var bookShelf: String
+}
+
+struct CampainsEvents {
+        var id: String
+        var title: String
+        var price: Double
+        var startDate: Date
+        var endDate: Date
+        var description: String
 }
 
 let isbnList = [
