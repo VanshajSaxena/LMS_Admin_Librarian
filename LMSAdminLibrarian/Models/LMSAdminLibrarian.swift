@@ -32,8 +32,6 @@ struct LMSAdminLibrarian: App {
                 }
         }
     }
-    
-    
     private func checkAuthentication() {
         if authViewModel.isAuthenticated, let userTypeRaw = authViewModel.storedUserType, let userType = UserType(rawValue: userTypeRaw) {
             authViewModel.userType = userType
