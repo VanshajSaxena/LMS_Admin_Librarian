@@ -1,10 +1,3 @@
-//
-//  AddCampaignSheet.swift
-//  LMSAdminLibrarian
-//
-//  Created by Ayush Sharma on 12/07/24.
-//
-
 import SwiftUI
 
 struct AddCampaignSheet: View {
@@ -65,17 +58,15 @@ struct AddCampaignSheet: View {
 
                             Text(startDate, style: .date)
                                 .padding()
-                                .background(RoundedRectangle(cornerRadius: 5).strokeBorder(Color.gray, lineWidth: 1))
+                                .background(RoundedRectangle(cornerRadius: 5).strokeBorder(Color.orange, lineWidth: 1))
                                 .onTapGesture {
                                     self.showStartDatePicker.toggle()
                                 }
-                                .sheet(isPresented: $showStartDatePicker) {
+                                .popover(isPresented: $showStartDatePicker) {
                                     DatePicker("Select Start Date", selection: $startDate, displayedComponents: .date)
                                         .datePickerStyle(GraphicalDatePickerStyle())
+                                        .frame(width: 300, height: 300)
                                         .padding()
-                                        .onChange(of: startDate) { _ in
-                                            self.showStartDatePicker = false
-                                        }
                                 }
                         }
 
@@ -89,17 +80,15 @@ struct AddCampaignSheet: View {
 
                             Text(endDate, style: .date)
                                 .padding()
-                                .background(RoundedRectangle(cornerRadius: 5).strokeBorder(Color.gray, lineWidth: 1))
+                                .background(RoundedRectangle(cornerRadius: 5).strokeBorder(Color.orange, lineWidth: 1))
                                 .onTapGesture {
                                     self.showEndDatePicker.toggle()
                                 }
-                                .sheet(isPresented: $showEndDatePicker) {
+                                .popover(isPresented: $showEndDatePicker) {
                                     DatePicker("Select End Date", selection: $endDate, in: startDate..., displayedComponents: .date)
                                         .datePickerStyle(GraphicalDatePickerStyle())
+                                        .frame(width: 300, height: 300)
                                         .padding()
-                                        .onChange(of: endDate) { _ in
-                                            self.showEndDatePicker = false
-                                        }
                                 }
                         }
                     }

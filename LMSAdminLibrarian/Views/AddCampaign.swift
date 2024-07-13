@@ -8,7 +8,7 @@ struct AddCampaign: View {
     var body: some View {
         VStack(alignment: .leading) {
             // Title
-            Text("Campaigns")
+            Text("Events and Campaigns")
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .padding(.leading)
