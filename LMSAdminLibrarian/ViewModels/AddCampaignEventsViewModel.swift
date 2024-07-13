@@ -29,8 +29,8 @@ final class AddCampaignEventsViewModel: ObservableObject {
             "id": newCampaign.id,
             "title": newCampaign.title,
             "price": String(newCampaign.price),
-            "startDate": dateFormatter.string(for: newCampaign.startDate) ?? "Cannot Conver",
-            "endDate": dateFormatter.string(for: newCampaign.endDate) ?? "Cannot Convert",
+            "startDate": dateFormatter.string(for: newCampaign.startDate) ?? "Cannot Conver Date Obj to String",
+            "endDate": dateFormatter.string(for: newCampaign.endDate) ?? "Cannot Convert Date Obj to String",
             "description": newCampaign.description
         ]
         db.collection("campaigns").addDocument(data: campaignDict) { error in

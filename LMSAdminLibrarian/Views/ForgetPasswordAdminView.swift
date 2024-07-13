@@ -50,7 +50,7 @@ struct ForgetPasswordAdminView: View {
                         .autocapitalization(.none)
                         .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color("ThemeOrange")))
                         .frame(maxWidth: .infinity)
-                        .onChange(of: email) { newValue in
+                        .onChange(of: email, initial: false) { oldValue, newValue in
                             (isEmailValid, emailValidationMessage) = validateEmail(newValue)
                         }
                     

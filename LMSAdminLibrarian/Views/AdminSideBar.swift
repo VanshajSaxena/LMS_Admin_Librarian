@@ -45,8 +45,8 @@ struct AdminSideBar: View {
                 .imageScale(.large)
             }
             .padding(.bottom, 30)
-            .onChange(of: authViewModel.isAuthenticated) { isAuthenticated in
-                if !isAuthenticated {
+            .onChange(of: authViewModel.isAuthenticated) { oldValue, newValue in
+                if !newValue {
                     isLoggedOut = true
                 }
             }
@@ -112,7 +112,6 @@ struct SidebarButton: View {
 struct AnalyticsView: View {
     var body: some View {
         AddCampaignEventsView()
-        Text("Analytics View")
     }
 }
 

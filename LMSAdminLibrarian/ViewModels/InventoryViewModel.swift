@@ -11,7 +11,7 @@ import Firebase
 import FirebaseFirestore
 
 @MainActor
-class InventoryViewModel: ObservableObject {
+final class InventoryViewModel: ObservableObject {
     @Published var books: [BookMetaData] = []
     @Published var searchQuery: String = ""
     

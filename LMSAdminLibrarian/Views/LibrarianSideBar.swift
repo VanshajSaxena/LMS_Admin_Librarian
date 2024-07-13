@@ -45,8 +45,8 @@ struct LibrarianSideBar: View {
                 .imageScale(.large)
             }
             .padding(.bottom, 30)
-            .onChange(of: authViewModel.isAuthenticated) { isAuthenticated in
-                if !isAuthenticated {
+            .onChange(of: authViewModel.isAuthenticated, initial: true) { oldValue, newValue in
+                if !newValue {
                     isLoggedOut = true
                 }
             }
