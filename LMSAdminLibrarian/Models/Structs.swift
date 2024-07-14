@@ -80,7 +80,7 @@ struct FirestoreMetadata {
     var bookShelf: String
 }
 
-struct CampainsEvents {
+struct CampaignsEvents {
         var id: String
         var title: String
         var price: Double
