@@ -24,7 +24,7 @@ final class AddCampaignEventsViewModel: ObservableObject {
     }
     
     func addCampaign() {
-        let newCampaign = CampainsEvents(id: UUID().uuidString, title: title, price: price, startDate: startDate, endDate: endDate, description: description)
+        let newCampaign = CampaignsEvents(id: UUID().uuidString, title: title, price: price, startDate: startDate, endDate: endDate, description: description)
         let campaignDict: [String: String] = [
             "id": newCampaign.id,
             "title": newCampaign.title,
