@@ -3,7 +3,7 @@ import SwiftUI
 struct SidebarView: View {
     @State private var showSidebar = false
     @State private var showAnalytics = false
-
+    
     var body: some View {
         ZStack(alignment: .leading){
             
@@ -33,7 +33,7 @@ struct SidebarView: View {
             .shadow(radius: showSidebar ? 20 : 0)
             .offset(x: showSidebar ? 250 : 0)
             .animation(.easeInOut)
-
+            
             // Sidebar Content
             if showSidebar {
                 SidebarContent()
@@ -87,16 +87,16 @@ struct SidebarContent: View {
             .padding(.leading, 20)
             
             // Inventory Button
-//            NavigationLink(destination: AddBookView()) {
-//                HStack {
-//                    Image(systemName: "doc.text")
-//                        .foregroundColor(.white)
-//                    Text("Inventory")
-//                        .foregroundColor(.white)
-//                        .fontWeight(.medium)
-//                }
-//                .padding()
-//            }
+            //            NavigationLink(destination: AddBookView()) {
+            //                HStack {
+            //                    Image(systemName: "doc.text")
+            //                        .foregroundColor(.white)
+            //                    Text("Inventory")
+            //                        .foregroundColor(.white)
+            //                        .fontWeight(.medium)
+            //                }
+            //                .padding()
+            //            }
             Button(action: {
                 
             }) {
@@ -152,14 +152,14 @@ struct SidebarContent: View {
             }) {
                 HStack {
                     Image(systemName: "power")
-                        .foregroundColor(.orange)
+                        .foregroundColor(.themeOrange)
                     Text("LogOut")
-                        .foregroundColor(.orange)
+                        .foregroundColor(.themeOrange)
                         .fontWeight(.medium)
                 }
-                .padding()
                 .background(Color.white)
-                .cornerRadius(25)
+                .cornerRadius(400)
+                .padding()
                 .padding(.bottom, 50)
                 .padding(.leading, 20)
             }

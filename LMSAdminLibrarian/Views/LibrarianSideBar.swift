@@ -18,7 +18,7 @@ struct LibrarianSideBar: View {
             VStack(alignment: .leading, spacing: 30) {
                 LibrarianSidebarButton(imageName: "house", text: "Dashboard", selectedButton: $selecteddButton)
                 LibrarianSidebarButton(imageName: "book", text: "Inventory", selectedButton: $selecteddButton)
-                LibrarianSidebarButton(imageName: "person", text: "GenerateRequests", selectedButton: $selecteddButton)
+                LibrarianSidebarButton(imageName: "person", text: "Requests", selectedButton: $selecteddButton)
                 LibrarianSidebarButton(imageName: "gearshape", text: "Settings", selectedButton: $selecteddButton)
                 
             }
@@ -93,10 +93,10 @@ struct LibrarianSidebarButton: View {
     func destinationView(for text: String) -> some View {
         switch text {
         case "Dashboard":
-            DashboardView()
+        MembershipsCardView()
         case "Inventory":
             InventoryView()
-        case "GenerateRequests":
+        case "Requests":
             LibrariankView()
         case "Settings":
             LibrarianSettingsView()
@@ -107,6 +107,12 @@ struct LibrarianSidebarButton: View {
 }
 
 // Sample Views for Librarian's Sidebar
+
+struct DashboardView: View {
+    var body: some View {
+        AdminAnalyticsView()
+    }
+}
 
 struct BooksView: View {
     var body: some View {

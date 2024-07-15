@@ -3,26 +3,25 @@ import Firebase
 import FirebaseFirestore
 import FirebaseAuth
 
+
+
 struct LoginView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
     @State private var email: String = ""
     @State private var password: String = ""
-    @State private var isRememberMe: Bool = false
     @State private var isShowingForgotPassword: Bool = false
-    @State private var loginError: String?
-    @State private var showAlert = false
-    @State private var alertMessage = ""
     @State private var navigationPath = NavigationPath()
     
     @State private var isEmailValid = false
     @State private var emailValidationMessage = ""
     @State private var isPasswordValid = false
     @State private var passwordValidationMessage = ""
-
+    
     var body: some View {
         NavigationStack(path: $navigationPath) {
             GeometryReader { geometry in
                 ZStack {
-                   
+                    
                     HStack {
                         VStack {
                             Spacer()
@@ -48,7 +47,7 @@ struct LoginView: View {
                                     .cornerRadius(12)
                                     .keyboardType(.emailAddress)
                                     .autocapitalization(.none)
-                                    .onChange(of: email) { newValue in
+                                    .onChange(of: email) { oldValue, newValue in
                                         (isEmailValid, emailValidationMessage) = validateEmail(newValue)
                                     }
                                     .overlay(
@@ -59,36 +58,31 @@ struct LoginView: View {
                                     .font(.caption)
                                     .foregroundColor(isEmailValid ? .green : .red)
                             }
-
+                            
                             VStack(alignment: .leading) {
                                 SecureField("Password", text: $password)
                                     .padding()
                                     .background(Color(.clear))
                                     .cornerRadius(12)
-                                    .onChange(of: password) { newValue in
+                                    .onChange(of: password) { oldValue, newValue in
                                         (isPasswordValid, passwordValidationMessage) = validatePassword(newValue)
                                     }
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 12)
-                                           .stroke(Color("ThemeOrange")))
+                                            .stroke(Color("ThemeOrange")))
                                 
                                 Text(passwordValidationMessage)
                                     .font(.caption)
                                     .foregroundColor(isPasswordValid ? .green : .red)
                             }
                             
-                            if let loginError = loginError {
-                                Text(loginError)
+                            if authViewModel.showAlert {
+                                Text(authViewModel.loginError ?? "Unknown error")
                                     .foregroundColor(.red)
                                     .padding()
                             }
                             
                             HStack {
-                                Button(action: {
-                                    isRememberMe.toggle()
-                                }) {
-                                    // Remember Me button (optional implementation)
-                                }
                                 Spacer()
                                 Button(action: {
                                     isShowingForgotPassword.toggle()
@@ -102,7 +96,9 @@ struct LoginView: View {
                             .padding(.leading)
                             .padding(.trailing)
                             
-                            Button(action: login) {
+                            Button(action: {
+                                login()
+                            }) {
                                 Text("Login")
                                     .foregroundColor(.white)
                                     .frame(maxWidth: 220)
@@ -129,10 +125,10 @@ struct LoginView: View {
                 .sheet(isPresented: $isShowingForgotPassword) {
                     ForgetPasswordView()
                 }
-                .alert(isPresented: $showAlert) {
+                .alert(isPresented: $authViewModel.showAlert) {
                     Alert(
                         title: Text("Login Error"),
-                        message: Text(alertMessage),
+                        message: Text(authViewModel.loginError ?? "Unknown error"),
                         dismissButton: .default(Text("OK"))
                     )
                 }
@@ -140,62 +136,33 @@ struct LoginView: View {
             .padding(.leading, -50)
             .padding(.trailing, 200)
             .padding(.bottom, -50)
-          
+            
         }.onAppear{
             
         }
     }
-
+    
     func login() {
         guard isEmailValid else {
-            alertMessage = "Please enter a valid email."
-            showAlert = true
+            authViewModel.loginError = "Please enter a valid email."
+            authViewModel.showAlert = true
             return
         }
         
         guard isPasswordValid else {
-            alertMessage = "Please enter your password."
-            showAlert = true
+            authViewModel.loginError = "Please enter your password."
+            authViewModel.showAlert = true
             return
         }
-
-        let db = Firestore.firestore()
-        let adminRef = db.collection("admin").document("allowedadmin")
-        adminRef.getDocument { document, error in
-            if let document = document, document.exists {
-                if let adminData = document.data(),
-                   let storedEmail = adminData["email"] as? String,
-                   let storedPassword = adminData["password"] as? String {
-                    if email == storedEmail && password == storedPassword {
-                        DispatchQueue.main.async {
-                            navigateToView(view: "AdminView")
-                        }
-                        return
-                    }
-                }
-            }
-
-            // Check librarian credentials using Firebase Authentication
-            Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-                if let error = error {
-                    print("Error signing in: \(error.localizedDescription)")
-                    alertMessage = "Invalid credentials"
-                    showAlert = true
-                    return
-                }
-                
-                // Successfully signed in
-                DispatchQueue.main.async {
-                    navigateToView(view: "InventoryView")
-                }
+        
+        authViewModel.login(email: email, password: password) { success in
+            if !success {
+                authViewModel.loginError = "Invalid credentials"
+                authViewModel.showAlert = true
             }
         }
     }
-
-    func navigateToView(view: String) {
-        navigationPath.append(view)
-    }
-
+    
     func validateEmail(_ email: String) -> (Bool, String) {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Z0-9a-z.-]+\\.[A-Za-z]{2,64}"
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
@@ -203,7 +170,7 @@ struct LoginView: View {
         let message = isValid ? "Valid email format." : "Invalid email format."
         return (isValid, message)
     }
-
+    
     func validatePassword(_ password: String) -> (Bool, String) {
         let isValid = !password.isEmpty
         let message = isValid ? "Password is valid." : "Password cannot be empty."
@@ -216,5 +183,6 @@ struct LoginView_Previews: PreviewProvider {
         LoginView()
             .previewDevice("iPad Pro (11-inch) (3rd generation)")
             .previewInterfaceOrientation(.landscapeLeft)
+            .environmentObject(AuthViewModel())
     }
 }

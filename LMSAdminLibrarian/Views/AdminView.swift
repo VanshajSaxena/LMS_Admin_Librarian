@@ -52,7 +52,7 @@ struct AdminView: View {
                                         .stroke(Color.gray, lineWidth: 1)
                                 )
                                 .multilineTextAlignment(.leading)
-                                .onChange(of: name) { newValue in
+                                .onChange(of: name) { oldValue, newValue in
                                     validateName(newValue)
                                 }
                             
@@ -86,7 +86,7 @@ struct AdminView: View {
                                             .stroke(Color.gray, lineWidth: 1)
                                     )
                                     .multilineTextAlignment(.leading)
-                                    .onChange(of: librarianEmail) { newValue in
+                                    .onChange(of: librarianEmail) { oldValue,newValue in
                                         validateEmail(newValue)
                                     }
                                 
@@ -130,7 +130,7 @@ struct AdminView: View {
                                         .stroke(Color.gray, lineWidth: 1)
                                 )
                                 .multilineTextAlignment(.leading)
-                                .onChange(of: userID) { newValue in
+                                .onChange(of: userID) { oldValue, newValue in
                                     validateUserID(newValue)
                                 }
                             
@@ -150,7 +150,7 @@ struct AdminView: View {
                                             .stroke(Color.gray, lineWidth: 1)
                                     )
                                     .multilineTextAlignment(.leading)
-                                    .onChange(of: librarianPassword) { newValue in
+                                    .onChange(of: librarianPassword) { oldValue,newValue in
                                         (isPasswordValid, passwordValidationMessage) = validatePassword(newValue)
                                     }
                                 
@@ -201,7 +201,7 @@ struct AdminView: View {
             showAlert(title: "Error", message: "Please enter a valid name with different first and last names.")
             return
         }
-
+        
         guard !userID.isEmpty else {
             showAlert(title: "Error", message: "Please enter a user ID")
             return
@@ -243,11 +243,11 @@ struct AdminView: View {
             
             print("Admin authenticated successfully.")
             
-            guard let user = result?.user else {
-                showAlert(title: "Error", message: "Error creating librarian: No user")
-                return
-            }
-            
+            //            guard let user = result?.user else {
+            //                showAlert(title: "Error", message: "Error creating librarian: No user")
+            //                return
+            //            }
+            //
             Auth.auth().createUser(withEmail: librarianEmail, password: librarianPassword) { (authResult, error) in
                 if let error = error {
                     showAlert(title: "Error", message: "Error creating librarian: \(error.localizedDescription)")
