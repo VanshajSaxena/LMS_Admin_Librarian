@@ -9,16 +9,6 @@ import Foundation
 import FirebaseFirestore
 import CoreXLSX
 
-//struct BookMetaData {
-//    let title: String
-//    let authors: String
-//    let publishedDate: String
-//    let pageCount: String
-//    let language: String
-//    let imageLinks: String
-//    let isbn: String
-//}
-
 struct BookRecord {
     let isbnOfTheBook: String
     let totalNumberOfCopies: Int
@@ -46,7 +36,7 @@ func parseExcelFile(at url: URL, completion: @escaping ([BookRecord]) -> Void) {
             print("Failed to open file.")
             return
         }
-
+        
         // Load shared strings
         let sharedStrings = try file.parseSharedStrings()
         
@@ -63,7 +53,7 @@ func parseExcelFile(at url: URL, completion: @escaping ([BookRecord]) -> Void) {
                 var isbnOfTheBookIdx: Int?
                 var bookColumnIdx: Int?
                 var bookShelfIdx: Int?
-
+                
                 // Find the indices of the required columns
                 if let headerRow = worksheet.data?.rows.first {
                     for (index, cell) in headerRow.cells.enumerated() {
@@ -81,14 +71,14 @@ func parseExcelFile(at url: URL, completion: @escaping ([BookRecord]) -> Void) {
                         }
                     }
                 }
-
+                
                 // Ensure all required columns are found
                 guard let isbnIdx = isbnOfTheBookIdx, let tnocIdx = totalNumberOfCopiesIdx, let noicIdx = numberOfIssuedCopiesIdx, let bcIdx = bookColumnIdx, let bsIdx = bookShelfIdx else {
                     print("Required columns not found")
                     completion([])
                     return
                 }
-
+                
                 // Iterate over rows starting from the second row
                 for row in worksheet.data?.rows.dropFirst() ?? [] {
                     if row.cells.count > max(isbnIdx, tnocIdx, noicIdx, bcIdx, bsIdx) { // Ensure there are enough cells in the row
