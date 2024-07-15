@@ -64,26 +64,70 @@ struct LibrariankView: View {
     @State private var requestDetails = ""
     @ObservedObject var requestRepo = RequestRepository()
     
+    var isFormValid: Bool {
+        !requestTitle.isEmpty && !requestDetails.isEmpty
+    }
+    
     var body: some View {
         VStack {
+            Text("Generate Request")
+                .font(.title)
+                .fontWeight(.bold)
+                .padding()
+                .foregroundColor(.black)
+                .padding(.leading)
+            
             TextField("Request Title", text: $requestTitle)
+                
+                .padding([.leading, .trailing], 50)
+                .padding(.top, 20)
+                .frame(height: 50)
+                .background(Color.white)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color("ThemeOrange"), lineWidth: 1)
+                        .padding([.leading, .trailing], 40)
+                )
+                .padding(.bottom,20)
+            
             TextField("Request Details", text: $requestDetails)
+                .padding([.leading, .trailing], 50)
+                .padding(.top, 20)
+                .frame(height: 50)
+                .background(Color.white)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color("ThemeOrange"), lineWidth: 1)
+                        .padding([.leading, .trailing], 40)
+                )
+                .padding(.bottom,20)
+            
             Button(action: {
-                let newRequest = Request(id: UUID().uuidString, title: requestTitle, details: requestDetails, status: "pending", librarianId: "librarian_id") // Replace "librarian_id" with the actual librarian's id
+                let newRequest = Request(id: UUID().uuidString, title: requestTitle, details: requestDetails, status: "pending", librarianId: "librarian_id")
                 requestRepo.addRequest(newRequest)
+                requestTitle = ""
+                requestDetails = ""
             }) {
                 Text("Send Request")
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(isFormValid ? Color("ThemeOrange") : Color.gray)
+                    .cornerRadius(8)
             }
+            .disabled(!isFormValid)
             
             List(requestRepo.requests) { request in
                 Text("\(request.title): \(request.status)")
             }
+            .padding(.top, 20)
         }
+        
         .onAppear {
             requestRepo.listenToRequests()
         }
     }
 }
+
 
 struct AdminkView: View {
     @ObservedObject var requestRepo = RequestRepository()
