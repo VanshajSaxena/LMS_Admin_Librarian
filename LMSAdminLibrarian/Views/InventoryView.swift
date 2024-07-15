@@ -135,25 +135,25 @@ struct InventoryView: View {
                 TableColumn("Column", value: \.bookColumn)
                 TableColumn("Shelf", value: \.bookShelf)
                 
-                TableColumn("Actions") { book in
-                    HStack {
-                        // Edit button
-                        Button(action: {
-                            // Edit action
-                        }) {
-                            Image(systemName: "pencil")
-                                .foregroundColor(.black)
-                        }
-                        
-                        // Delete button
-                        Button(action: {
-                            // Delete action
-                        }) {
-                            Image(systemName: "trash")
-                                .foregroundColor(.red)
-                        }
-                    }
-                }
+//                TableColumn("Actions") { book in
+////                    HStack {
+////                        // Edit button
+////                        Button(action: {
+////                            // Edit action
+////                        }) {
+////                            Image(systemName: "pencil")
+////                                .foregroundColor(.black)
+////                        }
+////                        
+////                        // Delete button
+////                        Button(action: {
+////                            // Delete action
+////                        }) {
+////                            Image(systemName: "trash")
+////                                .foregroundColor(.red)
+////                        }
+////                    }
+//                }
             }
             .task {
                 await updateInventoryTableView()
