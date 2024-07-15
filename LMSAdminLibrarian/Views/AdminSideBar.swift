@@ -17,7 +17,7 @@ struct AdminSideBar: View {
             
             VStack(alignment: .leading, spacing: 30) {
                 SidebarButton(imageName: "chart.bar", text: "Analytics", selectedButton: $selectedButton)
-                SidebarButton(imageName: "archivebox", text: "Inventory", selectedButton: $selectedButton)
+                SidebarButton(imageName: "archivebox", text: "Staff", selectedButton: $selectedButton)
                 SidebarButton(imageName: "person", text: "Profile", selectedButton: $selectedButton)
                 SidebarButton(imageName: "gearshape", text: "Settings", selectedButton: $selectedButton)
             }
@@ -86,7 +86,7 @@ struct SidebarButton: View {
             .padding(.horizontal, 20)  // Adjust horizontal padding
             .frame(maxWidth: .infinity, alignment: .leading)  // Make the background wider
             .background(selectedButton == text ? Color.white : Color.clear)
-            .cornerRadius(25)
+            .cornerRadius(12)
             .padding(.leading, 100)  // Adjust leading padding to center the button
         }
         .buttonStyle(PlainButtonStyle()) // Ensure NavigationLink behaves like a button
@@ -96,9 +96,9 @@ struct SidebarButton: View {
     func destinationView(for text: String) -> some View {
         switch text {
         case "Analytics":
-            AnalyticsView()
-        case "Inventory":
-            InventoryView()
+            AddCampaignEventsView()
+        case "Staff":
+            AddLibrarianView()
         case "Profile":
             ProfileView()
         case "Settings":
@@ -109,11 +109,7 @@ struct SidebarButton: View {
     }
 }
 
-struct AnalyticsView: View {
-    var body: some View {
-        AddCampaignEventsView()
-    }
-}
+
 
 struct ProfileView: View {
     var body: some View {

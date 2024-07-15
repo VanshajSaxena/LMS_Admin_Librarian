@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct LibrarianSideBar: View {
-    @State private var selectedButton: String? = "Analytics" // Set the initial selected button
+    @State private var selecteddButton: String? = "Dashboard" // Set the initial selected button
     @EnvironmentObject var authViewModel: AuthViewModel
     @State private var isLoggedOut = false
     
@@ -16,10 +16,11 @@ struct LibrarianSideBar: View {
                 .padding(.leading, 100)
             
             VStack(alignment: .leading, spacing: 30) {
-                SidebarButton(imageName: "chart.bar", text: "Analytics", selectedButton: $selectedButton)
-                SidebarButton(imageName: "archivebox", text: "Inventory", selectedButton: $selectedButton)
-                SidebarButton(imageName: "person", text: "Profile", selectedButton: $selectedButton)
-                SidebarButton(imageName: "gearshape", text: "Settings", selectedButton: $selectedButton)
+                LibrarianSidebarButton(imageName: "house", text: "Dashboard", selectedButton: $selecteddButton)
+                LibrarianSidebarButton(imageName: "book", text: "Inventory", selectedButton: $selecteddButton)
+                LibrarianSidebarButton(imageName: "person", text: "Profile", selectedButton: $selecteddButton)
+                LibrarianSidebarButton(imageName: "gearshape", text: "Settings", selectedButton: $selecteddButton)
+                
             }
             .padding(.horizontal, 30)
             
@@ -45,7 +46,7 @@ struct LibrarianSideBar: View {
                 .imageScale(.large)
             }
             .padding(.bottom, 30)
-            .onChange(of: authViewModel.isAuthenticated, initial: true) { oldValue, newValue in
+            .onChange(of: authViewModel.isAuthenticated) { oldValue, newValue in
                 if !newValue {
                     isLoggedOut = true
                 }
@@ -58,21 +59,75 @@ struct LibrarianSideBar: View {
         .background(Color("ThemeOrange"))
         .edgesIgnoringSafeArea(.all)
     }
+}
+
+struct LibrarianSidebarButton: View {
+    var imageName: String
+    var text: String
+    @Binding var selectedButton: String?
+    
+    var body: some View {
+        NavigationLink(destination: destinationView(for: text), tag: text, selection: $selectedButton) {
+            HStack {
+                Image(systemName: imageName)
+                    .foregroundColor(selectedButton == text ? .orange : .white)
+                    .padding(.leading, 35)
+                    .padding(.trailing, 15)
+                    .imageScale(.large)
+                Text(text)
+                    .font(.title3)  // Increase font size
+                    .foregroundColor(selectedButton == text ? .orange : .white)
+                    .fontWeight(.semibold)
+            }
+            .padding(.vertical, 15)  // Adjust vertical padding
+            .padding(.horizontal, 20)  // Adjust horizontal padding
+            .frame(maxWidth: .infinity, alignment: .leading)  // Make the background wider
+            .background(selectedButton == text ? Color.white : Color.clear)
+            .cornerRadius(12)
+            .padding(.leading, 100)  // Adjust leading padding to center the button
+        }
+        .buttonStyle(PlainButtonStyle()) // Ensure NavigationLink behaves like a button
+    }
     
     @ViewBuilder
     func destinationView(for text: String) -> some View {
         switch text {
-        case "Analytics":
-            AnalyticsView()
+        case "Dashboard":
+            DashboardView()
         case "Inventory":
             InventoryView()
         case "Profile":
-            ProfileView()
+            LibrarianProfileView()
         case "Settings":
-            SettingsView()
+            LibrarianSettingsView()
         default:
             EmptyView()
         }
     }
 }
 
+// Sample Views for Librarian's Sidebar
+
+struct DashboardView: View {
+    var body: some View {
+        Text("Dashboard View")
+    }
+}
+
+struct BooksView: View {
+    var body: some View {
+        Text("Books View")
+    }
+}
+
+struct LibrarianProfileView: View {
+    var body: some View {
+        Text("Profile View")
+    }
+}
+
+struct LibrarianSettingsView: View {
+    var body: some View {
+        Text("Settings View")
+    }
+}
