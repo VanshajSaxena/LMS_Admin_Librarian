@@ -25,7 +25,7 @@ struct ImageLinks: Codable {
     let thumbnail: String?
 }
 
-struct BookMetaData : Identifiable {
+struct BookMetaData : Identifiable, Equatable {
     let id: String
     let title: String
     let authors: String

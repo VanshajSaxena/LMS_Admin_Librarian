@@ -5,9 +5,19 @@ struct InventoryView: View {
     @State private var showAddBookView: Bool = false
     @StateObject private var viewModel = InventoryViewModel()
     
+    private func updateInventoryTableView() async {
+        do {
+            let firestoreService = FirestoreService()
+            let isbnList = try await firestoreService.getISBNList()
+            print("Fetched \(isbnList.count) books")
+            await viewModel.updateInventoryTableView(isbnList: isbnList)
+        }
+        catch {
+            let error = NSError(domain: "Error fetching ISBN List", code: -1, userInfo: nil)
+            print("Error: \(error.localizedDescription)")
+        }
+    }
     
-//    @State private var books: [BookMetaData] = [
-
 
     var body: some View {
         VStack {
@@ -144,6 +154,9 @@ struct InventoryView: View {
                         }
                     }
                 }
+            }
+            .task {
+                await updateInventoryTableView()
             }
             .cornerRadius(8)
             .padding(.horizontal, 50)
