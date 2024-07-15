@@ -34,6 +34,7 @@ struct AddNewMembershipView: View {
                         RoundedRectangle(cornerRadius: 8)
                             .stroke(Color.gray, lineWidth: 0.8)
                     )
+                    .multilineTextAlignment(.leading)
             }
 
 
@@ -68,6 +69,7 @@ struct AddNewMembershipView: View {
                         RoundedRectangle(cornerRadius: 8)
                             .stroke(Color.gray, lineWidth: 0.8)
                     )
+                    .multilineTextAlignment(.leading)
             }
             
 
@@ -77,7 +79,7 @@ struct AddNewMembershipView: View {
             HStack {
                 Spacer()
                 Button(action: {
-                    // Handle the "Done" button action
+                    // "Done" button action
                 }) {
                     Text("Done")
                         .font(.headline)
