@@ -110,7 +110,7 @@ struct LibrarianSidebarButton: View {
 
 struct DashboardView: View {
     var body: some View {
-        Text("Dashboard View")
+        AdminAnalyticsView()
     }
 }
 
