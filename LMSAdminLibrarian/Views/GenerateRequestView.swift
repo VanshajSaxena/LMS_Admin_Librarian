@@ -94,31 +94,40 @@ struct AdminkView: View {
             HStack {
                 Text(request.title)
                 Spacer()
+                
                 Button(action: {
-                    if processingRequestId == request.id {
-                       
+                    if processingRequestId != request.id {
+                        processingRequestId = request.id
                         requestRepo.updateRequestStatus(id: request.id, status: "approved") {
                             processingRequestId = nil
                         }
                     }
                 }) {
                     Text("Approve")
+                        .padding()
+                        .background(Color("Green")) // Green background color
+                        .foregroundColor(.white) // White text color
+                        .cornerRadius(12) // Rounded corners
                 }
-                .disabled(processingRequestId == request.id)
-                .opacity(processingRequestId == request.id ? 0.5 : 1) // Optionally, adjust opacity when disabled
+                .buttonStyle(BorderlessButtonStyle())
                 
                 Button(action: {
-                    if processingRequestId == request.id {
-                       
+                    if processingRequestId != request.id {
+                        processingRequestId = request.id
                         requestRepo.updateRequestStatus(id: request.id, status: "denied") {
                             processingRequestId = nil
                         }
                     }
                 }) {
                     Text("Deny")
+                        .padding()
+                        .background(Color("Red")) // Red background color
+                        .foregroundColor(.white) // White text color
+                        .cornerRadius(12) // Rounded corners
+                        .opacity(processingRequestId == request.id ? 0.5 : 1) // Adjust opacity when disabled
+                        .disabled(processingRequestId == request.id)
                 }
-                .disabled(processingRequestId == request.id)
-                .opacity(processingRequestId == request.id ? 0.5 : 1) // Optionally, adjust opacity when disabled
+                .buttonStyle(BorderlessButtonStyle())
             }
         }
         .onAppear {

@@ -18,7 +18,7 @@ struct LibrarianSideBar: View {
             VStack(alignment: .leading, spacing: 30) {
                 LibrarianSidebarButton(imageName: "house", text: "Dashboard", selectedButton: $selecteddButton)
                 LibrarianSidebarButton(imageName: "book", text: "Inventory", selectedButton: $selecteddButton)
-                LibrarianSidebarButton(imageName: "person", text: "Profile", selectedButton: $selecteddButton)
+                LibrarianSidebarButton(imageName: "person", text: "GenerateRequests", selectedButton: $selecteddButton)
                 LibrarianSidebarButton(imageName: "gearshape", text: "Settings", selectedButton: $selecteddButton)
                 
             }
@@ -96,8 +96,8 @@ struct LibrarianSidebarButton: View {
             DashboardView()
         case "Inventory":
             InventoryView()
-        case "Profile":
-            LibrarianProfileView()
+        case "GenerateRequests":
+            LibrariankView()
         case "Settings":
             LibrarianSettingsView()
         default:
