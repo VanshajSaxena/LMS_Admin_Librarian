@@ -144,7 +144,8 @@ struct SidebarContent: View {
             }
             .padding(.leading, 20)
             
-            Spacer()
+            
+            
             
             // LogOut Button
             Button(action: {

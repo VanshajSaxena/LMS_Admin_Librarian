@@ -18,10 +18,14 @@ struct LibrarianSideBar: View {
             VStack(alignment: .leading, spacing: 30) {
                 SidebarButton(imageName: "chart.bar", text: "Analytics", selectedButton: $selectedButton)
                 SidebarButton(imageName: "archivebox", text: "Inventory", selectedButton: $selectedButton)
+                SidebarButton(imageName: "qrcode.viewfinder", text: "ScanQR", selectedButton: $selectedButton)
                 SidebarButton(imageName: "person", text: "Profile", selectedButton: $selectedButton)
                 SidebarButton(imageName: "gearshape", text: "Settings", selectedButton: $selectedButton)
+               
+                
             }
             .padding(.horizontal, 30)
+            
             
             Spacer()
             
@@ -67,9 +71,12 @@ struct LibrarianSideBar: View {
         case "Inventory":
             InventoryView()
         case "Profile":
-            ProfileView()
+           ProfileView()
+           
         case "Settings":
             SettingsView()
+        case "ScanQR":
+            QRView()
         default:
             EmptyView()
         }
