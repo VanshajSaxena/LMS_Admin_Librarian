@@ -1,10 +1,10 @@
 import SwiftUI
 
 struct AddCampaignEventsSheetView: View {
+    @ObservedObject var viewModel: AddCampaignEventsViewModel
     @State private var showStartDatePicker: Bool = false
     @State private var showEndDatePicker: Bool = false
     @State private var campaignDetails: String = ""
-    @ObservedObject var viewModel : AddCampaignEventsViewModel
 
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.verticalSizeClass) var verticalSizeClass
@@ -29,7 +29,7 @@ struct AddCampaignEventsSheetView: View {
                 .padding(20)
 
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("Price")
+                    Text("Ticket Price")
                         .font(.headline)
                         .foregroundColor(.orange)
                     Slider(value: $viewModel.price, in: 0...10000, step: 1)
@@ -51,8 +51,6 @@ struct AddCampaignEventsSheetView: View {
                                 .foregroundColor(.black)
                                 .frame(width: 100, alignment: .leading)
 
-                            //Spacer()
-
                             Text(viewModel.startDate, style: .date)
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 5).strokeBorder(Color.orange, lineWidth: 1))
@@ -72,8 +70,6 @@ struct AddCampaignEventsSheetView: View {
                                 .font(.headline)
                                 .foregroundColor(.black)
                                 .frame(width: 100, alignment: .leading)
-
-                                //Spacer()
 
                             Text(viewModel.endDate, style: .date)
                                 .padding()
@@ -101,8 +97,6 @@ struct AddCampaignEventsSheetView: View {
                         .frame(height: 200)
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 5).strokeBorder(Color.gray, lineWidth: 1))
-                        .onChange(of: viewModel.description) { newValue, perform in
-                        }
                 }
                 .padding(20)
 
@@ -114,7 +108,7 @@ struct AddCampaignEventsSheetView: View {
                         Text("Send Request")
                             .padding()
                             .frame(maxWidth: 150, alignment: .center)
-                            .background(Color.orange)
+                            .background(Color("ThemeOrange"))
                             .foregroundColor(.white)
                             .cornerRadius(10)
                     }
@@ -125,19 +119,8 @@ struct AddCampaignEventsSheetView: View {
                 Spacer()
             }
             .padding()
-            .frame(maxWidth: .infinity) // Make sure the content takes full width
+            .frame(maxWidth: .infinity)
         }
-        .navigationViewStyle(StackNavigationViewStyle()) // Ensure proper navigation style for iPads
-    }
-}
-
-struct AddCampaignView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            AddCampaignEventsSheetView(viewModel: AddCampaignEventsViewModel.sample)
-                .previewDevice("iPad Pro (11-inch) (3rd generation)")
-            AddCampaignEventsSheetView(viewModel: AddCampaignEventsViewModel.sample)
-                .previewDevice("iPad Pro (12.9-inch) (5th generation)")
-        }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
