@@ -22,4 +22,17 @@ final class FirestoreService {
         let bookColumn = data["bookShelf"] as? String ?? "1"
         return FirestoreMetadata(isbn: isbn, totalNumberOfCopies: totalNumberOfCopies, numberOfIssuedCopies: numberOfIssuedCopies, bookColumn: bookColumn, bookShelf: bookShelf)
     }
+    
+    func getISBNList() async throws -> [String] {
+        do {
+            let docRef = db.collection("books")
+            let snapshot = try await docRef.getDocuments()
+            var isbnList = snapshot.documents.compactMap {
+                $0.data()["isbnOfTheBook"] as? String
+            }
+            print("Fetched \(isbnList.count) ISBNs from Firestore")
+            return isbnList
+        }
+    }
 }
+
