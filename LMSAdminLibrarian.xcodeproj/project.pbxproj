@@ -15,6 +15,8 @@
 		1A28CF972C426064006285A2 /* AddCampaignEventsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A28CF962C426064006285A2 /* AddCampaignEventsViewModel.swift */; };
 		1A28EC4C2C3D3A5300F2DB17 /* InventoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A28EC4B2C3D3A5300F2DB17 /* InventoryViewModel.swift */; };
 		1A5F189E2C4620E000BBAE43 /* AdminAnalyticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5F189D2C4620E000BBAE43 /* AdminAnalyticsViewModel.swift */; };
+		1A5F189A2C454B2800BBAE43 /* addnewmembershipview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5F18992C454B2800BBAE43 /* addnewmembershipview.swift */; };
+		1A5F189C2C454BF300BBAE43 /* membershipcardview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5F189B2C454BF300BBAE43 /* membershipcardview.swift */; };
 		1A8428C72C3BEDEC00A34F8D /* FilePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8428C62C3BEDEC00A34F8D /* FilePicker.swift */; };
 		1A8CC0582C412D3D00020D8A /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8CC0572C412D3D00020D8A /* FirestoreService.swift */; };
 		326BD2422C3E62B4008F1EB2 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326BD2412C3E62B4008F1EB2 /* AuthViewModel.swift */; };
@@ -61,6 +63,8 @@
 		1A28CF962C426064006285A2 /* AddCampaignEventsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCampaignEventsViewModel.swift; sourceTree = "<group>"; };
 		1A28EC4B2C3D3A5300F2DB17 /* InventoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryViewModel.swift; sourceTree = "<group>"; };
 		1A5F189D2C4620E000BBAE43 /* AdminAnalyticsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAnalyticsViewModel.swift; sourceTree = "<group>"; };
+		1A5F18992C454B2800BBAE43 /* addnewmembershipview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addnewmembershipview.swift; sourceTree = "<group>"; };
+		1A5F189B2C454BF300BBAE43 /* membershipcardview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = membershipcardview.swift; sourceTree = "<group>"; };
 		1A8428C62C3BEDEC00A34F8D /* FilePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePicker.swift; sourceTree = "<group>"; };
 		1A8CC0572C412D3D00020D8A /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
 		326BD2412C3E62B4008F1EB2 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
@@ -94,6 +98,8 @@
 		8016A8132C3546D60037D386 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8092BE4A2C3FA1A400D895F5 /* ForgetPasswordAdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordAdminView.swift; sourceTree = "<group>"; };
 		8092BE4C2C3FA28500D895F5 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
+		809C78E52C43158E00B14797 /* MembershipsCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembershipsCardView.swift; sourceTree = "<group>"; };
+		809C78E72C445F3000B14797 /* AddNewMembershipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewMembershipView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +143,10 @@
 				8092BE4A2C3FA1A400D895F5 /* ForgetPasswordAdminView.swift */,
 				3C41F1EA2C3FF5BB000454E9 /* CustomDatePicker.swift */,
 				3C51AEB42C3E628D00C39117 /* AdminAnalyticsView.swift */,
+				809C78E72C445F3000B14797 /* AddNewMembershipView.swift */,
+				1A5F18992C454B2800BBAE43 /* addnewmembershipview.swift */,
+				809C78E52C43158E00B14797 /* MembershipsCardView.swift */,
+				1A5F189B2C454BF300BBAE43 /* membershipcardview.swift */,
 				3C7290B62C40F6060047AEC0 /* BookDetailsView.swift */,
 				326BD24D2C3E6786008F1EB2 /* LibrarianSideBar.swift */,
 				326BD2452C3E66EC008F1EB2 /* AdminMainView.swift */,
@@ -346,6 +356,7 @@
 				67BE8FE72C37F3C900DA1B96 /* BarCodeScanner.swift in Sources */,
 				326BD2422C3E62B4008F1EB2 /* AuthViewModel.swift in Sources */,
 				8016A7DF2C353E8B0037D386 /* ContentView.swift in Sources */,
+				1A5F189C2C454BF300BBAE43 /* membershipcardview.swift in Sources */,
 				326BD2462C3E66EC008F1EB2 /* AdminMainView.swift in Sources */,
 				8092BE4B2C3FA1A400D895F5 /* ForgetPasswordAdminView.swift in Sources */,
 				329E0A592C3823EC00E8925A /* ForgetPasswordView.swift in Sources */,
@@ -354,6 +365,7 @@
 				32E4A7272C3AEC22003D0D6C /* AddLibrarianView.swift in Sources */,
 				32D84C1D2C37213E00E489F7 /* LibrarianView.swift in Sources */,
 				32D84C162C370E0A00E489F7 /* AdminView.swift in Sources */,
+				1A5F189A2C454B2800BBAE43 /* addnewmembershipview.swift in Sources */,
 				326BD2482C3E670E008F1EB2 /* LibrarianMainView.swift in Sources */,
 				8016A7DD2C353E8B0037D386 /* LMSAdminLibrarian.swift in Sources */,
 				326BD24A2C3E674C008F1EB2 /* AdminSideBar.swift in Sources */,

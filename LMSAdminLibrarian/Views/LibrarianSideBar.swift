@@ -93,7 +93,7 @@ struct LibrarianSidebarButton: View {
     func destinationView(for text: String) -> some View {
         switch text {
         case "Dashboard":
-            AddCampaignEventsView()
+        MembershipsCardView()
         case "Inventory":
             InventoryView()
         case "Requests":
