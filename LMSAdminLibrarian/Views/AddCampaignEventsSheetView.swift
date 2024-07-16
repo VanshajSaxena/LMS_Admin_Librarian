@@ -4,11 +4,7 @@ struct AddCampaignEventsSheetView: View {
     @ObservedObject var viewModel: AddCampaignEventsViewModel
     @State private var showStartDatePicker: Bool = false
     @State private var showEndDatePicker: Bool = false
-    @State private var campaignDetails: String = ""
 
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
-    @Environment(\.verticalSizeClass) var verticalSizeClass
-    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
@@ -32,10 +28,40 @@ struct AddCampaignEventsSheetView: View {
                     Text("Ticket Price")
                         .font(.headline)
                         .foregroundColor(.orange)
-                    Slider(value: $viewModel.price, in: 0...10000, step: 1)
-                    Text("\(Int(viewModel.price))")
-                        .font(.footnote)
-                        .foregroundColor(.gray)
+                    TextField("Enter the Ticket Price", text: $viewModel.price)
+                        .padding()
+                        .background(RoundedRectangle(cornerRadius: 5).strokeBorder(Color.gray, lineWidth: 1))
+                }
+                .padding(20)
+
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Type")
+                        .font(.headline)
+                        .foregroundColor(.orange)
+                    
+                    HStack {
+                        Button(action: {
+                            viewModel.type = .event
+                        }) {
+                            Text("Event")
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(viewModel.type == .event ? Color.orange : Color.gray)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                        }
+
+                        Button(action: {
+                            viewModel.type = .sale
+                        }) {
+                            Text("Sale")
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(viewModel.type == .sale ? Color.orange : Color.gray)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                        }
+                    }
                 }
                 .padding(20)
 

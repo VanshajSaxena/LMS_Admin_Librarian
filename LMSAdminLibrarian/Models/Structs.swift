@@ -1,4 +1,7 @@
 import Foundation
+import SwiftUI
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 struct BooksAPI: Codable {
     let items: [BookItem]
@@ -80,14 +83,32 @@ struct FirestoreMetadata {
     var bookShelf: String
 }
 
-struct CampaignsEvents {
-        var id: String
-        var title: String
-        var price: Double
-        var startDate: Date
-        var endDate: Date
-        var description: String
+
+
+struct CampaignsEvents: Identifiable, Codable {
+    enum CampaignType: String, Codable {
+        case event
+        case sale
+    }
+    
+    @DocumentID var id: String?
+    let type: CampaignType
+    var title: String
+    var price: String
+    var startDate: Date
+    var endDate: Date
+    var description: String
+
+    var imageName: String {
+        switch type {
+        case .event:
+            return "books"
+        case .sale:
+            return "Sales Card"
+        }
+    }
 }
+
 
 let isbnList = [
     "9780061120084",
