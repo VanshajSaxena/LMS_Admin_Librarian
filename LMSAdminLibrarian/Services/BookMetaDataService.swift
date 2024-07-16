@@ -19,11 +19,11 @@ final class BookMetaDataService {
             for isbn in isbnList {
                 group.addTask {
                     do {
-                        async let googleBookServiceFetchData = self.googleBookService.createGoogleBookMetaData(isbn: isbn)
                         async let firestoreServiceFetchData = self.firestoreService.getBookDetails(isbn: isbn)
-                        
-                        let combinedGoogleBookServiceData = try await googleBookServiceFetchData
+                        async let googleBookServiceFetchData = self.googleBookService.createGoogleBookMetaData(isbn: isbn)
+
                         let combinedFirestoreServiceData = try await firestoreServiceFetchData
+                        let combinedGoogleBookServiceData = try await googleBookServiceFetchData
                         let bookMetaData = BookMetaData(googleBookMetaData: combinedGoogleBookServiceData, firestoreMetadata: combinedFirestoreServiceData)
                         return (isbn, .success(bookMetaData))
                     } catch {

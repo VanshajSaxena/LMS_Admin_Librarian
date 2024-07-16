@@ -15,32 +15,30 @@ final class GoogleBookService {
     // Fetches book data from the API
     private func fetchBookInfoFromAPI(for isbn: String) async throws -> BooksAPI {
         let urlString = "https://www.googleapis.com/books/v1/volumes"
-        
-        let URLParam = ["q": "isbn:\(isbn)"]
+        let queryParams = ["q": "isbn:\(isbn)"]
         
         guard var url = URL(string: urlString) else {
-            
-            throw NSError(domain: "Invalid URL", code: -1, userInfo: nil)
+            throw URLError(.badURL)
         }
         
-        url = url.appendingQueryParameters(URLParam)
+        url = url.appendingQueryParameters(queryParams)
         
-        var request: URLRequest = URLRequest(url: url)
+        var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
         let (data, response) = try await URLSession.shared.data(for: request)
         
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-            throw NSError(domain: "Invalid Response", code: -1, userInfo: nil)
+            throw URLError(.badServerResponse)
         }
         
         do {
-            let bookData = try JSONDecoder().decode(BooksAPI.self, from: data)
-            return bookData
+            return try JSONDecoder().decode(BooksAPI.self, from: data)
         } catch {
             throw NSError(domain: "Decoding Error", code: -1, userInfo: [NSLocalizedDescriptionKey: error.localizedDescription])
         }
     }
+    
     
     // Fetches book metadata from the API
     func getBookMetaData(isbn: String) async throws -> BooksAPI {
@@ -55,29 +53,31 @@ final class GoogleBookService {
     func createGoogleBookMetaData(isbn: String) async throws -> GoogleBookMetaData {
         do {
             let bookAPI = try await getBookMetaData(isbn: isbn)
-            if let bookItem = bookAPI.items.first {
-                let volumeInfo = bookItem.volumeInfo
-                let coverImageLink = volumeInfo.imageLinks?.thumbnail ?? "Default Image"
-                let googleBookMetaData = GoogleBookMetaData(
-                    id: UUID().uuidString,
-                    title: volumeInfo.title,
-                    authors: volumeInfo.authors.joined(separator: ", "),
-                    genre: volumeInfo.categories?.joined(separator: ", ") ?? "Unknown",
-                    publishedDate: volumeInfo.publishedDate,
-                    pageCount: volumeInfo.pageCount,
-                    language: volumeInfo.language,
-                    coverImageLink: coverImageLink,
-                    description: volumeInfo.description,
-                    isbn: isbn
-                )
-                return googleBookMetaData
-            } else {
+            guard let bookItem = bookAPI.items.first else {
                 throw NSError(domain: "No book found", code: 404, userInfo: nil)
             }
+            
+            let volumeInfo = bookItem.volumeInfo
+            let coverImageLink = volumeInfo.imageLinks?.thumbnail ?? "Default Image"
+            
+            return GoogleBookMetaData(
+                id: UUID().uuidString,
+                title: volumeInfo.title,
+                authors: volumeInfo.authors.joined(separator: ", "),
+                genre: volumeInfo.categories?.joined(separator: ", ") ?? "Unknown",
+                publishedDate: volumeInfo.publishedDate,
+                pageCount: volumeInfo.pageCount,
+                language: volumeInfo.language,
+                coverImageLink: coverImageLink,
+                description: volumeInfo.description,
+                isbn: isbn
+            )
         } catch {
+            print("Error creating GoogleBookMetaData for ISBN \(isbn): \(error.localizedDescription)")
             throw error
         }
     }
+    
 }
 
 extension URL {
