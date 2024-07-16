@@ -230,7 +230,7 @@ struct HeaderView: View {
                         Text("My Account")
                     }
                     .padding()
-                    .background(Color.orange)
+                    .background(Color.themeOrange)
                     .foregroundColor(.white)
                     .cornerRadius(8)
                 }
@@ -245,12 +245,12 @@ struct IssueSection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 30) {
-            Text("Issue")
+            Text("Issue Book ")
                 .font(.largeTitle)
                 .bold()
 
             HStack(spacing: 20) {
-                IssueButton(title: "Scan QR", systemImageName: "qrcode.viewfinder", backgroundColor: .orange) {
+                IssueButton(title: "Scan QR", systemImageName: "qrcode.viewfinder", backgroundColor: Color.themeOrange) {
                     self.showingQRScanner = true
                 }
                 .sheet(isPresented: $showingQRScanner) {
@@ -274,6 +274,66 @@ struct IssueSection: View {
     }
 }
 
+//struct TableView: View {
+//    let scannedData: [QRkData]
+//
+//    var body: some View {
+//        VStack(alignment: .leading) {
+//            HStack {
+//                Text("User ID")
+//                Spacer()
+//                Text("ISBN")
+//                Spacer()
+//                Text("Issue Date")
+//                Spacer()
+//                Text("Issue Time")
+//                Spacer()
+//                Text("Return Date")
+//                Spacer()
+//                Text("Actions")
+//            }
+//            .font(.headline)
+//            .padding(.horizontal)
+//
+//            List(scannedData, id: \.isbn) { data in
+//                TableViewRow(record: data)
+//            }
+//        }
+//    }
+//}
+
+//struct TableViewRow: View {
+//    var record: QRkData
+//
+//
+//    var body: some View {
+//        HStack {
+//            Text(record.userId)
+//            Spacer()
+//            Text(record.isbn)
+//            Spacer()
+//            Text(record.date)
+//            Spacer()
+//            Text(record.currentTime)
+//            Spacer()
+//            Text(record.addDaysToDate())
+//            Spacer()
+//            HStack {
+//
+//                // Delete button
+//                Button(action: {
+//                    // Delete action
+//                }) {
+//                    Image(systemName: "trash")
+//                        .foregroundColor(.red)
+//                }
+//            }
+//        }
+//        .padding(.horizontal)
+//    }
+//}
+
+
 struct TableView: View {
     let scannedData: [QRkData]
 
@@ -295,52 +355,69 @@ struct TableView: View {
             .font(.headline)
             .padding(.horizontal)
 
-            List(scannedData, id: \.isbn) { data in
-                TableViewRow(record: data)
+            // List of TableViewRow items
+            ScrollView {
+                VStack(spacing: 0) {
+                    ForEach(scannedData, id: \.isbn) { data in
+                        TableViewRow(record: data)
+                            .padding(.horizontal)
+                            .background(Color.white)
+                            .cornerRadius(8)
+                            .shadow(radius: 2)
+                            .padding(.vertical, 4)
+                    }
+                }
             }
+            .background(Color(.systemGray6))
+            .cornerRadius(8)
+            .shadow(radius: 4)
+            .padding(.horizontal)
         }
+        .padding(.top, 20)
     }
 }
 
+
 struct TableViewRow: View {
     var record: QRkData
-  
 
     var body: some View {
         HStack {
             Text(record.userId)
+                .padding(.vertical, 8)
             Spacer()
             Text(record.isbn)
+                .padding(.vertical, 8)
             Spacer()
             Text(record.date)
+                .padding(.vertical, 8)
             Spacer()
             Text(record.currentTime)
+                .padding(.vertical, 8)
             Spacer()
             Text(record.addDaysToDate())
+                .padding(.vertical, 8)
             Spacer()
             HStack {
-                Button(action: {
-                    // Edit action
-                }) {
-                    Image(systemName: "pencil")
-                        .foregroundColor(.black)
-                }
-                // Delete button
+                // Action buttons can be added here
                 Button(action: {
                     // Delete action
                 }) {
                     Image(systemName: "trash")
                         .foregroundColor(.red)
                 }
+                .padding(.vertical, 8)
             }
         }
-        .padding(.horizontal)
+        .padding(.horizontal, 16)
     }
+}
+
 
 //    private func calculateReturnDate(issueDate: Date) -> Date {
 //        return Calendar.current.date(byAdding: .day, value: 30, to: issueDate) ?? issueDate
 //    }
-}
+
 
 // QR code scanning function
 func scanQRCodeFromImage(_ image: UIImage) -> String? {
