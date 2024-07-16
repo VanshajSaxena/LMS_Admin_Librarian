@@ -18,8 +18,9 @@ struct LibrarianSideBar: View {
             VStack(alignment: .leading, spacing: 30) {
                 LibrarianSidebarButton(imageName: "house", text: "Dashboard", selectedButton: $selecteddButton)
                 LibrarianSidebarButton(imageName: "book", text: "Inventory", selectedButton: $selecteddButton)
+                LibrarianSidebarButton(imageName: "qrcode.viewfinder", text: "Issue Book", selectedButton: $selecteddButton)
                 LibrarianSidebarButton(imageName: "person", text: "Requests", selectedButton: $selecteddButton)
-                LibrarianSidebarButton(imageName: "gearshape", text: "Settings", selectedButton: $selecteddButton)
+              
                 
             }
             .padding(.horizontal, 30)
@@ -98,8 +99,8 @@ struct LibrarianSidebarButton: View {
             InventoryView()
         case "Requests":
             LibrariankView()
-        case "Settings":
-            LibrarianSettingsView()
+        case "Issue Book":
+          Scanner()
         default:
             EmptyView()
         }
@@ -126,8 +127,8 @@ struct LibrarianProfileView: View {
     }
 }
 
-struct LibrarianSettingsView: View {
+struct IssueBook: View {
     var body: some View {
-        Text("Settings View")
+        Text("Issue View")
     }
 }
