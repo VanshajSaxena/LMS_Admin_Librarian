@@ -1,56 +1,51 @@
-import SwiftUI
+import Foundation
 import FirebaseFirestore
-import FirebaseFirestoreSwift
+import Combine
+import SwiftUI
 
-// Update CampaignType to conform to Codable
-
-class CampaignEventsViewModel: ObservableObject {
-    @Published var campaigns: [CampaignsEvents] = []
-    
+final class CampaignsEventsViewModel: ObservableObject {
     private var db = Firestore.firestore()
-    
+    @Published var campaigns: [CampaignsEvents] = []
+
     func fetchCampaigns() {
-        db.collection("campaigns").getDocuments { (querySnapshot, error) in
+        db.collection("campaigns").addSnapshotListener { (querySnapshot, error) in
             if let error = error {
-                print("Error fetching campaigns: \(error.localizedDescription)")
+                print("Error fetching documents: \(error)")
                 return
             }
-            
+
             guard let documents = querySnapshot?.documents else {
                 print("No documents")
                 return
             }
-            
+
             self.campaigns = documents.compactMap { queryDocumentSnapshot -> CampaignsEvents? in
-                do {
-                    let campaign = try queryDocumentSnapshot.data(as: CampaignsEvents.self)
-                    print("Fetched campaign: \(campaign.title)")
-                    return campaign
-                } catch {
-                    print("Error decoding campaign: \(error.localizedDescription)")
-                    return nil
-                }
+                let data = queryDocumentSnapshot.data()
+                let id = data["id"] as? String ?? ""
+                let type = data["type"] as? String ?? ""
+                let title = data["title"] as? String ?? ""
+                let price = data["price"] as? String ?? ""
+                let startDateString = data["startDate"] as? String ?? ""
+                let endDateString = data["endDate"] as? String ?? ""
+                let description = data["description"] as? String ?? ""
+
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd-MM-yyyy"
+                let startDate = dateFormatter.date(from: startDateString) ?? Date()
+                let endDate = dateFormatter.date(from: endDateString) ?? Date()
+
+                return CampaignsEvents(id: id, type: type, title: title, price: price, startDate: startDate, endDate: endDate, description: description)
             }
         }
     }
-    func printFetchedCampaigns() {
-           for campaign in campaigns {
-               print("Campaign: \(campaign.title)")
-               print("Type: \(campaign.type.rawValue)")
-               // Add more properties as needed
-           }
-       }
-    
 }
-
-
 struct AddCampaignEventsView: View {
     @State private var showingAddCampaignSheet = false
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.verticalSizeClass) var verticalSizeClass
-
-    @StateObject private var viewModel = CampaignEventsViewModel()
-
+    
+    @StateObject private var viewModel = CampaignsEventsViewModel()
+    
     var body: some View {
         VStack(alignment: .leading) {
             // Title
@@ -58,7 +53,7 @@ struct AddCampaignEventsView: View {
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .padding(.leading)
-
+            
             // Add Campaign Button
             HStack {
                 Spacer()
@@ -79,7 +74,7 @@ struct AddCampaignEventsView: View {
                     AddCampaignEventsSheetView(viewModel: AddCampaignEventsViewModel())
                 }
             }
-
+            
             // Campaign Cards and Placeholder
             if viewModel.campaigns.isEmpty {
                 Text("No campaigns found.")
@@ -89,9 +84,9 @@ struct AddCampaignEventsView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 30) {
                         ForEach(viewModel.campaigns) { campaign in
-                            if campaign.type == .event {
+                            if campaign.type == "event" {
                                 campaignCard(for: campaign)
-                            } else if campaign.type == .sale {
+                            } else if campaign.type == "sale" {
                                 saleCampaignCard(for: campaign)
                             }
                         }
@@ -99,15 +94,14 @@ struct AddCampaignEventsView: View {
                     .padding(20)
                 }
             }
-
+            
             Spacer()
         }
-        .onAppear {
-            viewModel.fetchCampaigns()
-            viewModel.printFetchedCampaigns()
+        .task {
+            await viewModel.fetchCampaigns()
         }
     }
-
+    
     func campaignCard(for campaign: CampaignsEvents) -> some View {
         VStack(alignment: .leading) {
             Image(campaign.imageName)
@@ -124,42 +118,49 @@ struct AddCampaignEventsView: View {
                 .frame(alignment: .center)
             Text(campaign.description)
                 .font(.body)
-                .padding(.top, 8)
+               
         }
         .padding()
         .background(Color("CampaignCard"))
         .cornerRadius(10)
         .shadow(radius: 5)
     }
-
+    
     func saleCampaignCard(for campaign: CampaignsEvents) -> some View {
         HStack {
             Image(campaign.imageName)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 150, height: 160)
-                .cornerRadius(10)
-
+            .resizable()
+            .scaledToFill()
+            .frame(width: 150, height: 160)
+            .cornerRadius(10)
+            .clipped() // Ensure the image stays within the bounds
+            .padding(.leading, -20)
+            .padding(.bottom , -50)
+            
             VStack(alignment: .leading, spacing: 8) {
                 Text(campaign.title)
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .padding(.top, 8)
-
+                    .frame(alignment: .center)
+                
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(campaign.price)
-                        .font(.title)
+                    Text(campaign.price ?? "")
+                        .font(.largeTitle)
                         .fontWeight(.bold)
                         .foregroundColor(.orange)
                 }
-                Text("*Terms and conditions apply")
-                    .font(.footnote)
-                    .foregroundColor(.gray)
+                
                 Text(campaign.description)
                     .font(.body)
                     .padding(.top, 8)
+                Text("*Terms and conditions apply")
+                    .font(.footnote)
+                    .foregroundColor(.gray)
             }
+            
             .padding(.horizontal)
+            
         }
         .padding()
         .background(Color("CampaignCard"))
@@ -167,7 +168,7 @@ struct AddCampaignEventsView: View {
         .shadow(radius: 5)
         .frame(width: 375, height: 200)
     }
-
+    
     private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateStyle = .short

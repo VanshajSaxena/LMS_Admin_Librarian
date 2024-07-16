@@ -86,13 +86,8 @@ struct FirestoreMetadata {
 
 
 struct CampaignsEvents: Identifiable, Codable {
-    enum CampaignType: String, Codable {
-        case event
-        case sale
-    }
-    
     @DocumentID var id: String?
-    let type: CampaignType
+    var type: String // Use String instead of enum
     var title: String
     var price: String
     var startDate: Date
@@ -101,10 +96,12 @@ struct CampaignsEvents: Identifiable, Codable {
 
     var imageName: String {
         switch type {
-        case .event:
+        case "event":
             return "books"
-        case .sale:
+        case "sale":
             return "Sales Card"
+        default:
+            return ""
         }
     }
 }

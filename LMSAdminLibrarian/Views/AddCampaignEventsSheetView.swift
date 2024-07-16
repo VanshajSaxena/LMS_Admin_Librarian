@@ -41,23 +41,23 @@ struct AddCampaignEventsSheetView: View {
                     
                     HStack {
                         Button(action: {
-                            viewModel.type = .event
+                            viewModel.type = "event"
                         }) {
                             Text("Event")
                                 .padding()
                                 .frame(maxWidth: .infinity)
-                                .background(viewModel.type == .event ? Color.orange : Color.gray)
+                                .background(viewModel.type == "event" ? Color.orange : Color.gray)
                                 .foregroundColor(.white)
                                 .cornerRadius(10)
                         }
 
                         Button(action: {
-                            viewModel.type = .sale
+                            viewModel.type = "sale"
                         }) {
                             Text("Sale")
                                 .padding()
                                 .frame(maxWidth: .infinity)
-                                .background(viewModel.type == .sale ? Color.orange : Color.gray)
+                                .background(viewModel.type == "sale" ? Color.orange : Color.gray)
                                 .foregroundColor(.white)
                                 .cornerRadius(10)
                         }
