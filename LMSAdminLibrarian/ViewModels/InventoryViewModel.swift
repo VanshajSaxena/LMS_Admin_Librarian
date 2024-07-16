@@ -24,14 +24,11 @@ final class InventoryViewModel: ObservableObject {
             print("Fetched ISBN List: \(isbnList)")
             let completeData = await self.bookMetaDataService.getCompleteBookMetadata(isbnList: isbnList)
             print("Fetched Complete Data Count: \(completeData.count)")
-            for i in completeData {
-                print(i.isbn)
-            }
             await MainActor.run {
+                self.books.removeAll()
                 self.books = completeData
                 print("Updated UI \(self.books.count) books")
             }
         }
     }
 }
-

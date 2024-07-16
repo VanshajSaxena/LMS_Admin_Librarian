@@ -111,7 +111,7 @@ struct SidebarButton: View {
 
 struct AnalyticsView: View {
     var body: some View {
-        Text("Analytics View")
+        AdminAnalyticsView()
     }
 }
 
