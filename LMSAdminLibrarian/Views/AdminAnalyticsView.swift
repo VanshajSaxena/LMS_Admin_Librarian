@@ -9,17 +9,22 @@ struct AdminAnalyticsView: View {
         VStack(alignment: .leading, spacing: 20) {
             HStack {
                 Spacer()
-                Button(action: {
-                    // Action for My Account
-                }) {
-                    HStack {
-                        Image(systemName: "person.circle")
-                        Text("My Account")
+                HStack {
+                    Button(action: {
+                        // Action for bell icon
+                    }) {
+                        ZStack(alignment: .topTrailing) {
+                            Image(systemName: "bell")
+                                .foregroundColor(Color("ThemeOrange"))
+                            Circle()
+                                .fill(Color.red)
+                                .frame(width: 8, height: 8)
+                                .offset(x: 5, y: -5)
+                        }
                     }
-                    .padding()
-                    .background(Color("ThemeOrange"))
-                    .foregroundColor(.white)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    Text("Fable")
+                        .font(.title)
+                        .foregroundColor(Color("ThemeOrange"))
                 }
                 .padding(.trailing, 30)
                 .padding(.top, 30)
