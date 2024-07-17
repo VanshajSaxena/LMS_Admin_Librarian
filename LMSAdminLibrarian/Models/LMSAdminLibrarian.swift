@@ -25,7 +25,7 @@ struct LMSAdminLibrarian: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
-            AddCampaignEventsView()
+            ContentView()
                 .environmentObject(authViewModel)
                 .onAppear {
                     checkAuthentication()
