@@ -65,7 +65,7 @@ struct AddCampaignEventsView: View {
                         Text("Add Campaigns")
                     }
                     .padding()
-                    .background(Color.orange)
+                    .background(Color.themeOrange)
                     .foregroundColor(.white)
                     .cornerRadius(10)
                 }

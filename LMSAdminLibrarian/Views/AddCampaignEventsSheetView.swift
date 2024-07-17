@@ -16,11 +16,48 @@ struct AddCampaignEventsSheetView: View {
 
     var body: some View {
         ScrollView {
+         
             VStack(alignment: .leading, spacing: 20) {
                 Text("Add Campaign")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .padding(10)
+                
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Type")
+                        .font(.headline)
+                        .foregroundColor(.orange)
+                    
+                    HStack {
+                        Button(action: {
+                            viewModel.type = "event"
+                        }) {
+                            Text("Event")
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(viewModel.type == "event" ? Color.themeOrange : Color.gray)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                        }
+
+                        Button(action: {
+                            viewModel.type = "sale"
+                        }) {
+                            Text("Sale")
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(viewModel.type == "sale" ? Color.themeOrange : Color.gray)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                        }
+                    }
+                    if let typeError = typeError {
+                        Text(typeError)
+                            .foregroundColor(.red)
+                            .font(.caption)
+                    }
+                }
+                .padding()
 
                 VStack(alignment: .leading, spacing: 10) {
                     Text("Name")
@@ -53,41 +90,7 @@ struct AddCampaignEventsSheetView: View {
                 }
                 .padding(20)
 
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Type")
-                        .font(.headline)
-                        .foregroundColor(.orange)
-                    
-                    HStack {
-                        Button(action: {
-                            viewModel.type = "event"
-                        }) {
-                            Text("Event")
-                                .padding()
-                                .frame(maxWidth: .infinity)
-                                .background(viewModel.type == "event" ? Color.orange : Color.gray)
-                                .foregroundColor(.white)
-                                .cornerRadius(10)
-                        }
-
-                        Button(action: {
-                            viewModel.type = "sale"
-                        }) {
-                            Text("Sale")
-                                .padding()
-                                .frame(maxWidth: .infinity)
-                                .background(viewModel.type == "sale" ? Color.orange : Color.gray)
-                                .foregroundColor(.white)
-                                .cornerRadius(10)
-                        }
-                    }
-                    if let typeError = typeError {
-                        Text(typeError)
-                            .foregroundColor(.red)
-                            .font(.caption)
-                    }
-                }
-                .padding(20)
+               
 
                 VStack(alignment: .leading, spacing: 10) {
                     Text("Duration")
