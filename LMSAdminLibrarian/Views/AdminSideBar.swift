@@ -96,7 +96,7 @@ struct SidebarButton: View {
     func destinationView(for text: String) -> some View {
         switch text {
         case "Analytics":
-            AnalyticsView()
+            AddCampaignEventsView()
         case "Staff":
             AddLibrarianView()
         case "Requests":
