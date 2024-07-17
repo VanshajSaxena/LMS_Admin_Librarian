@@ -37,10 +37,10 @@ struct LibrarianSideBar: View {
                     Text("LogOut")
                         .fontWeight(.bold)
                 }
-                .foregroundColor(.orange)
-                .frame(maxWidth: 150, alignment: .center)
+                .foregroundColor(.white)
+               // .frame(maxWidth: 150, alignment: .center)
                 .padding()
-                .background(Color.white)
+               // .foregroundColor(.white)
                 .cornerRadius(12)
                 .padding(.leading, 120)
                 .padding(.trailing, 20)
