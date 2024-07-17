@@ -28,6 +28,8 @@ struct BookRecord {
     }
 }
 
+
+
 let filepath = "/Users/vanshaj/Documents/Book (5).xlsx"
 
 func parseExcelFile(at url: URL, completion: @escaping ([BookRecord]) -> Void) {
@@ -119,6 +121,9 @@ func updateFirestore(with books: [BookRecord]) {
         }
     }
 }
+
+
+
 
 func fetchBooks(completion: @escaping ([BookRecord]?, Error?) -> Void) {
     let db = Firestore.firestore()

@@ -12,30 +12,42 @@ final class BookMetaDataService {
     private let firestoreService: FirestoreService = FirestoreService()
     
     func getCompleteBookMetadata(isbnList: [String]) async -> [BookMetaData] {
-        var bookMetaDataList : [BookMetaData] = []
+        var bookMetaDataList: [BookMetaData] = []
+        var errors: [String: Error] = [:]
         
-        await withTaskGroup(of: BookMetaData?.self) { group in
+        await withTaskGroup(of: (String, Result<BookMetaData, Error>).self) { group in
             for isbn in isbnList {
                 group.addTask {
                     do {
-                        async let googleBookServiceFetchData = self.googleBookService.createGoogleBookMetaData(isbn: isbn)
                         async let firestoreServiceFetchData = self.firestoreService.getBookDetails(isbn: isbn)
-                        
-                        let combinedGoogleBookServiceData = try await googleBookServiceFetchData
+                        async let googleBookServiceFetchData = self.googleBookService.createGoogleBookMetaData(isbn: isbn)
+
                         let combinedFirestoreServiceData = try await firestoreServiceFetchData
-                        return BookMetaData(googleBookMetaData: combinedGoogleBookServiceData, firestoreMetadata: combinedFirestoreServiceData)
-                    }catch {
-                        print("Error fetching data for ISBN \(isbn): \(error)")
-                        return nil
+                        let combinedGoogleBookServiceData = try await googleBookServiceFetchData
+                        let bookMetaData = BookMetaData(googleBookMetaData: combinedGoogleBookServiceData, firestoreMetadata: combinedFirestoreServiceData)
+                        return (isbn, .success(bookMetaData))
+                    } catch {
+                        return (isbn, .failure(error))
                     }
                 }
             }
+            
             for await result in group {
-                if let bookMetaData = result {
+                switch result.1 {
+                case .success(let bookMetaData):
                     bookMetaDataList.append(bookMetaData)
+                case .failure(let error):
+                    errors[result.0] = error
                 }
             }
         }
+        
+        print("Successfully fetched \(bookMetaDataList.count) books")
+        print("Errors occurred for \(errors.count) ISBNs:")
+        for (isbn, error) in errors {
+            print("ISBN \(isbn): \(error.localizedDescription)")
+        }
+        
         return bookMetaDataList
     }
 }
