@@ -128,7 +128,7 @@ struct AddBookView: View {
             self.presentationMode.wrappedValue.dismiss()
             // Add book action
             updateFirestore(with: [BookRecord(isbnOfTheBook: isbn,
-                                              totalNumberOfCopies: Int(numberOfCopies)!,
+                                              totalNumberOfCopies: Int(numberOfCopies) ?? 2,
                                               numberOfIssuedCopies: 0,
                                               bookColumn: column,
                                               bookShelf: shelf)])

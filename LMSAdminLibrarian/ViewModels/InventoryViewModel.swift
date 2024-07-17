@@ -18,13 +18,17 @@ final class InventoryViewModel: ObservableObject {
     private let bookMetaDataService = BookMetaDataService()
     
     
-    func updateInventoryTableView(isbnList: [String]) {
-        Task {
+    func updateInventoryTableView(isbnList: [String]) async {
+        do {
+            
+            print("Fetched ISBN List: \(isbnList)")
             let completeData = await self.bookMetaDataService.getCompleteBookMetadata(isbnList: isbnList)
-            DispatchQueue.main.async {
+            print("Fetched Complete Data Count: \(completeData.count)")
+            await MainActor.run {
+                self.books.removeAll()
                 self.books = completeData
+                print("Updated UI \(self.books.count) books")
             }
         }
-        
     }
 }

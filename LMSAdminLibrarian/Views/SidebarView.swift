@@ -152,14 +152,14 @@ struct SidebarContent: View {
             }) {
                 HStack {
                     Image(systemName: "power")
-                        .foregroundColor(.orange)
+                        .foregroundColor(.themeOrange)
                     Text("LogOut")
-                        .foregroundColor(.orange)
+                        .foregroundColor(.themeOrange)
                         .fontWeight(.medium)
                 }
-                .padding()
                 .background(Color.white)
-                .cornerRadius(25)
+                .cornerRadius(400)
+                .padding()
                 .padding(.bottom, 50)
                 .padding(.leading, 20)
             }

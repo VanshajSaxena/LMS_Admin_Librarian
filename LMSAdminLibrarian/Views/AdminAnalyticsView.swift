@@ -3,11 +3,7 @@ import SwiftUI
 struct AdminAnalyticsView: View {
     @State private var selectedDate = Date()
     @State private var selectedIndex: Int? = nil
-    
-    let analyticsData: [AnalyticsData] = [
-        AnalyticsData(image: "book.circle", amount: "13k", title: "Total Books", rate: "↑ 30%"),
-        // Add more data if needed
-    ]
+    @StateObject private var viewModel: AdminAnalyticsViewModel = AdminAnalyticsViewModel()
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -61,14 +57,17 @@ struct AdminAnalyticsView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 20) {
-                    ForEach(0..<15) { index in
+                    ForEach(viewModel.analyticsData.indices, id: \.self) { index in
                         AnalyticsButton(
-                            data: analyticsData[0], // Use actual data instead of index 0
+                            viewModel: viewModel,
+                            data: viewModel.analyticsData[index],
                             isSelected: selectedIndex == index,
                             action: { selectedIndex = index }
                         )
                     }
                 }
+            }.task {
+                await viewModel.updateUIwithChanges()
             }
             .padding(.top, 20)
             .padding(.leading, 50)
@@ -84,10 +83,12 @@ struct AdminAnalyticsView: View {
         .padding()
         .background(Color("BackgroundColor"))
         .edgesIgnoringSafeArea(.all)
+        
     }
 }
 
-struct AnalyticsButton: View {
+struct AnalyticsButton: View  {
+    @ObservedObject var viewModel: AdminAnalyticsViewModel
     var data: AnalyticsData
     var isSelected: Bool
     var action: () -> Void
