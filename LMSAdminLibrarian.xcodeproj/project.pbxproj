@@ -31,6 +31,8 @@
 		3C41F1EB2C3FF5BB000454E9 /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C41F1EA2C3FF5BB000454E9 /* CustomDatePicker.swift */; };
 		3C51AEB52C3E628D00C39117 /* AdminAnalyticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C51AEB42C3E628D00C39117 /* AdminAnalyticsView.swift */; };
 		3C7290B72C40F6060047AEC0 /* BookDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7290B62C40F6060047AEC0 /* BookDetailsView.swift */; };
+		3CE20B422C443C0C00E123FD /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE20B412C443C0C00E123FD /* GraphView.swift */; };
+		3CE20B452C443CFA00E123FD /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 3CE20B442C443CFA00E123FD /* SwiftUICharts */; };
 		5FDAB7962C371F1000FEC1C2 /* AddBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDAB7942C371F1000FEC1C2 /* AddBookView.swift */; };
 		5FE798562C413640005B6B56 /* AddCampaignEventsSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE798552C413640005B6B56 /* AddCampaignEventsSheetView.swift */; };
 		5FE798582C423DEE005B6B56 /* AddCampaignEventsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE798572C423DEE005B6B56 /* AddCampaignEventsView.swift */; };
@@ -74,6 +76,7 @@
 		3C41F1EA2C3FF5BB000454E9 /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
 		3C51AEB42C3E628D00C39117 /* AdminAnalyticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAnalyticsView.swift; sourceTree = "<group>"; };
 		3C7290B62C40F6060047AEC0 /* BookDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailsView.swift; sourceTree = "<group>"; };
+		3CE20B412C443C0C00E123FD /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		5FDAB7932C371F1000FEC1C2 /* SidebarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		5FDAB7942C371F1000FEC1C2 /* AddBookView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBookView.swift; sourceTree = "<group>"; };
 		5FE798552C413640005B6B56 /* AddCampaignEventsSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCampaignEventsSheetView.swift; sourceTree = "<group>"; };
@@ -106,6 +109,7 @@
 				8016A7F62C3544B30037D386 /* FirebaseStorage in Frameworks */,
 				8016A7F02C3544B30037D386 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				1A12145D2C370869009E1BD1 /* FirebaseFirestoreSwift in Frameworks */,
+				3CE20B452C443CFA00E123FD /* SwiftUICharts in Frameworks */,
 				8069BF872C3E4A7B0075475D /* SwiftProtobufPluginLibrary in Frameworks */,
 				32D84C1B2C37118600E489F7 /* FirebaseFirestore in Frameworks */,
 			);
@@ -137,6 +141,7 @@
 				326BD2452C3E66EC008F1EB2 /* AdminMainView.swift */,
 				326BD2472C3E670E008F1EB2 /* LibrarianMainView.swift */,
 				326BD2492C3E674C008F1EB2 /* AdminSideBar.swift */,
+				3CE20B412C443C0C00E123FD /* GraphView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -263,6 +268,7 @@
 				32D84C1A2C37118600E489F7 /* FirebaseFirestore */,
 				8069BF842C3E4A7B0075475D /* SwiftProtobuf */,
 				8069BF862C3E4A7B0075475D /* SwiftProtobufPluginLibrary */,
+				3CE20B442C443CFA00E123FD /* SwiftUICharts */,
 			);
 			productName = LMS_Admin_Librarian;
 			productReference = 8016A7D92C353E8B0037D386 /* LMSAdminLibrarian.app */;
@@ -296,6 +302,7 @@
 				8016A7EC2C3544B30037D386 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				1A1214542C36EF99009E1BD1 /* XCRemoteSwiftPackageReference "CoreXLSX" */,
 				8069BF832C3E4A7B0075475D /* XCRemoteSwiftPackageReference "swift-protobuf" */,
+				3CE20B432C443CFA00E123FD /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = 8016A7DA2C353E8B0037D386 /* Products */;
 			projectDirPath = "";
@@ -347,6 +354,7 @@
 				32D84C1D2C37213E00E489F7 /* LibrarianView.swift in Sources */,
 				32D84C162C370E0A00E489F7 /* AdminView.swift in Sources */,
 				326BD2482C3E670E008F1EB2 /* LibrarianMainView.swift in Sources */,
+				3CE20B422C443C0C00E123FD /* GraphView.swift in Sources */,
 				8016A7DD2C353E8B0037D386 /* LMSAdminLibrarian.swift in Sources */,
 				326BD24A2C3E674C008F1EB2 /* AdminSideBar.swift in Sources */,
 				8016A7DD2C353E8B0037D386 /* LMSAdminLibrarian.swift in Sources */,
@@ -578,6 +586,14 @@
 				minimumVersion = 0.14.2;
 			};
 		};
+		3CE20B432C443CFA00E123FD /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.5;
+			};
+		};
 		8016A7EC2C3544B30037D386 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -616,6 +632,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8016A7EC2C3544B30037D386 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		3CE20B442C443CFA00E123FD /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3CE20B432C443CFA00E123FD /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
 		};
 		8016A7ED2C3544B30037D386 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
