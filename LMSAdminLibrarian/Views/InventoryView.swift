@@ -88,8 +88,9 @@ struct InventoryView: View {
             // Book table
             Table(viewModel.books) {
                 TableColumn("S.No") { book in
-                    let index = viewModel.books.firstIndex(of: book)
-                    Text("\(index! + 1)")
+                    if let index = viewModel.books.firstIndex(of: book) {
+                        Text("\(index + 1)")
+                    }
                 }
                 TableColumn("Name", value: \.title)
                 TableColumn("Author", value: \.authors)
