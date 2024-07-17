@@ -71,14 +71,7 @@ struct AdminAnalyticsView: View {
             }
             .padding(.top, 20)
             .padding(.leading, 50)
-            
-            Text("Graphs")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .padding(.top, 20)
-                .padding(.leading, 40)
-            
-            Spacer()
+    
         }
         .padding()
         .background(Color("BackgroundColor"))
