@@ -9,6 +9,7 @@ struct BookItem: Codable {
     let volumeInfo: VolumeInfo
 }
 
+ 
 struct VolumeInfo: Codable {
     let title: String
     let authors: [String]
@@ -87,6 +88,22 @@ struct CampaignsEvents {
         var startDate: Date
         var endDate: Date
         var description: String
+}
+
+struct Membership: Codable {
+    let price: Int
+    let duration: Int
+    let perks: [String]
+    let isPremium: Bool
+    
+    var dictionary: [String: Any] {
+        return [
+            "price": price,
+            "duration": duration,
+            "perks": perks,
+            "isPremium": isPremium
+        ]
+    }
 }
 
 let isbnList = [
