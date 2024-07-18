@@ -731,6 +731,7 @@ struct HeaderView: View {
 
 struct IssueSection: View {
     @State private var showingQRScanner = false
+    @State private var showingImagePicker = false
     @State private var scannedData = [QRkData]()
     @State private var showAlert = false
     @State private var alertMessage = ""
@@ -748,7 +749,7 @@ struct IssueSection: View {
                 .sheet(isPresented: $showingQRScanner) {
                     QRScannerView { scannedCode in
                         if let data = processQRCode(scannedCode) {
-                            scannedData.insert(data, at: 0) // Add new data at the beginning
+                            scannedData.insert(data, at: 0)
                             print("Scanned Data Array: \(scannedData)")
                         } else {
                             print("Failed to process QR code")
@@ -756,6 +757,31 @@ struct IssueSection: View {
                             self.showAlert = true
                         }
                         showingQRScanner = false
+                    }
+                }
+                .alert(isPresented: $showAlert) {
+                    Alert(title: Text("Validation Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+                }
+
+                IssueButton(title: "Upload from Gallery", systemImageName: "photo.on.rectangle.angled", backgroundColor: Color.themeOrange) {
+                    self.showingImagePicker = true
+                }
+                .sheet(isPresented: $showingImagePicker) {
+                    ImagePickerView { selectedImage in
+                        if let qrCode = scanQRCodeFromImage(selectedImage) {
+                            if let data = processQRCode(qrCode) {
+                                scannedData.insert(data, at: 0)
+                                print("Scanned Data Array: \(scannedData)")
+                            } else {
+                                print("Failed to process QR code")
+                                self.alertMessage = "Invalid QR Code"
+                                self.showAlert = true
+                            }
+                        } else {
+                            print("No QR code found in the image")
+                            self.alertMessage = "No QR code found in the image"
+                            self.showAlert = true
+                        }
                     }
                 }
                 .alert(isPresented: $showAlert) {
@@ -912,4 +938,37 @@ struct ScannedQRData: Codable {
     var isbn: String
     var timestamp: String
     var date: String
+}
+
+// Image Picker View
+struct ImagePickerView: UIViewControllerRepresentable {
+    var completion: (UIImage) -> Void
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(completion: completion)
+    }
+
+    func makeUIViewController(context: Context) -> UIImagePickerController {
+        let picker = UIImagePickerController()
+        picker.delegate = context.coordinator
+        picker.sourceType = .photoLibrary
+        return picker
+    }
+
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
+
+    class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+        var completion: (UIImage) -> Void
+
+        init(completion: @escaping (UIImage) -> Void) {
+            self.completion = completion
+        }
+
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+            if let image = info[.originalImage] as? UIImage {
+                completion(image)
+            }
+            picker.dismiss(animated: true)
+        }
+    }
 }

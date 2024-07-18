@@ -38,10 +38,14 @@ struct LibrarianSideBar: View {
                         .fontWeight(.bold)
                 }
                 .foregroundColor(.white)
-               // .frame(maxWidth: 150, alignment: .center)
+                .frame(maxWidth: 150, alignment: .center)
                 .padding()
                // .foregroundColor(.white)
                 .cornerRadius(12)
+                .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(Color.white, lineWidth: 2)
+                    )
                 .padding(.leading, 120)
                 .padding(.trailing, 20)
                 .imageScale(.large)
