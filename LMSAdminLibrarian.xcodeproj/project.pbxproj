@@ -20,7 +20,6 @@
 		1B19F5E32C46417200F92C3A /* QRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B19F5E22C46417200F92C3A /* QRView.swift */; };
 		1B19F5E72C46432800F92C3A /* QR Scanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B19F5E62C46432800F92C3A /* QR Scanner.swift */; };
 		1B19F5E92C46436F00F92C3A /* QRStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B19F5E82C46436F00F92C3A /* QRStruct.swift */; };
-		3225E5222C47CF8100DF0285 /* NotificationPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3225E5212C47CF8100DF0285 /* NotificationPopoverView.swift */; };
 		3225E5242C47DB0A00DF0285 /* requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3225E5232C47DB0A00DF0285 /* requests.swift */; };
 		3225E5262C47E40B00DF0285 /* libraryrequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3225E5252C47E40B00DF0285 /* libraryrequests.swift */; };
 		3225E5282C482F7100DF0285 /* statusofrequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3225E5272C482F7100DF0285 /* statusofrequest.swift */; };
@@ -82,7 +81,6 @@
 		1B19F5E22C46417200F92C3A /* QRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRView.swift; sourceTree = "<group>"; };
 		1B19F5E62C46432800F92C3A /* QR Scanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QR Scanner.swift"; sourceTree = "<group>"; };
 		1B19F5E82C46436F00F92C3A /* QRStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRStruct.swift; sourceTree = "<group>"; };
-		3225E5212C47CF8100DF0285 /* NotificationPopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPopoverView.swift; sourceTree = "<group>"; };
 		3225E5232C47DB0A00DF0285 /* requests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = requests.swift; sourceTree = "<group>"; };
 		3225E5252C47E40B00DF0285 /* libraryrequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = libraryrequests.swift; sourceTree = "<group>"; };
 		3225E5272C482F7100DF0285 /* statusofrequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = statusofrequest.swift; sourceTree = "<group>"; };
@@ -105,7 +103,6 @@
 		3C51AEB42C3E628D00C39117 /* AdminAnalyticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAnalyticsView.swift; sourceTree = "<group>"; };
 		3C7290B62C40F6060047AEC0 /* BookDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailsView.swift; sourceTree = "<group>"; };
 		3CE20B412C443C0C00E123FD /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
-		5FDAB7932C371F1000FEC1C2 /* SidebarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		5FDAB7942C371F1000FEC1C2 /* AddBookView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBookView.swift; sourceTree = "<group>"; };
 		5FE798552C413640005B6B56 /* AddCampaignEventsSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCampaignEventsSheetView.swift; sourceTree = "<group>"; };
 		5FE798572C423DEE005B6B56 /* AddCampaignEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCampaignEventsView.swift; sourceTree = "<group>"; };
@@ -162,6 +159,7 @@
 				3225E5252C47E40B00DF0285 /* libraryrequests.swift */,
 				32D84C1C2C37213E00E489F7 /* LibrarianView.swift */,
 				8016A7DE2C353E8B0037D386 /* ContentView.swift */,
+				8092BE4A2C3FA1A400D895F5 /* ForgetPasswordAdminView.swift */,
 				5FDAB7942C371F1000FEC1C2 /* AddBookView.swift */,
 				32E4A72A2C3BC3C3003D0D6C /* InventoryView.swift */,
 				329E0A582C3823EC00E8925A /* ForgetPasswordView.swift */,
@@ -170,12 +168,10 @@
 				1B19F5E82C46436F00F92C3A /* QRStruct.swift */,
 				32D84C132C3708C500E489F7 /* LoginView.swift */,
 				8092BE4C2C3FA28500D895F5 /* ResetPasswordView.swift */,
-				8092BE4A2C3FA1A400D895F5 /* ForgetPasswordAdminView.swift */,
 				3C41F1EA2C3FF5BB000454E9 /* CustomDatePicker.swift */,
 				32D84C152C370E0A00E489F7 /* AdminView.swift */,
 				3C346E502C4158E400BB7E5B /* UploadSuccessfulView.swift */,
 				3C51AEB42C3E628D00C39117 /* AdminAnalyticsView.swift */,
-				3225E5212C47CF8100DF0285 /* NotificationPopoverView.swift */,
 				A0AFD19B2C4663D500C2A770 /* MembershipView.swift */,
 				A053CDDB2C46DECC0059A2B3 /* MembershipViewModel.swift */,
 				A0AFD19F2C469BC800C2A770 /* MembershipCardView.swift */,
@@ -392,7 +388,6 @@
 				3225E5242C47DB0A00DF0285 /* requests.swift in Sources */,
 				8092BE4D2C3FA28500D895F5 /* ResetPasswordView.swift in Sources */,
 				A053CDDC2C46DECC0059A2B3 /* MembershipViewModel.swift in Sources */,
-				3225E5222C47CF8100DF0285 /* NotificationPopoverView.swift in Sources */,
 				A0AFD19C2C4663D600C2A770 /* MembershipView.swift in Sources */,
 				1A8428C72C3BEDEC00A34F8D /* FilePicker.swift in Sources */,
 				3225E52C2C48CE0B00DF0285 /* LibrarianViewModel.swift in Sources */,
