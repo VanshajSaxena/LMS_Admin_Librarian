@@ -1,3 +1,4 @@
+
 import SwiftUI
 
 struct InventoryView: View {
@@ -18,7 +19,6 @@ struct InventoryView: View {
         }
     }
     
-
     var body: some View {
         VStack {
             // Header and search bar
@@ -49,55 +49,24 @@ struct InventoryView: View {
             // Search bar
             HStack(spacing: 10) {
                 ZStack {
-                    TextField("Search the book", text: $searchQuery)
+                    TextField("Search the book", text: $viewModel.searchQuery)
                         .padding()
                         .background(Color.white)
                         .cornerRadius(8)
-//                        .frame(height: 40)
                         .overlay(
                             RoundedRectangle(cornerRadius: 8)
                                 .stroke(Color("ThemeOrange"), lineWidth: 2)
                         )
-                    
-                    HStack {
-                        Spacer()
-                        Button(action: {
-                            // Action for Find button
-                        }) {
-                            Text("Find")
-                                .foregroundColor(.white)
-                                .padding(.horizontal, 30)
-                                .padding(.vertical, 5)
-                                .background(Color("ThemeOrange"))
-                                .cornerRadius(8)
+                        .onChange(of: viewModel.searchQuery) { newValue in
+                            viewModel.searchBooks(query: newValue)
                         }
-                        .padding(.trailing, 12)
-                    }
+                    
+                    
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.leading, 50)
                 
                 Spacer()
-                
-                // Filter action
-                Button(action: {
-                    
-                }) {
-                    HStack {
-                        Image(systemName: "line.horizontal.3.decrease.circle")
-                        Text("Filter")
-                    }
-                    .padding()
-                    .foregroundColor(Color("ThemeOrange"))
-                    .cornerRadius(8)
-                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color("ThemeOrange")))
-                }
-                .padding(.trailing, 10)
-                
-                Divider()
-                    .frame(width: 1.5, height: 40)
-                    .padding(.top,20)
-                    .background(Color.themeOrange)
                 
                 // Add Book action
                 Button(action: {
@@ -118,10 +87,10 @@ struct InventoryView: View {
             
             // Book table
             Table(viewModel.books) {
-                TableColumn("S.No"){
-                    book in
-                    let index = viewModel.books.firstIndex(of: book)
-                    Text("\(index!+1)")
+                TableColumn("S.No") { book in
+                    if let index = viewModel.books.firstIndex(of: book) {
+                        Text("\(index + 1)")
+                    }
                 }
                 TableColumn("Name", value: \.title)
                 TableColumn("Author", value: \.authors)
@@ -134,26 +103,6 @@ struct InventoryView: View {
                 }
                 TableColumn("Column", value: \.bookColumn)
                 TableColumn("Shelf", value: \.bookShelf)
-                
-//                TableColumn("Actions") { book in
-////                    HStack {
-////                        // Edit button
-////                        Button(action: {
-////                            // Edit action
-////                        }) {
-////                            Image(systemName: "pencil")
-////                                .foregroundColor(.black)
-////                        }
-////                        
-////                        // Delete button
-////                        Button(action: {
-////                            // Delete action
-////                        }) {
-////                            Image(systemName: "trash")
-////                                .foregroundColor(.red)
-////                        }
-////                    }
-//                }
             }
             .task {
                 await updateInventoryTableView()
@@ -162,17 +111,6 @@ struct InventoryView: View {
             .padding(.horizontal, 50)
             .padding(.bottom, 30)
             .padding(.top, 12)
-            
-//            Spacer() // Push the footer to the bottom
-//            
-//            HStack {
-//                Text("This is the \n End Folks!")
-//                    .font(.system(size: 40))
-//                    .fontWeight(.bold)
-//                    .foregroundColor(Color("ThemeOrange"))
-//                Spacer()
-//            }
-//            .padding(40)
         }
         .background(Color("BackgroundColor").edgesIgnoringSafeArea(.all))
         .sheet(isPresented: $showAddBookView) {

@@ -3,42 +3,7 @@ import FirebaseFirestore
 import Combine
 import SwiftUI
 
-final class CampaignsEventsViewModel: ObservableObject {
-    private var db = Firestore.firestore()
-    @Published var campaigns: [CampaignsEvents] = []
 
-    func fetchCampaigns() {
-        db.collection("campaigns").addSnapshotListener { (querySnapshot, error) in
-            if let error = error {
-                print("Error fetching documents: \(error)")
-                return
-            }
-
-            guard let documents = querySnapshot?.documents else {
-                print("No documents")
-                return
-            }
-
-            self.campaigns = documents.compactMap { queryDocumentSnapshot -> CampaignsEvents? in
-                let data = queryDocumentSnapshot.data()
-                let id = data["id"] as? String ?? ""
-                let type = data["type"] as? String ?? ""
-                let title = data["title"] as? String ?? ""
-                let price = data["price"] as? String ?? ""
-                let startDateString = data["startDate"] as? String ?? ""
-                let endDateString = data["endDate"] as? String ?? ""
-                let description = data["description"] as? String ?? ""
-
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "dd-MM-yyyy"
-                let startDate = dateFormatter.date(from: startDateString) ?? Date()
-                let endDate = dateFormatter.date(from: endDateString) ?? Date()
-
-                return CampaignsEvents(id: id, type: type, title: title, price: price, startDate: startDate, endDate: endDate, description: description)
-            }
-        }
-    }
-}
 struct AddCampaignEventsView: View {
     @State private var showingAddCampaignSheet = false
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
@@ -103,71 +68,101 @@ struct AddCampaignEventsView: View {
     }
     
     func campaignCard(for campaign: CampaignsEvents) -> some View {
-        VStack(alignment: .leading) {
+        VStack {
             Image(campaign.imageName)
                 .resizable()
                 .scaledToFit()
                 .frame(height: 100)
                 .cornerRadius(10)
+            
+            Spacer().frame(height: 5)
+            
             Text(campaign.title)
-                .font(.headline)
-                .padding(.top, 8)
-                .frame(alignment: .center)
+                .font(.system(size: 28, weight: .bold))
+                .multilineTextAlignment(.center)
+                .lineLimit(1)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .foregroundColor(.orange)
+                .padding(.top)
+            
+            Spacer().frame(height: 9) // Add space between the title and date
+            
             Text("\(campaign.startDate, formatter: dateFormatter) - \(campaign.endDate, formatter: dateFormatter)")
                 .font(.subheadline)
                 .frame(alignment: .center)
+            
+            Spacer().frame(height: 8) // Add space between the date and description
+            
             Text(campaign.description)
                 .font(.body)
-               
+                .foregroundColor(.gray)
+//            Text("*Terms and conditions apply")
+//                .font(.footnote)
+//                .foregroundColor(.gray)
         }
         .padding()
         .background(Color("CampaignCard"))
         .cornerRadius(10)
         .shadow(radius: 5)
     }
+
+
     
     func saleCampaignCard(for campaign: CampaignsEvents) -> some View {
         HStack {
             Image(campaign.imageName)
-            .resizable()
-            .scaledToFill()
-            .frame(width: 150, height: 160)
-            .cornerRadius(10)
-            .clipped() // Ensure the image stays within the bounds
-            .padding(.leading, -20)
-            .padding(.bottom , -50)
+                .resizable()
+                .scaledToFill()
+                .frame(width: 150, height: 160)
+                .cornerRadius(10)
+                .clipped() // Ensure the image stays within the bounds
+                .padding(.leading, -20)
+                .padding(.bottom, -50)
             
-            VStack(alignment: .leading, spacing: 8) {
-                Text(campaign.title)
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .padding(.top, 8)
-                    .frame(alignment: .center)
-                
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(campaign.price ?? "")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
+            VStack(alignment: .leading, spacing: 4) { // Reduced spacing
+                GeometryReader { geometry in
+                    Text(campaign.title)
+                        .font(.system(size: 32, weight: .bold))
+                        .lineLimit(1) // Ensure the title stays on one line
                         .foregroundColor(.orange)
+                        .frame(width: geometry.size.width, alignment: .leading)
                 }
-                
+                .frame(height: 40) // Fixed height to prevent layout issues
+
+                Spacer().frame(height: 3) // Reduced spacing
+
+                Text(campaign.price ?? "")
+                    .font(.title2)// Slightly smaller font size for the price
+                    .lineLimit(1)
+                    .fontWeight(.bold)
+                    .foregroundColor(.black)
+
+                Spacer().frame(height: 7)
                 Text(campaign.description)
                     .font(.body)
-                    .padding(.top, 8)
+                    .foregroundColor(.gray)
+                    .lineLimit(2) // Ensure the description fits into two lines
+
+                Spacer().frame(height: 6)
+                Text("\(campaign.startDate, formatter: dateFormatter) - \(campaign.endDate, formatter: dateFormatter)")
+                    .font(.subheadline)
+                    .frame(alignment: .center)
+
+                Spacer().frame(height: 8)
                 Text("*Terms and conditions apply")
                     .font(.footnote)
                     .foregroundColor(.gray)
             }
-            
             .padding(.horizontal)
-            
         }
         .padding()
         .background(Color("CampaignCard"))
         .cornerRadius(10)
         .shadow(radius: 5)
-        .frame(width: 375, height: 200)
+        .frame(width: 375, height: 300)
     }
+
+
     
     private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -175,5 +170,6 @@ struct AddCampaignEventsView: View {
         return formatter
     }
 }
-
-
+#Preview{
+    AddCampaignEventsView()
+}
