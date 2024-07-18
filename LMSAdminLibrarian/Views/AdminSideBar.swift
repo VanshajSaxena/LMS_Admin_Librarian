@@ -18,7 +18,7 @@ struct AdminSideBar: View {
             VStack(alignment: .leading, spacing: 30) {
                 SidebarButton(imageName: "chart.bar", text: "Analytics", selectedButton: $selectedButton)
                 SidebarButton(imageName: "archivebox", text: "Staff", selectedButton: $selectedButton)
-                SidebarButton(imageName: "person", text: "Requests", selectedButton: $selectedButton)
+             //   SidebarButton(imageName: "person", text: "Requests", selectedButton: $selectedButton)
                 SidebarButton(imageName: "gearshape", text: "Settings", selectedButton: $selectedButton)
             }
             .padding(.horizontal, 30)
@@ -101,8 +101,8 @@ struct SidebarButton: View {
 
         case "Staff":
             AddLibrarianView()
-        case "Requests":
-            AdminRequestView()
+//        case "Requests":
+//            AdminRequestView()
         case "Settings":
             SettingsView()
         default:

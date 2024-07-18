@@ -14,8 +14,10 @@ import SwiftUI
 
 struct AdminRequestView: View {
     @ObservedObject var viewModel = AdminViewModel()
-    @State private var showingAddCampaignSheet = false
-    @State private var processingCampaignId: String?
+       @State private var showingAddCampaignSheet = false
+       @State private var processingCampaignId: String?
+       // Assume true for testing, replace with actual logic
+
     
     var body: some View {
         VStack(alignment: .leading) {
