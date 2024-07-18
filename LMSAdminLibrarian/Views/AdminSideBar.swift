@@ -100,9 +100,10 @@ struct SidebarButton: View {
             ScrollView {
                         VStack(alignment: .leading, spacing: 0) {
                             AdminAnalyticsView()
-                            MembershipView()
+                            GraphView()
                         }
                         .frame(maxWidth: .infinity, alignment: .topLeading)
+                        .background(Color.background)
                     }
                     .edgesIgnoringSafeArea(.top)
 

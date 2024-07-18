@@ -27,7 +27,7 @@ struct AdminAnalyticsView: View {
             .padding()
             
             HStack(alignment: .center) {
-                Text("Monthly \nAnalytics")
+                Text("Data \nAnalytics")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                 
