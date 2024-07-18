@@ -172,8 +172,10 @@ struct LoginView: View {
     }
     
     func validatePassword(_ password: String) -> (Bool, String) {
-        let isValid = !password.isEmpty
-        let message = isValid ? "Password is valid." : "Password cannot be empty."
+        let passwordRegEx = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{8,}$"
+        let passwordPred = NSPredicate(format: "SELF MATCHES %@", passwordRegEx)
+        let isValid = passwordPred.evaluate(with: password)
+        let message = isValid ? "Valid password." : "Password must be at least 8 characters, including one uppercase, one lowercase, one number, and one special character."
         return (isValid, message)
     }
 }
