@@ -165,6 +165,10 @@ struct GraphView: View {
     @State private var analyticsData: (basicStats: [AnalyticsData], issueReturnsData: [(month: String, issued: Int, returned: Int)], genreData: ([(genre: String, percentage: Double)], Int))?
     
     var body: some View {
+        Text("Graphs")
+            .font(.largeTitle)
+            .bold()
+            .padding()
         HStack(alignment: .top, spacing: 30) {
             if let data = analyticsData {
                 IssueAndReturnsChart(data: data.issueReturnsData)

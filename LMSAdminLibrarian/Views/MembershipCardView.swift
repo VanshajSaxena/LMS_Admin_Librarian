@@ -22,42 +22,35 @@ struct MembershipCardView: View {
     }
     
     var body: some View {
-        VStack(alignment: .center ,spacing: 0) {
+        VStack(alignment: .leading ,spacing: 0) {
             
             
-            
-            premiumHeaderView()
-            
-            VStack(alignment: .leading ,spacing: 20) {
-                paymentInfoView()
-                togglePremiumView()
-                payNowButton()
+            VStack(alignment: .center) {
+                premiumHeaderView()
+                
+                VStack(alignment: .leading ,spacing: 20) {
+                    paymentInfoView()
+                    togglePremiumView()
+                    payNowButton()
+                }
+                .padding(20)
+                .background(Color.white.opacity(0.2))
+                .background(VisualEffectBlur(blurStyle: .systemUltraThinMaterialLight))
+                .cornerRadius(20)
+                .padding([.leading,.trailing], 20)
+                .offset(y: -100)
             }
-            .padding(20)
-            .background(Color.white.opacity(0.2))
-            .background(VisualEffectBlur(blurStyle: .systemUltraThinMaterialLight))
-            .cornerRadius(20)
-            .padding([.leading,.trailing], 50)
-            .offset(y: -100)
             
             VStack(alignment: .leading, spacing: 15) {
                 ForEach(currentPlan.perks, id: \.self) { perk in
                     FeatureRow(text: perk)
                 }
             }
-            .padding(20)
-            .padding(.trailing, 300)
-            .offset(y: -120)
+            .padding(.leading, 20)
+            .offset(y: -100)
         }
-        .padding(.bottom, -120)
-        .cornerRadius(20)
-        .padding(.leading, 50)
-        .padding(.trailing, 400)
-        
-        
-        
-        Spacer()
-        Spacer()
+        .frame(width: 500)
+        .padding()
     }
     
     @ViewBuilder
@@ -70,7 +63,7 @@ struct MembershipCardView: View {
                     .foregroundColor(.white)
                 
                 Text("Join the premium subscription to avail new and exciting features that would \n enhance your experience!")
-                    .padding()
+//                    .padding()
                     .font(.footnote)
                     .foregroundColor(.white.opacity(0.9))
                     .multilineTextAlignment(.center)
@@ -97,6 +90,7 @@ struct MembershipCardView: View {
                     .foregroundColor(.secondary)
             }
             Spacer()
+            .padding()
             Picker("Duration", selection: $selectedTimeIndex) {
                 ForEach(0..<filteredPlans.count, id: \.self) { index in
                     Text("\(filteredPlans[index].duration) \(filteredPlans[index].duration == 1 ? "month" : "months")")

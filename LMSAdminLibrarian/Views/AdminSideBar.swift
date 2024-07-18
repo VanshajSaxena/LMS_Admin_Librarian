@@ -100,10 +100,14 @@ struct SidebarButton: View {
                         VStack(alignment: .leading, spacing: 0) {
                             AdminAnalyticsView()
                             GraphView()
+                                .padding(.leading, 30)
+                            MembershipView()
+                                .padding(.top, 30)
                         }
                         .frame(maxWidth: .infinity, alignment: .topLeading)
-                        .background(Color.background)
+                        
                     }
+            .background(Color.background)
                     .edgesIgnoringSafeArea(.top)
 
         case "Staff":

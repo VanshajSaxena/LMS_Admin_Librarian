@@ -221,7 +221,7 @@ struct AdminAnalyticsView: View {
                 .padding(.leading, 50)
                 
                 // Add other views below the main content
-                MembershipView()
+                
                 
                 // Add more views as needed
             }
