@@ -22,56 +22,59 @@ struct MembershipCardView: View {
     }
     
     var body: some View {
-        VStack(spacing: 0) {
-            premiumHeaderView()
+        VStack(alignment: .leading ,spacing: 0) {
             
-            VStack(spacing: 20) {
-                paymentInfoView()
-                togglePremiumView()
-                payNowButton()
+            
+            VStack(alignment: .center) {
+                premiumHeaderView()
+                
+                VStack(alignment: .leading ,spacing: 20) {
+                    paymentInfoView()
+                    togglePremiumView()
+                    payNowButton()
+                }
+                .padding(20)
+                .background(Color.white.opacity(0.2))
+                .background(VisualEffectBlur(blurStyle: .systemUltraThinMaterialLight))
+                .cornerRadius(20)
+                .padding([.leading,.trailing], 20)
+                .offset(y: -100)
             }
-            .padding(20)
-            .background(Color.white.opacity(0.2))
-            .background(VisualEffectBlur(blurStyle: .systemUltraThinMaterialLight))
-            .cornerRadius(20)
-            .padding([.leading, .trailing], 300)
-            .offset(y: -100)
             
             VStack(alignment: .leading, spacing: 15) {
                 ForEach(currentPlan.perks, id: \.self) { perk in
                     FeatureRow(text: perk)
                 }
             }
-            .padding(20)
-            .padding(.trailing, 440)
-            .background(Color.white)
-            .offset(y: -120)
+            .padding(.leading, 20)
+            .offset(y: -100)
         }
-        .padding(.bottom, -120)
-        .background(Color.white)
-        .cornerRadius(20)
+        .frame(width: 500)
         .padding()
     }
     
     @ViewBuilder
     private func premiumHeaderView() -> some View {
-        VStack(alignment: .center, spacing: 10) {
-            Text("Unlock More with Premium")
-                .font(.headline)
-                .fontWeight(.bold)
-                .foregroundColor(.white)
-            
-            Text("Join the premium subscription to avail new and exciting features that would enhance your experience!")
-                .font(.caption)
-                .foregroundColor(.white.opacity(0.9))
-                .multilineTextAlignment(.center)
-                .fixedSize(horizontal: false, vertical: true)
-        }
-        .padding(20)
-        .padding(.bottom, 100)
-        .padding(.top, 30)
-        .background(Color.themeOrange)
-        .cornerRadius(20)
+        
+            VStack(alignment: .center, spacing: 10) {
+                Text("Unlock More with Premium")
+                    .font(.headline)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                
+                Text("Join the premium subscription to avail new and exciting features that would \n enhance your experience!")
+//                    .padding()
+                    .font(.footnote)
+                    .foregroundColor(.white.opacity(0.9))
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .padding(10)
+            .padding(.bottom, 100)
+//            .padding(.top, 30)
+            .background(Color.themeOrange)
+            .cornerRadius(20)
+        
     }
     
     private func paymentInfoView() -> some View {
@@ -87,6 +90,7 @@ struct MembershipCardView: View {
                     .foregroundColor(.secondary)
             }
             Spacer()
+            .padding()
             Picker("Duration", selection: $selectedTimeIndex) {
                 ForEach(0..<filteredPlans.count, id: \.self) { index in
                     Text("\(filteredPlans[index].duration) \(filteredPlans[index].duration == 1 ? "month" : "months")")
@@ -184,4 +188,5 @@ extension View {
 //    static var previews: some View {
 //    }
 //}
+
 
