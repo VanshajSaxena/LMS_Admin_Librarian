@@ -25,19 +25,8 @@ struct AddLibrarianView: View {
                         .fontWeight(.bold)
                         .padding(.leading, 50)
                     Spacer()
-                    Button(action: {
-                        // My Account action
-                    }) {
-                        HStack {
-                            Image(systemName: "person.circle")
-                            Text("My Account")
-                        }
-                        .padding()
-                        .background(Color("ThemeOrange"))
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
-                    }
-                    .padding(.trailing, 50)
+                  
+                    
                 }
                 .padding(.top, 50)
                 
@@ -75,21 +64,9 @@ struct AddLibrarianView: View {
                     Spacer()
                     
                     // Filter and add button
-                    Button(action: {
-                        // Filter action
-                    }) {
-                        HStack {
-                            Image(systemName: "line.horizontal.3.decrease.circle")
-                            Text("Filter")
-                        }
-                        .padding()
-                        .foregroundColor(Color("ThemeOrange"))
-                        .cornerRadius(8)
-                        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color("ThemeOrange")))
-                    }
-                    .padding(.trailing, 10)
+                   
                     
-                    Rectangle().frame(width: 1, height: 65).foregroundColor(Color("ThemeOrange"))
+                   
                     
                     Button(action: {
                         isShowingAddLibrarian.toggle()
@@ -128,7 +105,7 @@ struct AddLibrarianView: View {
                     .padding(.leading, 7)
                 }
                 .onAppear(perform: fetchLibrarians)
-                .navigationTitle("Librarians")
+                
                 
                 Table(librarians) {
                     TableColumn("Name", value: \.name)

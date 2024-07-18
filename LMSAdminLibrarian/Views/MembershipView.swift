@@ -35,13 +35,14 @@ struct MembershipView: View {
             .clipShape(RoundedRectangle(cornerRadius: 10))
         }
     }
-        .padding(.leading, 60)
-        .padding(.trailing, 30)
+        .padding(.leading, 40)
+        .padding(.trailing, 40)
         .sheet(isPresented: $showAddNewMemberView) {
             ScrollView {
                 AddNewMembershipView()
             }
             .edgesIgnoringSafeArea(.top)
+            .padding(.leading,50)
             
         }
         .task {
