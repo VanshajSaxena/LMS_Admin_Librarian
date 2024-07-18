@@ -77,10 +77,12 @@ struct AdminRequestView: View {
                                                 .background(selectedButton == "approved_\(campaign.id!)" ? Color("ThemeOrange") : Color.clear)
                                                 .foregroundColor(selectedButton == "approved_\(campaign.id!)" ? .white : .themeOrange)
                                                 .cornerRadius(10)
+                                              
                                                 .overlay(
                                                     RoundedRectangle(cornerRadius: 12)
                                                         .stroke(Color("ThemeOrange")))
                                         }
+                                        .padding(.leading , 55)
 
                                         Button(action: {
                                             if processingCampaignId != campaign.id {
@@ -97,6 +99,7 @@ struct AdminRequestView: View {
                                                 .background(selectedButton == "denied_\(campaign.id!)" ? Color("ThemeOrange") : Color.clear)
                                                 .foregroundColor(selectedButton == "denied_\(campaign.id!)" ? .white : .themeOrange)
                                                 .cornerRadius(10)
+                                               
                                                 .overlay(
                                                     RoundedRectangle(cornerRadius: 10)
                                                         .stroke(Color("ThemeOrange")))
@@ -108,6 +111,7 @@ struct AdminRequestView: View {
                                         .font(.headline)
                                         .foregroundColor(campaign.status == "approved" ? .green : .red)
                                         .padding(.top, 10)
+                                        .padding(.leading,55)
                                 }
                             }
                             .padding(.horizontal)
@@ -148,6 +152,7 @@ struct AdminRequestView: View {
         .background(Color("CampaignCard"))
         .cornerRadius(10)
         .shadow(radius: 5)
+        .padding(.leading , 55)
     }
 
     // Sale campaign card
@@ -188,6 +193,7 @@ struct AdminRequestView: View {
             .cornerRadius(10)
             .shadow(radius: 5)
             .frame(width: 375, height: 200)
+            .padding(.leading , 55)
         }
     }
 
