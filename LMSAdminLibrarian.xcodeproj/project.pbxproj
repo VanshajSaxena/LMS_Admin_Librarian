@@ -38,11 +38,12 @@
 		32D84C1D2C37213E00E489F7 /* LibrarianView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D84C1C2C37213E00E489F7 /* LibrarianView.swift */; };
 		32E4A7272C3AEC22003D0D6C /* AddLibrarianView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E4A7262C3AEC22003D0D6C /* AddLibrarianView.swift */; };
 		32E4A72B2C3BC3C3003D0D6C /* InventoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E4A72A2C3BC3C3003D0D6C /* InventoryView.swift */; };
+		32F9C57A2C44CFFD001B88CA /* GenerateRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F9C5792C44CFFD001B88CA /* GenerateRequestView.swift */; };
 		3C346E512C4158E400BB7E5B /* UploadSuccessfulView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C346E502C4158E400BB7E5B /* UploadSuccessfulView.swift */; };
 		3C41F1EB2C3FF5BB000454E9 /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C41F1EA2C3FF5BB000454E9 /* CustomDatePicker.swift */; };
 		3C51AEB52C3E628D00C39117 /* AdminAnalyticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C51AEB42C3E628D00C39117 /* AdminAnalyticsView.swift */; };
 		3C7290B72C40F6060047AEC0 /* BookDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7290B62C40F6060047AEC0 /* BookDetailsView.swift */; };
-		3CE20B422C443C0C00E123FD /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE20B412C443C0C00E123FD /* GraphView.swift */; };
+		3CE20B422C443C0C00E123FD /* AdminGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE20B412C443C0C00E123FD /* AdminGraphView.swift */; };
 		3CE20B452C443CFA00E123FD /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 3CE20B442C443CFA00E123FD /* SwiftUICharts */; };
 		5FDAB7962C371F1000FEC1C2 /* AddBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FDAB7942C371F1000FEC1C2 /* AddBookView.swift */; };
 		5FE798562C413640005B6B56 /* AddCampaignEventsSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE798552C413640005B6B56 /* AddCampaignEventsSheetView.swift */; };
@@ -98,11 +99,12 @@
 		32D84C1C2C37213E00E489F7 /* LibrarianView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarianView.swift; sourceTree = "<group>"; };
 		32E4A7262C3AEC22003D0D6C /* AddLibrarianView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLibrarianView.swift; sourceTree = "<group>"; };
 		32E4A72A2C3BC3C3003D0D6C /* InventoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryView.swift; sourceTree = "<group>"; };
+		32F9C5792C44CFFD001B88CA /* GenerateRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateRequestView.swift; sourceTree = "<group>"; };
 		3C346E502C4158E400BB7E5B /* UploadSuccessfulView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadSuccessfulView.swift; sourceTree = "<group>"; };
 		3C41F1EA2C3FF5BB000454E9 /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
 		3C51AEB42C3E628D00C39117 /* AdminAnalyticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAnalyticsView.swift; sourceTree = "<group>"; };
 		3C7290B62C40F6060047AEC0 /* BookDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailsView.swift; sourceTree = "<group>"; };
-		3CE20B412C443C0C00E123FD /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		3CE20B412C443C0C00E123FD /* AdminGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminGraphView.swift; sourceTree = "<group>"; };
 		5FDAB7942C371F1000FEC1C2 /* AddBookView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBookView.swift; sourceTree = "<group>"; };
 		5FE798552C413640005B6B56 /* AddCampaignEventsSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCampaignEventsSheetView.swift; sourceTree = "<group>"; };
 		5FE798572C423DEE005B6B56 /* AddCampaignEventsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCampaignEventsView.swift; sourceTree = "<group>"; };
@@ -181,7 +183,7 @@
 				326BD2452C3E66EC008F1EB2 /* AdminMainView.swift */,
 				326BD2472C3E670E008F1EB2 /* LibrarianMainView.swift */,
 				326BD2492C3E674C008F1EB2 /* AdminSideBar.swift */,
-				3CE20B412C443C0C00E123FD /* GraphView.swift */,
+				3CE20B412C443C0C00E123FD /* AdminGraphView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -410,7 +412,7 @@
 				32D84C162C370E0A00E489F7 /* AdminView.swift in Sources */,
 				3225E52E2C48CEA100DF0285 /* AdminViewModel.swift in Sources */,
 				326BD2482C3E670E008F1EB2 /* LibrarianMainView.swift in Sources */,
-				3CE20B422C443C0C00E123FD /* GraphView.swift in Sources */,
+				3CE20B422C443C0C00E123FD /* AdminGraphView.swift in Sources */,
 				8016A7DD2C353E8B0037D386 /* LMSAdminLibrarian.swift in Sources */,
 				326BD24A2C3E674C008F1EB2 /* AdminSideBar.swift in Sources */,
 				8016A7DD2C353E8B0037D386 /* LMSAdminLibrarian.swift in Sources */,

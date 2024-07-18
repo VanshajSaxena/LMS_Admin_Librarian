@@ -86,85 +86,101 @@ struct IssueAndReturnsChart: View {
         .padding()
         .frame(width: 600, height: 500) // Increased size
         .background(RoundedRectangle(cornerRadius: 20).fill(Color.white))
-        .shadow(radius: 5)
+        .shadow(radius: 3)
     }
 }
 
 struct GenrePieChart: View {
     let data: [(genre: String, percentage: Double)]
     let totalBooks: Int
-    let colorNames: [String] = ["ThemeOrange", "Graph1", "Graph2", "Graph3"]
+    let colorNames: [String] = ["ThemeOrange", "Graph1", "Graph2", "Graph3", "Graph4"]
+    
+    private var top5Data: [(genre: String, percentage: Double)] {
+        Array(data.prefix(5))
+    }
+    
+    private var otherPercentage: Double {
+        data.dropFirst(5).reduce(0) { $0 + $1.percentage }
+    }
+    
+    private var chartData: [(genre: String, percentage: Double)] {
+        var result = top5Data
+        if otherPercentage > 0 {
+            result.append((genre: "Other", percentage: otherPercentage))
+        }
+        return result
+    }
     
     var body: some View {
-        VStack(spacing: 15) { // Increased spacing
+        VStack(spacing: 15) {
             ZStack {
-                Chart(data, id: \.genre) { item in
+                Chart(chartData, id: \.genre) { item in
                     SectorMark(
                         angle: .value("Percentage", item.percentage),
                         innerRadius: .ratio(0.6),
                         angularInset: 1.5
                     )
-                    .foregroundStyle(Color(colorNames[data.firstIndex { $0.genre == item.genre } ?? 0 % colorNames.count]))
+                    .foregroundStyle(color(for: item.genre))
                 }
                 
                 VStack {
                     Text("Total Books")
-                        .font(.headline) // Larger font
+                        .font(.headline)
                     Text("\(totalBooks)")
-                        .font(.largeTitle.bold()) // Larger font
+                        .font(.largeTitle.bold())
                 }
             }
-            .frame(height: 300) // Increased height
+            .frame(height: 300)
             
-            VStack(alignment: .leading, spacing: 12) { // Increased spacing
-                ForEach(data, id: \.genre) { item in
+            VStack(alignment: .leading, spacing: 12) {
+                ForEach(chartData, id: \.genre) { item in
                     HStack {
                         Circle()
-                            .fill(Color(colorNames[data.firstIndex { $0.genre == item.genre } ?? 0 % colorNames.count]))
-                            .frame(width: 12, height: 12) // Increased size
+                            .fill(color(for: item.genre))
+                            .frame(width: 12, height: 12)
                         Text(item.genre)
-                            .font(.subheadline) // Larger font
+                            .font(.subheadline)
                         Spacer()
                         Text("\(Int(item.percentage))%")
-                            .font(.subheadline) // Larger font
+                            .font(.subheadline)
                     }
                 }
             }
             .padding(.horizontal)
         }
         .padding()
-        .frame(width: 400, height: 500) // Increased size
+        .frame(width: 400, height: 500)
         .background(RoundedRectangle(cornerRadius: 20).fill(Color.white))
         .shadow(radius: 5)
+    }
+    
+    func color(for genre: String) -> Color {
+        let index = chartData.firstIndex { $0.genre == genre } ?? 0
+        return Color(colorNames[index % colorNames.count])
     }
 }
 
 struct GraphView: View {
-    let issueReturnData: [(month: String, issued: Int, returned: Int)] = [
-        ("Jan", 600, 400),
-        ("Feb", 800, 700),
-        ("Mar", 640, 480),
-        ("Apr", 760, 440),
-        ("May", 860, 600),
-        ("Jun", 840, 420)
-    ]
-    
-    let genreData: [(genre: String, percentage: Double)] = [
-        ("Romantic", 37),
-        ("Comedy", 13),
-        ("Drama", 31),
-        ("Horror", 19)
-    ]
+    @StateObject private var viewModel = AdminAnalyticsViewModel()
+    @State private var analyticsData: (basicStats: [AnalyticsData], issueReturnsData: [(month: String, issued: Int, returned: Int)], genreData: ([(genre: String, percentage: Double)], Int))?
     
     var body: some View {
-        HStack(alignment: .top, spacing: 30) { // Increased spacing
-            IssueAndReturnsChart(data: issueReturnData)
-                .background(RoundedRectangle(cornerRadius: 20).fill(Color.white)).shadow(radius: 5)
-            
-            GenrePieChart(data: genreData, totalBooks: 1430)
-                .background(RoundedRectangle(cornerRadius: 20).fill(Color.white)).shadow(radius: 5)
+        HStack(alignment: .top, spacing: 30) {
+            if let data = analyticsData {
+                IssueAndReturnsChart(data: data.issueReturnsData)
+                    .background(RoundedRectangle(cornerRadius: 20).fill(Color.white))
+                
+                GenrePieChart(data: data.genreData.0, totalBooks: data.genreData.1)
+                    .background(RoundedRectangle(cornerRadius: 20).fill(Color.white))
+            } else {
+                ProgressView()
+            }
         }
         .padding()
+        .task {
+            analyticsData = await viewModel.createAnalyticsDataObj()
+        }
+        .background(Color.background)
     }
 }
 

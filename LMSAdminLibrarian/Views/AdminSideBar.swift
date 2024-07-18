@@ -96,8 +96,15 @@ struct SidebarButton: View {
     func destinationView(for text: String) -> some View {
         switch text {
         case "Analytics":
-
-            AdminAnalyticsView()
+            ScrollView {
+                        VStack(alignment: .leading, spacing: 0) {
+                            AdminAnalyticsView()
+                            GraphView()
+                        }
+                        .frame(maxWidth: .infinity, alignment: .topLeading)
+                        .background(Color.background)
+                    }
+                    .edgesIgnoringSafeArea(.top)
 
         case "Staff":
             AddLibrarianView()
