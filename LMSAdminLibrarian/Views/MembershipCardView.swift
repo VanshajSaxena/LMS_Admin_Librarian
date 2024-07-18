@@ -22,10 +22,13 @@ struct MembershipCardView: View {
     }
     
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(alignment: .center ,spacing: 0) {
+            
+            
+            
             premiumHeaderView()
             
-            VStack(spacing: 20) {
+            VStack(alignment: .leading ,spacing: 20) {
                 paymentInfoView()
                 togglePremiumView()
                 payNowButton()
@@ -34,7 +37,7 @@ struct MembershipCardView: View {
             .background(Color.white.opacity(0.2))
             .background(VisualEffectBlur(blurStyle: .systemUltraThinMaterialLight))
             .cornerRadius(20)
-            .padding([.leading, .trailing], 300)
+            .padding([.leading,.trailing], 50)
             .offset(y: -100)
             
             VStack(alignment: .leading, spacing: 15) {
@@ -43,35 +46,42 @@ struct MembershipCardView: View {
                 }
             }
             .padding(20)
-            .padding(.trailing, 440)
-            .background(Color.white)
+            .padding(.trailing, 300)
             .offset(y: -120)
         }
         .padding(.bottom, -120)
-        .background(Color.white)
         .cornerRadius(20)
-        .padding()
+        .padding(.leading, 50)
+        .padding(.trailing, 400)
+        
+        
+        
+        Spacer()
+        Spacer()
     }
     
     @ViewBuilder
     private func premiumHeaderView() -> some View {
-        VStack(alignment: .center, spacing: 10) {
-            Text("Unlock More with Premium")
-                .font(.headline)
-                .fontWeight(.bold)
-                .foregroundColor(.white)
-            
-            Text("Join the premium subscription to avail new and exciting features that would enhance your experience!")
-                .font(.caption)
-                .foregroundColor(.white.opacity(0.9))
-                .multilineTextAlignment(.center)
-                .fixedSize(horizontal: false, vertical: true)
-        }
-        .padding(20)
-        .padding(.bottom, 100)
-        .padding(.top, 30)
-        .background(Color.themeOrange)
-        .cornerRadius(20)
+        
+            VStack(alignment: .center, spacing: 10) {
+                Text("Unlock More with Premium")
+                    .font(.headline)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                
+                Text("Join the premium subscription to avail new and exciting features that would \n enhance your experience!")
+                    .padding()
+                    .font(.footnote)
+                    .foregroundColor(.white.opacity(0.9))
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .padding(10)
+            .padding(.bottom, 100)
+//            .padding(.top, 30)
+            .background(Color.themeOrange)
+            .cornerRadius(20)
+        
     }
     
     private func paymentInfoView() -> some View {
@@ -184,4 +194,5 @@ extension View {
 //    static var previews: some View {
 //    }
 //}
+
 
