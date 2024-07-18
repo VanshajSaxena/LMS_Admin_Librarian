@@ -11,17 +11,24 @@ struct AdminAnalyticsView: View {
             VStack(alignment: .leading, spacing: 20) {
                 HStack {
                     Spacer()
-                    Button(action: {
-                        // Action for My Account
-                    }) {
-                        HStack {
-                            Image(systemName: "person.circle")
-                            Text("My Account")
+                    HStack {
+                        Button(action: {
+                            // Action for My Account
+                        }) {
+                            Image(systemName: "bell")
+                                .imageScale(.large)
+                                .padding()
+                                .background(Color("ThemeOrange"))
+                                .foregroundColor(.white)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
                         }
-                        .padding()
-                        .background(Color("ThemeOrange"))
-                        .foregroundColor(.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        
+                        Text("Fable")
+                            
+                            .font(.system(size: 50))
+                            .foregroundColor(.themeOrange)
+                            .fontWeight(.bold)
+                            .padding(.leading, 10) // Adjust spacing as needed
                     }
                     .padding(.trailing, 30)
                     .padding(.top, 30)
@@ -36,28 +43,18 @@ struct AdminAnalyticsView: View {
                     Spacer()
                     
                     CustomDatePicker(date: $selectedDate)
-                        .frame(width: 80, height: 25)
+                        .frame(width: 140, height: 40)
                         .padding()
                         .background(Color.white)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                         .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color("ThemeOrange"), lineWidth: 1))
-                        .padding(.trailing, 10)
+                        
+                        .frame(alignment: .center)
                     
-                    Button(action: {
-                        showPopover.toggle()
-                    }) {
-                        Image(systemName: "square.and.arrow.up")
-                            .padding()
-                            .background(Color("ThemeOrange"))
-                            .foregroundColor(.white)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                    }
-                    .popover(isPresented: $showPopover) {
-                        // NotificationPopoverView()
-                    }
                 }
+                
                 .padding(.horizontal)
-                .padding(.trailing, 50)
+                .padding(.trailing)
                 .padding(.leading, 20)
                 
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -86,7 +83,7 @@ struct AdminAnalyticsView: View {
             .padding()
             .background(Color("BackgroundColor"))
         }
-        .edgesIgnoringSafeArea(.all)
+        
     }
 }
 
