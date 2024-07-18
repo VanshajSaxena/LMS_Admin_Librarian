@@ -8,7 +8,7 @@
 import Foundation
 
 // Original struct
-struct QRkData: Codable {
+struct QRData: Codable {
     var isbn: String
     var userId: String
     var currentTime: String
