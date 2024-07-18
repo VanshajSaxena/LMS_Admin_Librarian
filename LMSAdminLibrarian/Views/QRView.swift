@@ -7,7 +7,7 @@ import Firebase
 struct Scanner: View {
     var body: some View {
         VStack {
-            HeaderView()
+           
             IssueSection()
         }
         .padding()

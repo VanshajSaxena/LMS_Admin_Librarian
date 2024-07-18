@@ -278,12 +278,7 @@ struct AnalyticsButton: View  {
     }
 }
 
-struct AnalyticsData {
-    var image: String
-    var amount: String
-    var title: String
-    var rate: String
-}
+
 
 struct AdminAnalyticsView_Previews: PreviewProvider {
     static var previews: some View {
