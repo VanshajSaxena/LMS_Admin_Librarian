@@ -443,7 +443,9 @@ func processQRCode(_ code: String) -> QRkData? {
             isbn: scannedData.isbn,
             userId: scannedData.userId,
             currentTime: scannedData.timestamp,
-            date: scannedData.date
+            date: scannedData.date,
+            hasReturned: scannedData.hasReturned
+            
         )
         print("Decoded QR Data: \(qrData)")
         return qrData
