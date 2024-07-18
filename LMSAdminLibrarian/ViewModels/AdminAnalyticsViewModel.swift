@@ -208,8 +208,24 @@ final class AdminAnalyticsViewModel: ObservableObject {
                 }
             }
             
-            let genreData = genreCounts.map { (genre: $0.key, percentage: Double($0.value) / Double(totalBooks) * 100) }
-                .sorted { $0.percentage > $1.percentage }
+            let sortedGenres = genreCounts.sorted { $0.value > $1.value }
+            
+            var genreData: [(genre: String, percentage: Double)] = []
+            var otherCount = 0
+            
+            for (index, (genre, count)) in sortedGenres.enumerated() {
+                if index < 4 {
+                    let percentage = Double(count) / Double(totalBooks) * 100
+                    genreData.append((genre: genre, percentage: percentage))
+                } else {
+                    otherCount += count
+                }
+            }
+            
+            if otherCount > 0 {
+                let otherPercentage = Double(otherCount) / Double(totalBooks) * 100
+                genreData.append((genre: "Other", percentage: otherPercentage))
+            }
             
             return (genreData, totalBooks)
         } catch {
