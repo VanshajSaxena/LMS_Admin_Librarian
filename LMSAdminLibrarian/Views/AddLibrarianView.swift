@@ -137,23 +137,23 @@ struct AddLibrarianView: View {
                     TableColumn("Email", value: \.email)
                     TableColumn("Years of Experience", value: \.yearsOfExperience)
                     TableColumn("User Id", value: \.userID)
-                    TableColumn("Actions") { book in
-                        HStack {
-                            Button(action: {
-                                // Edit action
-                            }) {
-                                Image(systemName: "pencil")
-                                    .foregroundColor(.black)
-                            }
-                            // Delete button
-                            Button(action: {
-                                // Delete action
-                            }) {
-                                Image(systemName: "trash")
-                                    .foregroundColor(.red)
-                            }
-                        }
-                    }
+//                    TableColumn("Actions") { book in
+//                        HStack {
+//                            Button(action: {
+//                                // Edit action
+//                            }) {
+//                                Image(systemName: "pencil")
+//                                    .foregroundColor(.black)
+//                            }
+//                            // Delete button
+//                            Button(action: {
+//                                // Delete action
+//                            }) {
+//                                Image(systemName: "trash")
+//                                    .foregroundColor(.red)
+//                            }
+//                        }
+//                    }
                     
                 }
                 .padding(.horizontal, 50)
