@@ -1,6 +1,12 @@
+//
+//  LibrarianAnalyticsView.swift
+//  LMSAdminLibrarian
+//
+//  Created by Mahak garg on 18/07/24.
+//
 import SwiftUI
 
-struct AdminAnalyticsView: View {
+struct LibrarianAnalyticsView: View {
     @State private var selectedDate = Date()
     @State private var selectedIndex: Int? = nil
     @StateObject private var viewModel: AdminAnalyticsViewModel = AdminAnalyticsViewModel()
@@ -78,61 +84,20 @@ struct AdminAnalyticsView: View {
                 .padding(.top, 20)
                 .padding(.leading, 50)
                 
-                // Add other views below the main content
-                MembershipView()
-                
-                // Add more views as needed
+                // Add more views here
+                VStack(spacing: 20) {
+                    AddCampaignEventsView()
+                    
+                    
+                    
+                    // Add other views or components as needed
+                }
+                .padding(.top, 20)
+                .padding(.leading, 50)
             }
             .padding()
             .background(Color("BackgroundColor"))
         }
         .edgesIgnoringSafeArea(.all)
-    }
-}
-
-struct AnalyticsButton: View  {
-    @ObservedObject var viewModel: AdminAnalyticsViewModel
-    var data: AnalyticsData
-    var isSelected: Bool
-    var action: () -> Void
-    
-    var body: some View {
-        Button(action: action) {
-            VStack(spacing: 20) {
-                Image(systemName: data.image)
-                    .font(.system(size: 43))
-                    .foregroundStyle(Color("ThemeOrange"))
-                
-                VStack(spacing: 5) {
-                    Text(data.amount)
-                        .font(.system(size: 40, weight: .heavy))
-                    Text(data.title)
-                        .font(.system(size: 22))
-                }
-                
-                Text(data.rate)
-                    .font(.system(size: 20))
-                    .foregroundColor(.green)
-            }
-            .padding(40)
-            .frame(width: 210, height: 215)
-            .foregroundColor(isSelected ? .white : .black)
-            .background(isSelected ? Color("ThemeOrange") : Color.white)
-            .clipShape(RoundedRectangle(cornerRadius: 10))
-        }
-    }
-}
-
-struct AnalyticsData {
-    var image: String
-    var amount: String
-    var title: String
-    var rate: String
-}
-
-
-struct AdminAnalyticsView_Previews: PreviewProvider {
-    static var previews: some View {
-        AdminAnalyticsView()
     }
 }

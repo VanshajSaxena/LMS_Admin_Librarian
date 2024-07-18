@@ -97,22 +97,14 @@ struct SidebarButton: View {
         switch text {
         case "Analytics":
 
-            ScrollView {
-                        VStack(alignment: .leading, spacing: 0) {
-                            AdminAnalyticsView()
-                            MembershipView()
-                            AddCampaignEventsView()
-                        }
-                        .frame(maxWidth: .infinity, alignment: .topLeading)
-                    }
-                    .edgesIgnoringSafeArea(.top)
+            AdminAnalyticsView()
 
         case "Staff":
             AddLibrarianView()
         case "Requests":
-            AdminlView()
+            AdminRequestView()
         case "Settings":
-            LibrarianRequestsView()
+            SettingsView()
         default:
             EmptyView()
         }

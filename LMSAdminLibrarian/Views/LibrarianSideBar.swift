@@ -94,11 +94,11 @@ struct LibrarianSidebarButton: View {
     func destinationView(for text: String) -> some View {
         switch text {
         case "Dashboard":
-            AddNewMembershipView()
+            LibrarianAnalyticsView()
         case "Inventory":
             InventoryView()
         case "Requests":
-            LibrarianView()
+            LibrarianRequestsView()
         case "Issue Book":
           Scanner()
         default:
@@ -109,11 +109,7 @@ struct LibrarianSidebarButton: View {
 
 // Sample Views for Librarian's Sidebar
 
-struct DashboardView: View {
-    var body: some View {
-        AdminAnalyticsView()
-    }
-}
+
 
 struct BooksView: View {
     var body: some View {

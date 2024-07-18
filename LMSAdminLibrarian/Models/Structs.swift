@@ -95,6 +95,7 @@ struct CampaignsEvents: Identifiable, Codable {
     var endDate: Date
     var description: String
     var status: String // Add status field
+    
 
     var imageName: String {
         switch type {
