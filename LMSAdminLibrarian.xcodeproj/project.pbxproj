@@ -14,6 +14,8 @@
 		1A25BA012C3F03F60069BED6 /* GoogleBookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A25BA002C3F03F60069BED6 /* GoogleBookService.swift */; };
 		1A28CF972C426064006285A2 /* AddCampaignEventsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A28CF962C426064006285A2 /* AddCampaignEventsViewModel.swift */; };
 		1A28EC4C2C3D3A5300F2DB17 /* InventoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A28EC4B2C3D3A5300F2DB17 /* InventoryViewModel.swift */; };
+		1A5F189A2C454B2800BBAE43 /* addnewmembershipview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5F18992C454B2800BBAE43 /* addnewmembershipview.swift */; };
+		1A5F189C2C454BF300BBAE43 /* membershipcardview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5F189B2C454BF300BBAE43 /* membershipcardview.swift */; };
 		1A5F189E2C4620E000BBAE43 /* AdminAnalyticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5F189D2C4620E000BBAE43 /* AdminAnalyticsViewModel.swift */; };
 		1A8428C72C3BEDEC00A34F8D /* FilePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8428C62C3BEDEC00A34F8D /* FilePicker.swift */; };
 		1A8CC0582C412D3D00020D8A /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8CC0572C412D3D00020D8A /* FirestoreService.swift */; };
@@ -76,6 +78,8 @@
 		1A25BA002C3F03F60069BED6 /* GoogleBookService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleBookService.swift; sourceTree = "<group>"; };
 		1A28CF962C426064006285A2 /* AddCampaignEventsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCampaignEventsViewModel.swift; sourceTree = "<group>"; };
 		1A28EC4B2C3D3A5300F2DB17 /* InventoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryViewModel.swift; sourceTree = "<group>"; };
+		1A5F18992C454B2800BBAE43 /* addnewmembershipview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addnewmembershipview.swift; sourceTree = "<group>"; };
+		1A5F189B2C454BF300BBAE43 /* membershipcardview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = membershipcardview.swift; sourceTree = "<group>"; };
 		1A5F189D2C4620E000BBAE43 /* AdminAnalyticsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAnalyticsViewModel.swift; sourceTree = "<group>"; };
 		1A8428C62C3BEDEC00A34F8D /* FilePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePicker.swift; sourceTree = "<group>"; };
 		1A8CC0572C412D3D00020D8A /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
