@@ -27,7 +27,7 @@ final class FirestoreService {
         do {
             let docRef = db.collection("books")
             let snapshot = try await docRef.getDocuments()
-            var isbnList = snapshot.documents.compactMap {
+            let isbnList = snapshot.documents.compactMap {
                 $0.data()["isbnOfTheBook"] as? String
             }
             print("Fetched \(isbnList.count) ISBNs from Firestore")
