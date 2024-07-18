@@ -165,7 +165,8 @@ func issueBook(data: QRData) {
     let qrDataDict: [String: Any] = [
         "isbn": data.isbn,
         "issueDate": data.date,
-        "dueDate": data.addDaysToDate()
+        "dueDate": data.addDaysToDate(),
+        "hasReturned": data.hasReturned
     ]
     
     let db = Firestore.firestore()
