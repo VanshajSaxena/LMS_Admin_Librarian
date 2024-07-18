@@ -28,13 +28,14 @@ final class CampaignsEventsViewModel: ObservableObject {
                 let startDateString = data["startDate"] as? String ?? ""
                 let endDateString = data["endDate"] as? String ?? ""
                 let description = data["description"] as? String ?? ""
+                let status = data["status"] as? String ?? ""
 
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "dd-MM-yyyy"
                 let startDate = dateFormatter.date(from: startDateString) ?? Date()
                 let endDate = dateFormatter.date(from: endDateString) ?? Date()
 
-                return CampaignsEvents(id: id, type: type, title: title, price: price, startDate: startDate, endDate: endDate, description: description)
+                return CampaignsEvents(id: id, type: type, title: title, price: price, startDate: startDate, endDate: endDate, description: description, status: status)
             }
         }
     }

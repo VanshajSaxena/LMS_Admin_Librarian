@@ -24,17 +24,19 @@ final class AddCampaignEventsViewModel: ObservableObject {
             price: price,
             startDate: startDate,
             endDate: endDate,
-            description: description
+            description: description,
+            status: "pending" // Set initial status to pending
         )
         
         let campaignDict: [String: Any] = [
             "id": newCampaign.id ?? "",
             "title": newCampaign.title,
             "price": newCampaign.price,
-            "startDate": dateFormatter.string(for: newCampaign.startDate) ?? "Cannot Convert Date Obj to String",
-            "endDate": dateFormatter.string(for: newCampaign.endDate) ?? "Cannot Convert Date Obj to String",
+            "startDate": dateFormatter.string(from: newCampaign.startDate),
+            "endDate": dateFormatter.string(from: newCampaign.endDate),
             "description": newCampaign.description,
-            "type": type
+            "type": newCampaign.type,
+            "status": newCampaign.status // Include status in the dictionary
         ]
         
         // Add to Firestore
@@ -57,3 +59,4 @@ final class AddCampaignEventsViewModel: ObservableObject {
         print("Campaign Added Successfully!")
     }
 }
+

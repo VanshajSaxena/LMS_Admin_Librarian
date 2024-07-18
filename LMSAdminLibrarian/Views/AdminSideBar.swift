@@ -101,6 +101,7 @@ struct SidebarButton: View {
                         VStack(alignment: .leading, spacing: 0) {
                             AdminAnalyticsView()
                             MembershipView()
+                            AddCampaignEventsView()
                         }
                         .frame(maxWidth: .infinity, alignment: .topLeading)
                     }
@@ -109,9 +110,9 @@ struct SidebarButton: View {
         case "Staff":
             AddLibrarianView()
         case "Requests":
-            AdminkView()
+            AdminlView()
         case "Settings":
-            SettingsView()
+            LibrarianRequestsView()
         default:
             EmptyView()
         }

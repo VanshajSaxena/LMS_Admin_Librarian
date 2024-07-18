@@ -4,6 +4,7 @@ struct AdminAnalyticsView: View {
     @State private var selectedDate = Date()
     @State private var selectedIndex: Int? = nil
     @StateObject private var viewModel: AdminAnalyticsViewModel = AdminAnalyticsViewModel()
+    @State private var showPopover = false
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -42,13 +43,16 @@ struct AdminAnalyticsView: View {
                     .padding(.trailing, 10)
                 
                 Button(action: {
-                    // Action for share button
+                    showPopover.toggle()
                 }) {
                     Image(systemName: "square.and.arrow.up")
                         .padding()
                         .background(Color("ThemeOrange"))
                         .foregroundColor(.white)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
+                }
+                .popover(isPresented: $showPopover) {
+//                    NotificationPopoverView()
                 }
             }
             .padding(.horizontal)
@@ -71,12 +75,10 @@ struct AdminAnalyticsView: View {
             }
             .padding(.top, 20)
             .padding(.leading, 50)
-    
         }
         .padding()
         .background(Color("BackgroundColor"))
         .edgesIgnoringSafeArea(.all)
-        
     }
 }
 
@@ -120,9 +122,9 @@ struct AnalyticsData {
     var rate: String
 }
 
+
 struct AdminAnalyticsView_Previews: PreviewProvider {
     static var previews: some View {
         AdminAnalyticsView()
     }
 }
-

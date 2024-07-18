@@ -98,7 +98,7 @@ struct LibrarianSidebarButton: View {
         case "Inventory":
             InventoryView()
         case "Requests":
-            LibrariankView()
+            LibrarianView()
         case "Issue Book":
           Scanner()
         default:
