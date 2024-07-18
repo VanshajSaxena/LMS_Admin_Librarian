@@ -42,23 +42,43 @@ struct RequestRow: View {
     
     var body: some View {
         VStack(alignment: .leading) {
+            HStack(alignment: .top, spacing: 10){
+                HStack {
+                    Image(systemName: "person.circle.fill")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .foregroundColor(Color("ThemeOrange"))
+                        .padding(.trailing, 20)
+                    VStack(alignment: .leading, spacing: 5) {
+                        Text("Rohit Singh")
+                            .font(.headline)
+                            .fontWeight(.bold)
+                        Text("requested to organize a new campaign for the month of December")
+                            .font(.headline)
+                            .foregroundColor(.gray)
+                    }
+                }
+                .padding(.leading)
+                Spacer()
+                Text("Status: \(request.status)")
+                    .foregroundColor(statusColor(for: request.status))
+                    .font(.title2)
+                    .padding(.top, 5)
+            }
+
+            
+            
             if request.type == "event" {
                 campaignCard(for: request)
             } else if request.type == "sale" {
                 saleCampaignCard(for: request)
             }
-            
-            Text("Status: \(request.status)")
-                .foregroundColor(statusColor(for: request.status))
-                .font(.subheadline)
-                .padding(.top, 8)
-            
             buttonView(for: request)
         }
         .padding()
         .background(Color("RequestBackground"))
         .cornerRadius(10)
-        .shadow(radius: 5)
+
     }
     
     func campaignCard(for campaign: CampaignsEvents) -> some View {
@@ -82,6 +102,8 @@ struct RequestRow: View {
         .background(Color("CampaignCard"))
         .cornerRadius(10)
         .shadow(radius: 5)
+        .padding(.top, 20)
+        .padding(.leading, 90)
     }
     
     func saleCampaignCard(for campaign: CampaignsEvents) -> some View {
@@ -91,7 +113,7 @@ struct RequestRow: View {
                 .scaledToFill()
                 .frame(width: 150, height: 160)
                 .cornerRadius(10)
-                .clipped() // Ensure the image stays within the bounds
+                .clipped()
                 .padding(.leading, -20)
                 .padding(.bottom, -50)
             
@@ -106,7 +128,7 @@ struct RequestRow: View {
                     Text(campaign.price ?? "")
                         .font(.largeTitle)
                         .fontWeight(.bold)
-                        .foregroundColor(.orange)
+                        .foregroundColor(.themeOrange)
                 }
                 
                 Text(campaign.description)
@@ -123,6 +145,8 @@ struct RequestRow: View {
         .cornerRadius(10)
         .shadow(radius: 5)
         .frame(width: 375, height: 200)
+        .padding(.top, 20)
+        .padding(.leading, 80)
     }
     
     private var dateFormatter: DateFormatter {
@@ -138,7 +162,7 @@ struct RequestRow: View {
         case "denied":
             return .red
         case "live":
-            return .blue
+            return .themeOrange
         case "stopped":
             return .gray
         default:
@@ -157,8 +181,8 @@ struct RequestRow: View {
                     .font(.headline)
                     .foregroundColor(.white)
                     .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.blue)
+                    .frame(width: 200)
+                    .background(Color.themeOrange)
                     .cornerRadius(10)
             }
             .padding(.top, 8)
@@ -170,11 +194,12 @@ struct RequestRow: View {
                     .font(.headline)
                     .foregroundColor(.white)
                     .padding()
-                    .frame(maxWidth: .infinity)
+                    .frame(width: 200)
                     .background(isCampaignStopped ? Color.gray : Color.red)
                     .cornerRadius(10)
             }
-            .padding(.top, 8)
+            .padding(.top, 18)
+            .padding(.leading, 90)
             .disabled(isCampaignStopped)
         case "denied":
             Button(action: {}) {
@@ -182,7 +207,7 @@ struct RequestRow: View {
                     .font(.headline)
                     .foregroundColor(.white)
                     .padding()
-                    .frame(maxWidth: .infinity)
+                    .frame(width: 200)
                     .background(Color.gray)
                     .cornerRadius(10)
             }
@@ -195,11 +220,12 @@ struct RequestRow: View {
                     .font(.headline)
                     .foregroundColor(.white)
                     .padding()
-                    .frame(maxWidth: .infinity)
+                    .frame(width: 200)
                     .background(Color.gray)
                     .cornerRadius(10)
             }
-            .padding(.top, 8)
+            .padding(.top, 18)
+            .padding(.leading, 80)
             .disabled(true)
             
         default:
@@ -236,5 +262,12 @@ struct RequestRow: View {
                 isCampaignStopped = true // Set the state variable to true
             }
         }
+    }
+}
+struct LibrarianRequestsViewPreviews: PreviewProvider {
+    static var previews: some View {
+        LibrarianRequestsView()
+            .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch)"))
+            .previewDisplayName("iPad Pro 11-inch")
     }
 }
