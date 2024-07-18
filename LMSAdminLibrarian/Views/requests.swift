@@ -69,8 +69,7 @@ import SwiftUI
 struct AdminlView: View {
     @ObservedObject var viewModel = AdminViewModel()
     @State private var showingAddCampaignSheet = false
-   
-        @State private var processingCampaignId: String?
+    @State private var processingCampaignId: String?
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -107,13 +106,55 @@ struct AdminlView: View {
                     .foregroundColor(.gray)
                     .padding()
             } else {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 30) {
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack(spacing: 20) {
                         ForEach(viewModel.campaigns) { campaign in
-                            if campaign.type == "event" {
-                                campaignCard(for: campaign)
-                            } else if campaign.type == "sale" {
-                                saleCampaignCard(for: campaign)
+                            VStack(alignment: .leading) {
+                                if campaign.type == "event" {
+                                    campaignCard(for: campaign)
+                                } else if campaign.type == "sale" {
+                                    saleCampaignCard(for: campaign)
+                                }
+                                
+                                if campaign.status == "pending" {
+                                    HStack {
+                                        Button(action: {
+                                            if processingCampaignId != campaign.id {
+                                                processingCampaignId = campaign.id
+                                                viewModel.updateCampaignStatus(campaignId: campaign.id!, status: "approved") {
+                                                    processingCampaignId = nil
+                                                }
+                                            }
+                                        }) {
+                                            Text("Approve")
+                                                .padding()
+                                                .background(Color.green)
+                                                .foregroundColor(.white)
+                                                .cornerRadius(10)
+                                        }
+                                        
+                                        Button(action: {
+                                            if processingCampaignId != campaign.id {
+                                                processingCampaignId = campaign.id
+                                                viewModel.updateCampaignStatus(campaignId: campaign.id!, status: "denied") {
+                                                    processingCampaignId = nil
+                                                }
+                                            }
+                                        }) {
+                                            Text("Deny")
+                                                .padding()
+                                                .background(Color.red)
+                                                .foregroundColor(.white)
+                                                .cornerRadius(10)
+                                        }
+                                    }
+                                    .padding(.top, 10)
+                                } else {
+                                    Text("Status: \(campaign.status.capitalized)")
+                                        .font(.headline)
+                                        .foregroundColor(campaign.status == "approved" ? .green : .red)
+                                        .padding(.top, 10)
+                                }
                             }
                         }
                     }
@@ -122,8 +163,6 @@ struct AdminlView: View {
             }
             
             Spacer()
-            
-            
         }
         .task {
             await viewModel.fetchPendingCampaigns()
@@ -150,39 +189,6 @@ struct AdminlView: View {
             
             Text(campaign.description)
                 .font(.body)
-            
-            HStack {
-                Button(action: {
-                    if processingCampaignId != campaign.id {
-                        processingCampaignId = campaign.id
-                        viewModel.updateCampaignStatus(campaignId: campaign.id ?? "", status: "approved") {
-                            processingCampaignId = nil
-                        }
-                    }
-                }) {
-                    Text("Approve")
-                        .padding()
-                        .background(Color.green)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-                
-                Button(action: {
-                    if processingCampaignId != campaign.id {
-                        processingCampaignId = campaign.id
-                        viewModel.updateCampaignStatus(campaignId: campaign.id ?? "", status: "denied") {
-                            processingCampaignId = nil
-                        }
-                    }
-                }) {
-                    Text("Deny")
-                        .padding()
-                        .background(Color.red)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-            }
-            .padding(.top, 10)
         }
         .padding()
         .background(Color("CampaignCard"))
@@ -221,43 +227,8 @@ struct AdminlView: View {
                     Text("*Terms and conditions apply")
                         .font(.footnote)
                         .foregroundColor(.gray)
-                    
-                    HStack {
-                        Button(action: {
-                            if processingCampaignId != campaign.id {
-                                processingCampaignId = campaign.id
-                                viewModel.updateCampaignStatus(campaignId: campaign.id ?? "", status: "approved") {
-                                    processingCampaignId = nil
-                                }
-                            }
-                        }) {
-                            Text("Approve")
-                                .padding()
-                                .background(Color.green)
-                                .foregroundColor(.white)
-                                .cornerRadius(10)
-                        }
-                        
-                        Button(action: {
-                            if processingCampaignId != campaign.id {
-                                processingCampaignId = campaign.id
-                                viewModel.updateCampaignStatus(campaignId: campaign.id ?? "", status: "denied") {
-                                    processingCampaignId = nil
-                                }
-                            }
-                        }) {
-                            Text("Deny")
-                                .padding()
-                                .background(Color.red)
-                                .foregroundColor(.white)
-                                .cornerRadius(10)
-                        }
-                    }
-                    .padding(.top, 10)
                 }
-                
                 .padding(.horizontal)
-                
             }
             .padding()
             .background(Color("CampaignCard"))
@@ -273,4 +244,3 @@ struct AdminlView: View {
         return formatter
     }
 }
-
