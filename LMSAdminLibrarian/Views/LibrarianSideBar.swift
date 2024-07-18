@@ -37,11 +37,16 @@ struct LibrarianSideBar: View {
                     Text("LogOut")
                         .fontWeight(.bold)
                 }
-                .foregroundColor(.orange)
+                .foregroundColor(.white)
                 .frame(maxWidth: 150, alignment: .center)
                 .padding()
-                .background(Color.white)
+               // .background(Color.white)
                 .cornerRadius(12)
+                .overlay(
+                       RoundedRectangle(cornerRadius: 12)
+                           .stroke(Color.white, lineWidth: 2) // White border
+                   )
+                   
                 .padding(.leading, 120)
                 .padding(.trailing, 20)
                 .imageScale(.large)
@@ -94,11 +99,11 @@ struct LibrarianSidebarButton: View {
     func destinationView(for text: String) -> some View {
         switch text {
         case "Dashboard":
-            AddNewMembershipView()
+            LibrarianAnalyticsView()
         case "Inventory":
             InventoryView()
         case "Requests":
-            LibrariankView()
+            LibrarianRequestsView()
         case "Issue Book":
           Scanner()
         default:
@@ -109,11 +114,7 @@ struct LibrarianSidebarButton: View {
 
 // Sample Views for Librarian's Sidebar
 
-struct DashboardView: View {
-    var body: some View {
-        AdminAnalyticsView()
-    }
-}
+
 
 struct BooksView: View {
     var body: some View {

@@ -94,6 +94,8 @@ struct CampaignsEvents: Identifiable, Codable {
     var startDate: Date
     var endDate: Date
     var description: String
+    var status: String // Add status field
+    
 
     var imageName: String {
         switch type {
@@ -106,6 +108,7 @@ struct CampaignsEvents: Identifiable, Codable {
         }
     }
 }
+
 
 struct Membership: Codable {
     let price: Int
