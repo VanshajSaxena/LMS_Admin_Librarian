@@ -86,9 +86,6 @@ struct IssueSection: View {
                     self.showingImagePicker = true
                 }
                 
-                IssueButton(title: "Upload from Gallery", systemImageName: "photo.on.rectangle.angled", backgroundColor: Color.themeOrange) {
-                    self.showingImagePicker = true
-                }
             }
             
             TableView(scannedData: scannedData)
