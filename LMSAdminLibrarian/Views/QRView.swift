@@ -149,7 +149,9 @@ struct TableView: View {
                 TableColumn("Issue Time", value: \.currentTime)
                 TableColumn("Return Date") { data in
                     Text(data.addDaysToDate())
+                    
                 }
+                TableColumn("Has Returned", value:  \.hasReturnedString)
             }
             .font(.headline)
             .padding(.horizontal)

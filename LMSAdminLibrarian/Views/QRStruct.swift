@@ -15,6 +15,10 @@ struct QRData: Codable, Identifiable {
     var currentTime: String
     var date: String
     var hasReturned: Bool
+    var hasReturnedString: String {
+           "\(hasReturned ? "Yes" : "No")"
+       }
+    
     
     func addDaysToDate() -> String {
         let dateFormatter = DateFormatter()
