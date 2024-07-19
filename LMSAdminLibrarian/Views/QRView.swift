@@ -177,39 +177,21 @@ struct TableView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            HStack {
-                Text("User ID")
-                Spacer()
-                Text("ISBN")
-                Spacer()
-                Text("Issue Date")
-                Spacer()
-                Text("Issue Time")
-                Spacer()
-                Text("Return Date")
-                Spacer()
-               
+            Table(scannedData) {
+                TableColumn("User ID", value: \.userId)
+                TableColumn("ISBN", value: \.isbn)
+                TableColumn("Issue Date", value: \.date)
+                TableColumn("Issue Time", value: \.currentTime)
+                TableColumn("Return Date") { data in
+                    Text(data.addDaysToDate())
+                }
+                TableColumn("Has Returned", value:  \.hasReturnedString)
             }
+            .cornerRadius(8)
             .font(.headline)
             .padding(.horizontal)
-
-            // List of TableViewRow items
-            ScrollView {
-                VStack(spacing: 0) {
-                    ForEach(scannedData, id: \.isbn) { data in
-                        TableViewRow(record: data)
-                            .padding(.horizontal)
-                            .background(Color.white)
-                            .cornerRadius(8)
-                            .shadow(radius: 2)
-                            .padding(.vertical, 4)
-                    }
-                }
-            }
-            .background(Color(.systemGray6))
-            .cornerRadius(8)
-            .shadow(radius: 4)
             .padding(.horizontal)
+            
         }
         .padding(.top, 20)
     }
@@ -385,10 +367,10 @@ struct IssueButton: View {
     let title: String
     let systemImageName: String
     let backgroundColor: Color
-    let action: () -> Void // Add action closure
+    let action: () -> Void
 
     var body: some View {
-        Button(action: action) { // Use action closure in Button
+        Button(action: action) {
             VStack {
                 Image(systemName: systemImageName)
                     .resizable()
@@ -406,6 +388,3 @@ struct IssueButton: View {
         }
     }
 }
-
-
-
