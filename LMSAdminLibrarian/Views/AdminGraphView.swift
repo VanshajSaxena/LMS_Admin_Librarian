@@ -86,7 +86,7 @@ struct IssueAndReturnsChart: View {
         .padding()
         .frame(width: 600, height: 500) // Increased size
         .background(RoundedRectangle(cornerRadius: 20).fill(Color.white))
-        .shadow(radius: 3)
+//        .shadow(radius: 3)
     }
 }
 
@@ -151,7 +151,7 @@ struct GenrePieChart: View {
         .padding()
         .frame(width: 400, height: 500)
         .background(RoundedRectangle(cornerRadius: 20).fill(Color.white))
-        .shadow(radius: 5)
+//        .shadow(radius: 5)
     }
     
     func color(for genre: String) -> Color {
