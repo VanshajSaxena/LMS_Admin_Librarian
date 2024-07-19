@@ -8,27 +8,28 @@
 import Foundation
 
 // Original struct
-struct QRData: Codable {
+struct QRData: Codable, Identifiable {
+    var id: String { isbn }
     var isbn: String
     var userId: String
     var currentTime: String
     var date: String
     var hasReturned: Bool
     
-    
     func addDaysToDate() -> String {
-         let dateFormatter = DateFormatter()
-         dateFormatter.dateFormat = "yyyy-MM-dd" // Adjust the date format to match your input string
-         
-         if let originalDate = dateFormatter.date(from: date) {
-             let newDate = Calendar.current.date(byAdding: .day, value: 30, to: originalDate)!
-             let newDateString = dateFormatter.string(from: newDate)
-             return newDateString
-         } else {
-             return "Invalid date format"
-         }
-     }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        if let originalDate = dateFormatter.date(from: date) {
+            let newDate = Calendar.current.date(byAdding: .day, value: 30, to: originalDate)!
+            let newDateString = dateFormatter.string(from: newDate)
+            return newDateString
+        } else {
+            return "Invalid date format"
+        }
+    }
 }
+
 
 // Struct to match the JSON structure
 struct ScannedQRData: Codable {
