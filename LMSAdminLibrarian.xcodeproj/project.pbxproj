@@ -14,8 +14,6 @@
 		1A25BA012C3F03F60069BED6 /* GoogleBookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A25BA002C3F03F60069BED6 /* GoogleBookService.swift */; };
 		1A28CF972C426064006285A2 /* AddCampaignEventsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A28CF962C426064006285A2 /* AddCampaignEventsViewModel.swift */; };
 		1A28EC4C2C3D3A5300F2DB17 /* InventoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A28EC4B2C3D3A5300F2DB17 /* InventoryViewModel.swift */; };
-		1A5F189A2C454B2800BBAE43 /* addnewmembershipview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5F18992C454B2800BBAE43 /* addnewmembershipview.swift */; };
-		1A5F189C2C454BF300BBAE43 /* membershipcardview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5F189B2C454BF300BBAE43 /* membershipcardview.swift */; };
 		1A5F189E2C4620E000BBAE43 /* AdminAnalyticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5F189D2C4620E000BBAE43 /* AdminAnalyticsViewModel.swift */; };
 		1A8428C72C3BEDEC00A34F8D /* FilePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8428C62C3BEDEC00A34F8D /* FilePicker.swift */; };
 		1A8CC0582C412D3D00020D8A /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8CC0572C412D3D00020D8A /* FirestoreService.swift */; };
@@ -40,7 +38,6 @@
 		32D84C1D2C37213E00E489F7 /* LibrarianView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D84C1C2C37213E00E489F7 /* LibrarianView.swift */; };
 		32E4A7272C3AEC22003D0D6C /* AddLibrarianView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E4A7262C3AEC22003D0D6C /* AddLibrarianView.swift */; };
 		32E4A72B2C3BC3C3003D0D6C /* InventoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E4A72A2C3BC3C3003D0D6C /* InventoryView.swift */; };
-		32F9C57A2C44CFFD001B88CA /* GenerateRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F9C5792C44CFFD001B88CA /* GenerateRequestView.swift */; };
 		3C346E512C4158E400BB7E5B /* UploadSuccessfulView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C346E502C4158E400BB7E5B /* UploadSuccessfulView.swift */; };
 		3C41F1EB2C3FF5BB000454E9 /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C41F1EA2C3FF5BB000454E9 /* CustomDatePicker.swift */; };
 		3C51AEB52C3E628D00C39117 /* AdminAnalyticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C51AEB42C3E628D00C39117 /* AdminAnalyticsView.swift */; };
@@ -78,8 +75,6 @@
 		1A25BA002C3F03F60069BED6 /* GoogleBookService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleBookService.swift; sourceTree = "<group>"; };
 		1A28CF962C426064006285A2 /* AddCampaignEventsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCampaignEventsViewModel.swift; sourceTree = "<group>"; };
 		1A28EC4B2C3D3A5300F2DB17 /* InventoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryViewModel.swift; sourceTree = "<group>"; };
-		1A5F18992C454B2800BBAE43 /* addnewmembershipview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addnewmembershipview.swift; sourceTree = "<group>"; };
-		1A5F189B2C454BF300BBAE43 /* membershipcardview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = membershipcardview.swift; sourceTree = "<group>"; };
 		1A5F189D2C4620E000BBAE43 /* AdminAnalyticsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAnalyticsViewModel.swift; sourceTree = "<group>"; };
 		1A8428C62C3BEDEC00A34F8D /* FilePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePicker.swift; sourceTree = "<group>"; };
 		1A8CC0572C412D3D00020D8A /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
@@ -103,7 +98,6 @@
 		32D84C1C2C37213E00E489F7 /* LibrarianView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarianView.swift; sourceTree = "<group>"; };
 		32E4A7262C3AEC22003D0D6C /* AddLibrarianView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLibrarianView.swift; sourceTree = "<group>"; };
 		32E4A72A2C3BC3C3003D0D6C /* InventoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryView.swift; sourceTree = "<group>"; };
-		32F9C5792C44CFFD001B88CA /* GenerateRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateRequestView.swift; sourceTree = "<group>"; };
 		3C346E502C4158E400BB7E5B /* UploadSuccessfulView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadSuccessfulView.swift; sourceTree = "<group>"; };
 		3C41F1EA2C3FF5BB000454E9 /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
 		3C51AEB42C3E628D00C39117 /* AdminAnalyticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminAnalyticsView.swift; sourceTree = "<group>"; };
@@ -560,7 +554,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"LMSAdminLibrarian/Preview Content\"";
-				DEVELOPMENT_TEAM = 63W22LRA9Q;
+				DEVELOPMENT_TEAM = VW3NC988UB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "LMS-Admin-Librarian-Info.plist";
@@ -577,7 +571,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.infosys.LMS-Admin-Librarian";
+				PRODUCT_BUNDLE_IDENTIFIER = com.infosys.LMSAdminLibrarian;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -593,7 +587,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"LMSAdminLibrarian/Preview Content\"";
-				DEVELOPMENT_TEAM = 63W22LRA9Q;
+				DEVELOPMENT_TEAM = VW3NC988UB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "LMS-Admin-Librarian-Info.plist";
@@ -610,7 +604,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.infosys.LMS-Admin-Librarian";
+				PRODUCT_BUNDLE_IDENTIFIER = com.infosys.LMSAdminLibrarian;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

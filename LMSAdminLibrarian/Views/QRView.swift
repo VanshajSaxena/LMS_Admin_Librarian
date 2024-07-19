@@ -133,8 +133,6 @@ struct TableView: View {
             }
             .cornerRadius(8)
             .font(.headline)
-            .padding(.horizontal)
-            .padding(.horizontal)
             
         }
         .padding(.top, 20)
