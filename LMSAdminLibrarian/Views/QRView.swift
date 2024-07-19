@@ -4,14 +4,12 @@ import PhotosUI
 
 struct Scanner: View {
     @State private var showingQRScanner = false
-    @State private var showingImagePicker = false
-    @State private var selectedImage: UIImage?
     @State private var scannedData = [QRData]()
     
     var body: some View {
         VStack {
             HeaderView()
-            IssueSection(showingQRScanner: $showingQRScanner, showingImagePicker: $showingImagePicker, selectedImage: $selectedImage, scannedData: $scannedData)
+            IssueSection(showingQRScanner: $showingQRScanner, scannedData: $scannedData)
         }
         .padding()
         .background(Color(.systemGray6))
@@ -37,20 +35,6 @@ struct Scanner: View {
                     print("Error processing QR code: \(error.localizedDescription)")
                 }
                 showingQRScanner = false
-            }
-        }
-        .sheet(isPresented: $showingImagePicker) {
-            ImagePicker(image: $selectedImage) { image in
-                if let selectedImage = image, let scannedCode = scanQRCodeFromImage(selectedImage) {
-                    if let data = processQRCode(scannedCode) {
-                        issueBook(data: data)
-                        scannedData.append(data)
-                        print("Scanned Data Array: \(scannedData)")
-                    } else {
-                        print("Failed to process QR code")
-                    }
-                }
-                showingImagePicker = false
             }
         }
     }
@@ -84,8 +68,7 @@ struct HeaderView: View {
 
 struct IssueSection: View {
     @Binding var showingQRScanner: Bool
-    @Binding var showingImagePicker: Bool
-    @Binding var selectedImage: UIImage?
+
     @Binding var scannedData: [QRData]
     
     var body: some View {
@@ -96,7 +79,8 @@ struct IssueSection: View {
             
             HStack(spacing: 20) {
                 IssueButton(title: "Scan QR", systemImageName: "qrcode.viewfinder", backgroundColor: Color.themeOrange) {
-                    self.showingImagePicker = true
+
+                    self.showingQRScanner = true
                 }
                 .sheet(isPresented: $showingQRScanner) {
                     QRScannerView { scannedCode in
@@ -121,8 +105,6 @@ struct IssueSection: View {
                             }
                             showingQRScanner = false
                         }
-                    
-
                 }
             }
             
@@ -130,45 +112,6 @@ struct IssueSection: View {
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
-    }
-}
-
-struct ImagePicker: UIViewControllerRepresentable {
-    @Binding var image: UIImage?
-    var completion: (UIImage?) -> Void
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-
-    func makeUIViewController(context: Context) -> UIImagePickerController {
-        let picker = UIImagePickerController()
-        picker.delegate = context.coordinator
-        picker.sourceType = .photoLibrary
-        return picker
-    }
-
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
-
-    class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-        var parent: ImagePicker
-
-        init(_ parent: ImagePicker) {
-            self.parent = parent
-        }
-
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            if let uiImage = info[.originalImage] as? UIImage {
-                parent.image = uiImage
-                parent.completion(uiImage)
-            }
-            picker.dismiss(animated: true)
-        }
-
-        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-            parent.completion(nil)
-            picker.dismiss(animated: true)
-        }
     }
 }
 
