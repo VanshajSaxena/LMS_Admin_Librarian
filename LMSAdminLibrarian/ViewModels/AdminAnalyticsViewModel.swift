@@ -55,8 +55,8 @@ final class AdminAnalyticsViewModel: ObservableObject {
             }
             
             let basicStats = [
-                AnalyticsData(image: "book.circle.fill", amount: "\(totalBooks)", title: "Total Books", rate: "N/A"),
-                AnalyticsData(image: "person.circle.fill", amount: "\(totalUsers)", title: "Total Users", rate: "N/A")
+                AnalyticsData(image: "book.circle.fill", amount: "\(totalBooks)", title: "Total Books", rate: ""),
+                AnalyticsData(image: "person.circle.fill", amount: "\(totalUsers)", title: "Total Users", rate: "")
             ]
             
             return (basicStats: basicStats, issueReturnsData: issueReturnsData, genreData: genreData)
