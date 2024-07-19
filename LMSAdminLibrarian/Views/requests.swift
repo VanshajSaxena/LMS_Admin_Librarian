@@ -167,6 +167,7 @@ struct AdminRequestView: View {
         .background(Color("CampaignCard"))
         .cornerRadius(10)
         .shadow(radius: 5)
+        .frame(maxWidth: 365 , maxHeight: 250)
     }
 
     // Sale campaign card
