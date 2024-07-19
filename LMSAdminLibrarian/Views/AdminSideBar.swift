@@ -35,11 +35,15 @@ struct AdminSideBar: View {
                     Text("LogOut")
                         .fontWeight(.bold)
                 }
-                .foregroundColor(.orange)
+                .foregroundColor(.white)
                 .frame(maxWidth: 150, alignment: .center)
                 .padding()
-                .background(Color.white)
+               // .background(Color.white)
                 .cornerRadius(12)
+                .overlay(
+                       RoundedRectangle(cornerRadius: 12)
+                           .stroke(Color.white, lineWidth: 2) // White border
+                   )
                 .padding(.leading, 120)
                 .padding(.trailing, 20)
                 .imageScale(.large)
