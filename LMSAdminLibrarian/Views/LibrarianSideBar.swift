@@ -17,8 +17,9 @@ struct LibrarianSideBar: View {
             
             VStack(alignment: .leading, spacing: 30) {
                 LibrarianSidebarButton(imageName: "house", text: "Dashboard", selectedButton: $selecteddButton)
-                LibrarianSidebarButton(imageName: "book", text: "Inventory", selectedButton: $selecteddButton)
+                
                 LibrarianSidebarButton(imageName: "qrcode.viewfinder", text: "Issue Book", selectedButton: $selecteddButton)
+                LibrarianSidebarButton(imageName: "book", text: "Inventory", selectedButton: $selecteddButton)
                 LibrarianSidebarButton(imageName: "person", text: "Requests", selectedButton: $selecteddButton)
               
                 
@@ -99,7 +100,21 @@ struct LibrarianSidebarButton: View {
     func destinationView(for text: String) -> some View {
         switch text {
         case "Dashboard":
-            LibrarianAnalyticsView()
+            ScrollView {
+                        VStack(alignment: .leading, spacing: 0) {
+                            LibrarianAnalyticsView()
+                            GraphView()
+                                .padding(.leading, 30)
+                            AddCampaignEventsView()
+                                .padding(.top, 30)
+                                .padding(.leading,30)
+                                .padding(.trailing , 20)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .topLeading)
+                        
+                    }
+            .background(Color.background)
+                    .edgesIgnoringSafeArea(.top)
         case "Inventory":
             InventoryView()
         case "Requests":

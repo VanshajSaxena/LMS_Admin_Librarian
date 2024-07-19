@@ -30,19 +30,7 @@ struct InventoryView: View {
                 Spacer()
                 
                 // My Account action
-                Button(action: {
-                    
-                }) {
-                    HStack {
-                        Image(systemName: "person.circle")
-                        Text("My Account")
-                    }
-                    .padding()
-                    .background(Color("ThemeOrange"))
-                    .foregroundColor(.white)
-                    .cornerRadius(8)
-                }
-                .padding(.trailing, 50)
+                
             }
             .padding(.top, 50)
             

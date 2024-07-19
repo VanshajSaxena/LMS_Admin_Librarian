@@ -145,7 +145,6 @@ struct AdminAnalyticsView: View {
     @StateObject private var viewModel: AdminAnalyticsViewModel = AdminAnalyticsViewModel()
     @State private var showPopover = false
     @State private var showAdminRequestView = false // State variable to control sheet presentation
-    
 
     var body: some View {
         ScrollView {
@@ -155,7 +154,7 @@ struct AdminAnalyticsView: View {
                     HStack {
                         Button(action: {
                             showAdminRequestView = true // Show the sheet
-                          // Reset notification count to 0
+                            // Reset notification count to 0
                         }) {
                             ZStack {
                                 Image(systemName: "bell")
@@ -164,8 +163,6 @@ struct AdminAnalyticsView: View {
                                     .background(Color("ThemeOrange"))
                                     .foregroundColor(.white)
                                     .clipShape(RoundedRectangle(cornerRadius: 10))
-                                
-                               
                             }
                         }
                         
@@ -178,7 +175,8 @@ struct AdminAnalyticsView: View {
                     .padding(.trailing, 30)
                     .padding(.top, 30)
                 }
-                .padding()
+                .padding(.horizontal)
+                .padding(.top, 20)
                 
                 HStack(alignment: .center) {
                     Text("Monthly \nAnalytics")
@@ -193,11 +191,9 @@ struct AdminAnalyticsView: View {
                         .background(Color.white)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                         .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color("ThemeOrange"), lineWidth: 1))
-                        
                         .frame(alignment: .center)
                     
                 }
-                
                 .padding(.horizontal)
                 .padding(.trailing)
                 .padding(.leading, 20)
@@ -282,12 +278,7 @@ struct AnalyticsButton: View  {
     }
 }
 
-struct AnalyticsData {
-    var image: String
-    var amount: String
-    var title: String
-    var rate: String
-}
+
 
 struct AdminAnalyticsView_Previews: PreviewProvider {
     static var previews: some View {
