@@ -11,7 +11,7 @@ import AVFoundation
 import Foundation
 
 struct QRScannerView: UIViewControllerRepresentable {
-    var completion: (String) -> Void
+    var completion: (String) async -> Void
 
     class Coordinator: NSObject, AVCaptureMetadataOutputObjectsDelegate {
         var parent: QRScannerView
@@ -22,15 +22,21 @@ struct QRScannerView: UIViewControllerRepresentable {
         }
 
         func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-            if let metadataObject = metadataObjects.first {
-                guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
-                guard let stringValue = readableObject.stringValue else { return }
-                AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-                parent.completion(stringValue)
-                captureSession?.stopRunning()
+                    if let metadataObject = metadataObjects.first {
+                        guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
+                        guard let stringValue = readableObject.stringValue else { return }
+                        AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+                        Task {
+                            do {
+                                try await parent.completion(stringValue)
+                            } catch {
+                                print("Error processing QR code: \(error.localizedDescription)")
+                            }
+                        }
+                        captureSession?.stopRunning()
+                    }
+                }
             }
-        }
-    }
 
     func makeCoordinator() -> Coordinator {
         return Coordinator(parent: self)

@@ -57,15 +57,26 @@ struct IssueSection: View {
                 }
                 .sheet(isPresented: $showingQRScanner) {
                     QRScannerView { scannedCode in
-                        if let data = processQRCode(scannedCode) {
-                            issueBook(data: data)
-                            scannedData.append(data)
-                            print("Scanned Data Array: \(scannedData)")
-                        } else {
-                            print("Failed to process QR code")
+                            do {
+                                if let data = processQRCode(scannedCode) {
+                                    if data.hasReturned {
+                                        returnBook(data: data)
+                                        let issuedCopies = try await decrementIssuedCopies(forBookISBN: data.isbn)
+                                        print("Decremented issued copies. New count: \(issuedCopies)")
+                                    } else {
+                                        issueBook(data: data)
+                                    }
+                                    scannedData.append(data)
+                                    print("Scanned Data Array: \(scannedData)")
+                                } else {
+                                    print("Failed to process QR code")
+                                }
+                            } catch {
+                                print("Error processing QR code: \(error.localizedDescription)")
+                            }
+                            showingQRScanner = false
                         }
-                        showingQRScanner = false
-                    }
+                    
                 }
 
             }
@@ -165,12 +176,13 @@ func issueBook(data: QRData) {
     let qrDataDict: [String: Any] = [
         "isbn": data.isbn,
         "issueDate": data.date,
-        "dueDate": data.addDaysToDate()
+        "dueDate": data.addDaysToDate(),
+        "hasReturned": data.hasReturned
     ]
     
     let db = Firestore.firestore()
     
-    let docRef = db.collection("Users").document(data.userId).collection("History").addDocument(data: qrDataDict) {error in
+    let docRef: Void = db.collection("Users").document(data.userId).collection("History").document(data.isbn).setData(qrDataDict, merge: true) { error in
         if let error = error {
             print("Error adding document: \(error)")
         } else {
@@ -178,6 +190,87 @@ func issueBook(data: QRData) {
         }
     }
 }
+
+func returnBook(data: QRData) {
+    let qrDataDict: [String: Any] = [
+        "isbn": data.isbn,
+        "returnDate": data.date,
+        "hasReturned": data.hasReturned
+    ]
+    
+    let db = Firestore.firestore()
+    
+    let docRef: Void = db.collection("Users").document(data.userId).collection("History").document(data.isbn).setData(qrDataDict, merge: true) { error in
+        if let error = error {
+            print("Error adding document: \(error)")
+        } else {
+            print("Document added to user: \(data.userId)")
+        }
+    }
+}
+
+func incrementIssuedCopies(forBookISBN isbn: String) async throws -> Int {
+    let db = Firestore.firestore()
+    let bookRef = db.collection("books").document(isbn)
+    
+    let result = try await db.runTransaction { (transaction, errorPointer) -> Int? in
+        let bookDocument: DocumentSnapshot
+        do {
+            try bookDocument = transaction.getDocument(bookRef)
+        } catch let fetchError as NSError {
+            errorPointer?.pointee = fetchError
+            return nil
+        }
+        
+        guard let oldCount = bookDocument.data()?["numberOfIssuedCopies"] as? Int else {
+            let error = NSError(domain: "AppErrorDomain", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unable to retrieve numberOfIssuedCopies"])
+            errorPointer?.pointee = error
+            return nil
+        }
+        
+        let newCount = oldCount + 1
+        transaction.updateData(["numberOfIssuedCopies": newCount], forDocument: bookRef)
+        return newCount
+    }
+    
+    guard let newCount = result else {
+        throw NSError(domain: "AppErrorDomain", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to increment issued copies"])
+    }
+    
+    return newCount as! Int
+}
+
+func decrementIssuedCopies(forBookISBN isbn: String) async throws -> Int {
+    let db = Firestore.firestore()
+    let bookRef = db.collection("books").document(isbn)
+    
+    let result = try await db.runTransaction { (transaction, errorPointer) -> Int? in
+        let bookDocument: DocumentSnapshot
+        do {
+            try bookDocument = transaction.getDocument(bookRef)
+        } catch let fetchError as NSError {
+            errorPointer?.pointee = fetchError
+            return nil
+        }
+        
+        guard let oldCount = bookDocument.data()?["numberOfIssuedCopies"] as? Int else {
+            let error = NSError(domain: "AppErrorDomain", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unable to retrieve numberOfIssuedCopies"])
+            errorPointer?.pointee = error
+            return nil
+        }
+        
+        let newCount = max(0, oldCount - 1) // Ensure count doesn't go below 0
+        transaction.updateData(["numberOfIssuedCopies": newCount], forDocument: bookRef)
+        return newCount
+    }
+    
+    guard let newCount = result else {
+        throw NSError(domain: "AppErrorDomain", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to decrement issued copies"])
+    }
+    
+    return newCount as! Int
+}
+
 
 
 // QR code scanning function
@@ -204,7 +297,8 @@ func processQRCode(_ code: String) -> QRData? {
             isbn: scannedData.isbn,
             userId: scannedData.userId,
             currentTime: scannedData.timestamp,
-            date: scannedData.date
+            date: scannedData.date,
+            hasReturned: scannedData.hasReturned
         )
         print("Decoded QR Data: \(qrData)")
         return qrData
