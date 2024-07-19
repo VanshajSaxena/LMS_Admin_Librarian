@@ -106,7 +106,9 @@ final class AdminAnalyticsViewModel: ObservableObject {
                           let dueDate = dateFormatter.date(from: dueDateString) else {
                         continue
                     }
-                    
+                    print("DueDate: \(dueDateString)")
+                    print("IssueDate: \(issueDateString)")
+
                     // Get the start of the week for the issue date
                     let weekStart = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: issueDate))!
                     

@@ -93,7 +93,7 @@ struct IssueAndReturnsChart: View {
 struct GenrePieChart: View {
     let data: [(genre: String, percentage: Double)]
     let totalBooks: Int
-    let colorNames: [String] = ["ThemeOrange", "Graph1", "Graph2", "Graph3", "Graph4"]
+    let colorNames: [String] = ["ThemeOrange", "Graph1", "Graph2", "Graph3", "Graph4", "Graph5"]
     
     private var top5Data: [(genre: String, percentage: Double)] {
         Array(data.prefix(5))
