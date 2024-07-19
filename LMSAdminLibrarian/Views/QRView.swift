@@ -17,12 +17,24 @@ struct Scanner: View {
         .background(Color(.systemGray6))
         .sheet(isPresented: $showingQRScanner) {
             QRScannerView { scannedCode in
-                if let data = processQRCode(scannedCode) {
-                    issueBook(data: data)
-                    scannedData.append(data)
-                    print("Scanned Data Array: \(scannedData)")
-                } else {
-                    print("Failed to process QR code")
+                do {
+                    if let data = processQRCode(scannedCode) {
+                        if data.hasReturned {
+                            returnBook(data: data)
+                            let issuedCopies = try await decrementIssuedCopies(forBookISBN: data.isbn)
+                            print("Decremented issued copies. New count: \(issuedCopies)")
+                        } else {
+                            issueBook(data: data)
+                            let issuedCopies = try await incrementIssuedCopies(forBookISBN: data.isbn)
+                            print("Incremented issued copies. New count: \(issuedCopies)")
+                        }
+                        scannedData.append(data)
+                        print("Scanned Data Array: \(scannedData)")
+                    } else {
+                        print("Failed to process QR code")
+                    }
+                } catch {
+                    print("Error processing QR code: \(error.localizedDescription)")
                 }
                 showingQRScanner = false
             }
@@ -96,6 +108,8 @@ struct IssueSection: View {
                                         print("Decremented issued copies. New count: \(issuedCopies)")
                                     } else {
                                         issueBook(data: data)
+                                        let issuedCopies = try await incrementIssuedCopies(forBookISBN: data.isbn)
+                                        print("Incremented issued copies. New count: \(issuedCopies)")
                                     }
                                     scannedData.append(data)
                                     print("Scanned Data Array: \(scannedData)")
