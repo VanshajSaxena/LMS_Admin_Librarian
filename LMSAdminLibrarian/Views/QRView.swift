@@ -1,17 +1,46 @@
-
-
-
 import SwiftUI
 import Firebase
+import PhotosUI
 
 struct Scanner: View {
+    @State private var showingQRScanner = false
+    @State private var showingImagePicker = false
+    @State private var selectedImage: UIImage?
+    @State private var scannedData = [QRData]()
+    
     var body: some View {
         VStack {
             HeaderView()
-            IssueSection()
+            IssueSection(showingQRScanner: $showingQRScanner, showingImagePicker: $showingImagePicker, selectedImage: $selectedImage, scannedData: $scannedData)
         }
         .padding()
         .background(Color(.systemGray6))
+        .sheet(isPresented: $showingQRScanner) {
+            QRScannerView { scannedCode in
+                if let data = processQRCode(scannedCode) {
+                    issueBook(data: data)
+                    scannedData.append(data)
+                    print("Scanned Data Array: \(scannedData)")
+                } else {
+                    print("Failed to process QR code")
+                }
+                showingQRScanner = false
+            }
+        }
+        .sheet(isPresented: $showingImagePicker) {
+            ImagePicker(image: $selectedImage) { image in
+                if let selectedImage = image, let scannedCode = scanQRCodeFromImage(selectedImage) {
+                    if let data = processQRCode(scannedCode) {
+                        issueBook(data: data)
+                        scannedData.append(data)
+                        print("Scanned Data Array: \(scannedData)")
+                    } else {
+                        print("Failed to process QR code")
+                    }
+                }
+                showingImagePicker = false
+            }
+        }
     }
 }
 
@@ -42,18 +71,20 @@ struct HeaderView: View {
 }
 
 struct IssueSection: View {
-    @State private var showingQRScanner = false
-    @State private var scannedData = [QRData]()
-
+    @Binding var showingQRScanner: Bool
+    @Binding var showingImagePicker: Bool
+    @Binding var selectedImage: UIImage?
+    @Binding var scannedData: [QRData]
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 30) {
             Text("Issue Book ")
                 .font(.largeTitle)
                 .bold()
-
+            
             HStack(spacing: 20) {
                 IssueButton(title: "Scan QR", systemImageName: "qrcode.viewfinder", backgroundColor: Color.themeOrange) {
-                    self.showingQRScanner = true
+                    self.showingImagePicker = true
                 }
                 .sheet(isPresented: $showingQRScanner) {
                     QRScannerView { scannedCode in
@@ -77,14 +108,53 @@ struct IssueSection: View {
                             showingQRScanner = false
                         }
                     
+
                 }
-
             }
-
+            
             TableView(scannedData: scannedData)
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
+struct ImagePicker: UIViewControllerRepresentable {
+    @Binding var image: UIImage?
+    var completion: (UIImage?) -> Void
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+
+    func makeUIViewController(context: Context) -> UIImagePickerController {
+        let picker = UIImagePickerController()
+        picker.delegate = context.coordinator
+        picker.sourceType = .photoLibrary
+        return picker
+    }
+
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
+
+    class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+        var parent: ImagePicker
+
+        init(_ parent: ImagePicker) {
+            self.parent = parent
+        }
+
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            if let uiImage = info[.originalImage] as? UIImage {
+                parent.image = uiImage
+                parent.completion(uiImage)
+            }
+            picker.dismiss(animated: true)
+        }
+
+        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+            parent.completion(nil)
+            picker.dismiss(animated: true)
+        }
     }
 }
 
@@ -104,7 +174,7 @@ struct TableView: View {
                 Spacer()
                 Text("Return Date")
                 Spacer()
-                Text("Actions")
+               
             }
             .font(.headline)
             .padding(.horizontal)
@@ -131,7 +201,6 @@ struct TableView: View {
     }
 }
 
-
 struct TableViewRow: View {
     var record: QRData
 
@@ -151,17 +220,7 @@ struct TableViewRow: View {
             Spacer()
             Text(record.addDaysToDate())
                 .padding(.vertical, 8)
-            Spacer()
-            HStack {
-                // Action buttons can be added here
-                Button(action: {
-                    // Delete action
-                }) {
-                    Image(systemName: "trash")
-                        .foregroundColor(.red)
-                }
-                .padding(.vertical, 8)
-            }
+            
         }
         .padding(.horizontal, 16)
     }
@@ -333,3 +392,6 @@ struct IssueButton: View {
         }
     }
 }
+
+
+

@@ -14,7 +14,7 @@ struct QRData: Codable {
     var currentTime: String
     var date: String
     var hasReturned: Bool
-    
+
     func addDaysToDate() -> String {
          let dateFormatter = DateFormatter()
          dateFormatter.dateFormat = "yyyy-MM-dd" // Adjust the date format to match your input string
@@ -36,6 +36,7 @@ struct ScannedQRData: Codable {
     var timestamp: String
     var date: String
     var hasReturned: Bool
+
 }
 
 

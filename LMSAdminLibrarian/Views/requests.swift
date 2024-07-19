@@ -131,70 +131,96 @@ struct AdminRequestView: View {
 
     // Campaign card for events
     func campaignCard(for campaign: CampaignsEvents) -> some View {
-        VStack(alignment: .leading) {
+        VStack {
             Image(campaign.imageName)
                 .resizable()
                 .scaledToFit()
                 .frame(height: 100)
                 .cornerRadius(10)
-
+            
+            Spacer().frame(height: 5)
+            
             Text(campaign.title)
-                .font(.headline)
-                .padding(.top, 8)
-
+                .font(.system(size: 28, weight: .bold))
+                .multilineTextAlignment(.center)
+                .lineLimit(1)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .foregroundColor(.orange)
+                .padding(.top)
+            
+            Spacer().frame(height: 9) // Add space between the title and date
+            
             Text("\(campaign.startDate, formatter: dateFormatter) - \(campaign.endDate, formatter: dateFormatter)")
                 .font(.subheadline)
-
+                .frame(alignment: .center)
+            
+            Spacer().frame(height: 8) // Add space between the date and description
+            
             Text(campaign.description)
                 .font(.body)
+                .foregroundColor(.gray)
+//            Text("*Terms and conditions apply")
+//                .font(.footnote)
+//                .foregroundColor(.gray)
         }
         .padding()
         .background(Color("CampaignCard"))
         .cornerRadius(10)
         .shadow(radius: 5)
-        .padding(.leading , 55)
     }
 
     // Sale campaign card
     func saleCampaignCard(for campaign: CampaignsEvents) -> some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Image(campaign.imageName)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 150, height: 160)
-                    .cornerRadius(10)
-                    .clipped() // Ensure the image stays within the bounds
-
-                VStack(alignment: .leading, spacing: 8) {
-                    Text(campaign.title)
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .padding(.top, 8)
-
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(campaign.price)
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-                            .foregroundColor(.themeOrange)
-                    }
-
-                    Text(campaign.description)
-                        .font(.body)
-                        .padding(.top, 8)
-                    Text("*Terms and conditions apply")
-                        .font(.footnote)
-                        .foregroundColor(.gray)
+        HStack {
+            Image(campaign.imageName)
+                .resizable()
+                .scaledToFill()
+                .frame(width: 130, height: 200)
+                .cornerRadius(10)
+                .clipped() // Ensure the image stays within the bounds
+                .padding(.leading, -10)
+                .padding(.bottom, -50)
+            
+            VStack(alignment: .center, spacing: 4) { // Reduced spacing
+                Text(campaign.title)
+                    .font(.title) // Slightly smaller font size for the title
+                    .lineLimit(1)
+                    .fontWeight(.bold)
+                    .foregroundColor(.black)
+                Spacer().frame(height: 7) // Reduced spacing
+                GeometryReader { geometry in
+                    Text(campaign.price ?? "")
+                        .font(.system(size: 40, weight: .bold)) // Set the font size and weight for the price
+                        .lineLimit(1) // Ensure the price stays on one line
+                        .foregroundColor(.orange)
+                        .frame(width: geometry.size.width, alignment: .center)
                 }
-                .padding(.horizontal)
+                .frame(height: 40) // Fixed height to prevent layout issues
+
+                Spacer().frame(height: 10)
+                Text(campaign.description)
+                    .font(.body)
+                    .foregroundColor(.black)
+                    .lineLimit(1) // Ensure the description fits into one line
+                    .font(.system(size: 32))
+                
+                Spacer().frame(height: 12)
+                Text("\(campaign.startDate, formatter: dateFormatter) - \(campaign.endDate, formatter: dateFormatter)")
+                    .font(.title3)
+                    .frame(alignment: .center)
+                
+                Spacer().frame(height: 12)
+                Text("*Terms and conditions apply")
+                    .font(.footnote)
+                    .foregroundColor(.gray)
             }
-            .padding()
-            .background(Color("CampaignCard"))
-            .cornerRadius(10)
-            .shadow(radius: 5)
-            .frame(width: 375, height: 200)
-            .padding(.leading , 55)
+            .padding(.horizontal)
         }
+        .padding()
+        .background(Color("CampaignCard"))
+        .cornerRadius(10)
+        .shadow(radius: 5)
+        .frame(width: 375, height: 300)
     }
 
     private var dateFormatter: DateFormatter {

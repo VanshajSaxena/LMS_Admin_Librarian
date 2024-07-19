@@ -140,3 +140,10 @@ let isbnList = [
     "9780670097111",
     "9780743273565"
 ]
+
+struct AnalyticsData {
+    var image: String
+    var amount: String
+    var title: String
+    var rate: String
+}
