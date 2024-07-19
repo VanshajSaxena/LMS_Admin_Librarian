@@ -76,7 +76,7 @@ struct AddCampaignEventsSheetView: View {
                 .padding(20)
 
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("Ticket Price")
+                    Text("Offers")
                         .font(.headline)
                         .foregroundColor(.orange)
                     TextField("Enter the Ticket Price", text: $viewModel.price)

@@ -55,8 +55,8 @@ final class AdminAnalyticsViewModel: ObservableObject {
             }
             
             let basicStats = [
-                AnalyticsData(image: "book.circle.fill", amount: "\(totalBooks)", title: "Total Books", rate: "N/A"),
-                AnalyticsData(image: "person.circle.fill", amount: "\(totalUsers)", title: "Total Users", rate: "N/A")
+                AnalyticsData(image: "book.circle.fill", amount: "\(totalBooks)", title: "Total Books", rate: ""),
+                AnalyticsData(image: "person.circle.fill", amount: "\(totalUsers)", title: "Total Users", rate: "")
             ]
             
             return (basicStats: basicStats, issueReturnsData: issueReturnsData, genreData: genreData)
@@ -106,7 +106,9 @@ final class AdminAnalyticsViewModel: ObservableObject {
                           let dueDate = dateFormatter.date(from: dueDateString) else {
                         continue
                     }
-                    
+                    print("DueDate: \(dueDateString)")
+                    print("IssueDate: \(issueDateString)")
+
                     // Get the start of the week for the issue date
                     let weekStart = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: issueDate))!
                     

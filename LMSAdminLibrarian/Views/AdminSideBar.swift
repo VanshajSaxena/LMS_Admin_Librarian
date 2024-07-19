@@ -7,7 +7,7 @@ struct AdminSideBar: View {
     
     var body: some View {
         VStack {
-            Text("App Name")
+            Text("Fable")
                 .font(.largeTitle)
                 .fontWeight(.black)
                 .foregroundColor(.white)

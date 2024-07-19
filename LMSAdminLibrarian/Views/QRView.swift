@@ -82,6 +82,7 @@ struct IssueSection: View {
 
                     self.showingQRScanner = true
                 }
+
                 .sheet(isPresented: $showingQRScanner) {
                     QRScannerView { scannedCode in
                             do {
